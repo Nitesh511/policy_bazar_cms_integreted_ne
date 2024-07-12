@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "aboutus",
+  "info": {
+    "singularName": "aboutu",
+    "pluralName": "aboutus",
+    "displayName": "aboutu",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 2000
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "bigdesctiption": {
+      "type": "text",
+      "required": true,
+      "maxLength": 30000,
+      "minLength": 10
+    }
+  }
+}

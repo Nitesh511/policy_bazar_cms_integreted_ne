@@ -1,0 +1,133 @@
+
+.custom-carousel .carousel-dots {
+    display: none;
+}
+
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.swiper-wrapper{
+    width: 100%;
+
+}
+.swiper-slide {
+    width: 300px;
+    height: 400px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    background: black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: self-start;
+}
+
+.swiper-slide-active {
+    filter: blur(0px);
+}
+
+.swiper-pagination-bullet,
+.swiper-pagination-bullet-active {
+    background: #fff;
+}
+
+.swiper-slide span {
+    text-transform: uppercase;
+    color: #fff;
+    background: #1b7402;
+    padding: 7px 18px 7px 25px;
+    display: inline-block;
+    border-radius: 0 20px 20px 0px;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    font-family: "Open Sans", sans-serif;
+}
+
+.swiper-slide--one span {
+    background: #62667f;
+}
+
+.swiper-slide--two span {
+    background: #087ac4;
+}
+
+.swiper-slide--three span {
+    background: #b45205;
+}
+
+.swiper-slide--four span {
+    background: #087ac4;
+}
+
+.swiper-slide h2 {
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    padding: 25px 45px 0 25px;
+}
+
+.swiper-slide p {
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    padding: 0 20px 12px 20px;
+}
+
+.swiper-slide svg {
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    margin-right: 7px;
+}
+
+.swiper-slide--one {
+    background: linear-gradient(to top, #0f2027, #00000040, #2c536400),
+      url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAfYsQ0pi9gUqPuw4Id-wlFXB2ENPXGKdWQw&s') no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--two {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+      url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_-btS4HicAC5-E7JvBMZdcxYz5hDJrWH0FQ&s') no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--three {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+      url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGmjekB2w-MrUlwo8746-IBUMO12mHoqop_w&s') no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--four {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+      url('https://salitrekking.com/wp-content/uploads/2017/01/ANNAPURNA-BASE-CAMP-NEPAL-scaled.jpg') no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--five {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+      url('https://www.himalayanabode.com/wp-content/uploads/2018/01/ghorepai-poonhill.jpg') no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--six {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+      url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9DUBPdDhueeGCEBo4opoUahDErdwLf2tqtw&s') no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--seven {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+      url('https://images.unsplash.com/photo-1568992688065-536aad8a12f6') no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--eight {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+      url('https://images.unsplash.com/photo-1568992688065-536aad8a12f6') no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--nine {
+    background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+      url('https://images.unsplash.com/photo-1568992688065-536aad8a12f6') no-repeat 50% 50% / cover;
+}
