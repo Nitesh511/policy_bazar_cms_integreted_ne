@@ -1,45 +1,60 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Carousel } from "@material-tailwind/react";
-import "../CSS/layout.css";
 import Our_services from "../our services/services";
 import AboutUs from "../aboutus/about_us";
+import { useDispatch, useSelector } from "react-redux";
+import {useFetchDashboardMutation} from "../API/proceedToApi"
+
+import {
+  setDashboardData,
+  setLoading,
+  setError,
+  selectDashboardLoading,
+  selectDashboardError,
+  selectDashboard,
+} from "../API/dataSlice";
 
 const Home = () => {
-  const [dash, setDash] = useState([]);
+  const dispatch = useDispatch();
+  const [fetchDashboard, { data: dashboardData, isLoading, isError }] = useFetchDashboardMutation();
 
   useEffect(() => {
-    const fetchDashboard = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:1337/api/dashboards?populate=*",
-          {
-            headers: {
-              Authorization:
-                "Bearer cb6977f556ef939cc2dec9cffef081aec6784cd62adc7e6fff50f20f9e56610703876a424ddf177b7fbb8c26887bb280c09fffc955c4999fc8f0a8ff114699e7c1609e6734313c75c535f9addb25d4ca0fe737bdbe2c3cbfae0fea39e12fc134925fb539e3a4767880808f98f4051fa09d75db181eb16f5abca3575ddf69837c",
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const result = await response.json();
-        if (result && result.data) {
-          setDash(result.data);
-        }
+        dispatch(setLoading(true));
+        const response = await fetchDashboard().unwrap();
+        dispatch(setDashboardData(response.data));
       } catch (error) {
-        console.log("Error Fetching Data", error);
+        dispatch(setError(error));
+      } finally {
+        dispatch(setLoading(false));
       }
     };
-    fetchDashboard();
-  }, []);
+
+    fetchData();
+  }, [dispatch, fetchDashboard]);
+
+  const selectDashboardData = useSelector(selectDashboard);
+  const selectLoading = useSelector(selectDashboardLoading);
+  const selectError = useSelector(selectDashboardError);
+
+  if (selectLoading) return <div>Loading...</div>;
+  if (selectError) return <div>Error: {selectError.message}</div>;
+
+  if (!Array.isArray(selectDashboardData)) {
+    console.error("Dashboard data is not an array:", selectDashboardData);
+    return null;
+  }
 
   return (
     <div className="relative">
       <div className="z-10 relative">
         <Carousel className="rounded-xl custom-carousel" loop autoplay>
-          {dash.map((item, index) => (
+          {selectDashboardData.map((item, index) => (
             <div className="relative" key={index}>
               <img
-              src={`http://localhost:1337${item.attributes.image.data.attributes.url}`} // Adjusted image URL handling
-                alt={item.title} // Assuming your API returns a 'title' field
+                src={`http://localhost:1337${item.attributes.image?.data?.attributes?.url}`}
+                alt={item.attributes.title}
                 className="w-full object-cover"
                 style={{ height: "calc(120vh - 100px)" }}
               />

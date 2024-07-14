@@ -1,4 +1,3 @@
-// main application file (index.jsx)
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import App from "./App.jsx";
@@ -17,6 +16,8 @@ import GreenRobotAvatar1 from "./assets/chatbot1.png";
 import { ThemeProvider } from "styled-components";
 import ChatbotSteps from "./chatbotsteps.jsx";
 import LoadingScreen from "./components/layout/loadingscreen/loadingScreen.jsx";
+import { Provider } from "react-redux";
+import store from "./store.js";  // Import the Redux store
 
 const theme = {
   background: "#f5f8fb",
@@ -44,50 +45,52 @@ const MainApp = () => {
   }
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="" element={<Home />}></Route>
-        <Route path="/blogs" element={<Blogs />}></Route>
-        <Route path="/products" element={<Products />}></Route>
-        <Route path="/ourstory" element={<Story />}></Route>
-        <Route path="/contactus" element={<Contactpage />}></Route>
-      </Routes>
-      <Footer />
-      <ThemeProvider theme={theme}>
-        <ChatBot
-          floating={true}
-          cache={false}
-          steps={ChatbotSteps}
-          floatingIcon={
-            <img
-              src={GreenRobotAvatar1}
-              alt="Chatbot Icon"
-              style={{
-                width: "60px",
-                height: "60px",
-                borderRadius: "50%",
-                backgroundColor: "#4CAF50",
-                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-                zIndex: 1000,
-              }}
-            />
-          }
-          botAvatar={GreenRobotAvatar}
-          bubbleStyle={{ background: "#4CAF50", color: "white" }}
-          style={{ bottom: "10px", right: "20px", position: "fixed" }}
-          floatingStyle={{
-            width: "60px",
-            height: "60px",
-            background: "#4CAF50",
-            borderRadius: "50%",
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-          }}
-          headerTitle="Policybazar Nepal"
-          userDelay={1000}
-        />
-      </ThemeProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="" element={<Home />}></Route>
+          <Route path="/blogs" element={<Blogs />}></Route>
+          <Route path="/products" element={<Products />}></Route>
+          <Route path="/ourstory" element={<Story />}></Route>
+          <Route path="/contactus" element={<Contactpage />}></Route>
+        </Routes>
+        <Footer />
+        <ThemeProvider theme={theme}>
+          <ChatBot
+            floating={true}
+            cache={false}
+            steps={ChatbotSteps}
+            floatingIcon={
+              <img
+                src={GreenRobotAvatar1}
+                alt="Chatbot Icon"
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  borderRadius: "50%",
+                  backgroundColor: "#4CAF50",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                  zIndex: 1000,
+                }}
+              />
+            }
+            botAvatar={GreenRobotAvatar}
+            bubbleStyle={{ background: "#4CAF50", color: "white" }}
+            style={{ bottom: "10px", right: "20px", position: "fixed" }}
+            floatingStyle={{
+              width: "60px",
+              height: "60px",
+              background: "#4CAF50",
+              borderRadius: "50%",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+            }}
+            headerTitle="Policybazar Nepal"
+            userDelay={1000}
+          />
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
   );
 };
 
