@@ -943,6 +943,80 @@ export interface ApiFaqFaq extends Schema.CollectionType {
   };
 }
 
+export interface ApiMissionAndVisionMissionAndVision
+  extends Schema.CollectionType {
+  collectionName: 'mission_and_visions';
+  info: {
+    singularName: 'mission-and-vision';
+    pluralName: 'mission-and-visions';
+    displayName: 'mission&vision';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    missiontext: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 200;
+      }>;
+    missiondescription: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 2000;
+      }>;
+    visiontext: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 4;
+        maxLength: 1000;
+      }>;
+    vissiondescription: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 2000;
+      }>;
+    slug: Attribute.UID<
+      'api::mission-and-vision.mission-and-vision',
+      'missiontext'
+    > &
+      Attribute.Required;
+    storyheading: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 5;
+        maxLength: 1000;
+      }>;
+    storydescription: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 7000;
+      }>;
+    storyheading2: Attribute.String;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::mission-and-vision.mission-and-vision',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::mission-and-vision.mission-and-vision',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPartnerPartner extends Schema.CollectionType {
   collectionName: 'partners';
   info: {
@@ -1069,6 +1143,7 @@ declare module '@strapi/types' {
       'api::blog.blog': ApiBlogBlog;
       'api::dashboard.dashboard': ApiDashboardDashboard;
       'api::faq.faq': ApiFaqFaq;
+      'api::mission-and-vision.mission-and-vision': ApiMissionAndVisionMissionAndVision;
       'api::partner.partner': ApiPartnerPartner;
       'api::product.product': ApiProductProduct;
     }
