@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import QuickLinksSection from "./quicklink";
+import Advertisement from "../advertise/adertise";
 
 const AboutSection = () => {
   const [aboutsection, setAboutsection] = useState([]);
@@ -99,7 +100,14 @@ const AboutSection = () => {
           </div>
         </div>
       </section>
+      <div className="mt-4">
+        <Advertisement/>
+    </div>
+      <div className="relative" data-aos="flip-right" data-aos-duration="5000"  >
       <QuickLinksSection />
+
+      </div>
+    
     </div>
   );
 };

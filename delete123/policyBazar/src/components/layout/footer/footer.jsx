@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -84,7 +85,7 @@ const Footer = () => {
               <a href="#!">Medical Insurance</a>
             </p>
             <p>
-              <a href="#!">Vehicle Insurance</a>
+              <Link to='/our_teams'>Our Teams</Link>
             </p>
           </div>
 

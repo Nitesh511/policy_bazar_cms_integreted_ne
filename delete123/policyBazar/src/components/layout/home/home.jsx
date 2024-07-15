@@ -70,8 +70,13 @@ const Home = () => {
           ))}
         </Carousel>
       </div>
+      <div data-aos="flip-left" >
       <Our_services />
+
+      </div>
+      <div data-aos="slide-right">
       <AboutUs />
+      </div>
     </div>
   );
 };

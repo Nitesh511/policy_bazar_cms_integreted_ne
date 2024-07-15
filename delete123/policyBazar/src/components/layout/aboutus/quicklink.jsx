@@ -4,7 +4,7 @@ import DownloadAppSection from '../dowloadsection/download';
 
 const QuickLinksSection = () => {
   return (
-    <div>
+    <div >
     <section className="mt-10">
       <div className="container mx-auto px-4 md:px-0">
         <div className="max-w-screen-xl mx-auto gap-8">
@@ -31,7 +31,11 @@ const QuickLinksSection = () => {
         </div>
       </div>
     </section>
+    <div data-aos='flip-right '>
     <DownloadAppSection/>
+
+    </div>
+  
     </div>
   );
 };

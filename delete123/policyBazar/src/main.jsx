@@ -18,6 +18,9 @@ import ChatbotSteps from "./chatbotsteps.jsx";
 import LoadingScreen from "./components/layout/loadingscreen/loadingScreen.jsx";
 import { Provider } from "react-redux";
 import store from "./store.js";  // Import the Redux store
+import InsuranceComponent from "./components/layout/home/home_second.jsx";
+import ScrollToTop from "./scrollTop.jsx";
+import Our_team from "./components/layout/teams/our_team.jsx";
 
 const theme = {
   background: "#f5f8fb",
@@ -47,13 +50,16 @@ const MainApp = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
+      <ScrollToTop/>
         <Navbar />
         <Routes>
-          <Route path="" element={<Home />}></Route>
+          {/* <Route path="" element={<Home />}></Route> */}
+          <Route path="" element={<InsuranceComponent />}></Route>
           <Route path="/blogs" element={<Blogs />}></Route>
           <Route path="/products" element={<Products />}></Route>
           <Route path="/ourstory" element={<Story />}></Route>
           <Route path="/contactus" element={<Contactpage />}></Route>
+          <Route path="/our_teams" element={<Our_team/>}></Route>
         </Routes>
         <Footer />
         <ThemeProvider theme={theme}>

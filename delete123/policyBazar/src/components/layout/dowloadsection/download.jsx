@@ -55,10 +55,17 @@ const DownloadAppSection = () => {
         </div>
       </div>
     </section>
+ 
+    <div data-aos="slide-left" > <ContactSection/></div>
+
+    <div data-aos="slide-right"><PartnersSection/></div>
+    <div data-aos="slide-right">
     <Faq_downloads/>
+
+    </div>
+   
+   
     
-    <ContactSection/>
-    <PartnersSection/>
     
     </div>
   );
