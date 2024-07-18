@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Faq_downloads from "../faq/faq";
 
 
 const Our_team = () => {
@@ -76,31 +77,11 @@ const Our_team = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mb-5">
-        <div className="w-full max-w-full sm:w-3/4 mx-auto text-center">
-          <p className="text-sm text-slate-500 py-1">
-            Tailwind CSS Component from{" "}
-            <a
-              href="https://www.loopple.com/theme/riva-dashboard-tailwind?ref=tailwindcomponents"
-              className="text-slate-700 hover:text-slate-900"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Riva Dashboard
-            </a>{" "}
-            by{" "}
-            <a
-              href="https://www.loopple.com"
-              className="text-slate-700 hover:text-slate-900"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Loopple Builder
-            </a>
-            .
-          </p>
-        </div>
-      </div>
+   
+      <div >
+    <Faq_downloads/>
+
+    </div>
     </>
   );
 };
