@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react';
 import Swiper from 'swiper';
 import '../CSS/layout.css';
 
+
 const OurServices = () => {
   const [services, setServices] = useState([]);
+  let mySwiper = null;
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const response = await fetch('http://localhost:1337/api/products?populate=*');
         const result = await response.json();
-        
+
         if (result && result.data) {
           setServices(result.data);
-          initializeSwiper(); // Initialize Swiper after services are fetched
         }
       } catch (error) {
         console.error('Error fetching services:', error);
@@ -21,6 +22,35 @@ const OurServices = () => {
     };
 
     fetchServices();
+  }, []); // Empty dependency array to run effect only once
+
+  useEffect(() => {
+    if (services.length > 0) {
+      mySwiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        },
+      });
+    }
 
     // Cleanup function
     return () => {
@@ -28,36 +58,7 @@ const OurServices = () => {
         mySwiper.destroy(true, true);
       }
     };
-  }, []); // Empty dependency array to run effect only once
-
-  let mySwiper = null;
-
-  const initializeSwiper = () => {
-    mySwiper = new Swiper('.swiper-container', {
-      slidesPerView: 1,
-      spaceBetween: 10,
-      loop: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      breakpoints: {
-        640: {
-          slidesPerView: 2,
-        },
-        768: {
-          slidesPerView: 3,
-        },
-        1024: {
-          slidesPerView: 4,
-        },
-      },
-    });
-  };
+  }, [services]); // Run effect when services change
 
   const getBadgeColor = (index) => {
     const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500'];
@@ -95,7 +96,7 @@ const OurServices = () => {
             </div>
           ))}
         </div>
-   
+       
       </div>
     </div>
   );

@@ -1017,6 +1017,49 @@ export interface ApiMissionAndVisionMissionAndVision
   };
 }
 
+export interface ApiOurteamOurteam extends Schema.CollectionType {
+  collectionName: 'ourteams';
+  info: {
+    singularName: 'ourteam';
+    pluralName: 'ourteams';
+    displayName: 'ourteam';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 100;
+      }>;
+    position: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 1000;
+      }>;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    slug: Attribute.UID<'api::ourteam.ourteam', 'name'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ourteam.ourteam',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ourteam.ourteam',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPartnerPartner extends Schema.CollectionType {
   collectionName: 'partners';
   info: {
@@ -1144,6 +1187,7 @@ declare module '@strapi/types' {
       'api::dashboard.dashboard': ApiDashboardDashboard;
       'api::faq.faq': ApiFaqFaq;
       'api::mission-and-vision.mission-and-vision': ApiMissionAndVisionMissionAndVision;
+      'api::ourteam.ourteam': ApiOurteamOurteam;
       'api::partner.partner': ApiPartnerPartner;
       'api::product.product': ApiProductProduct;
     }

@@ -7,6 +7,7 @@ import ContactSection from '../getintouch/getintouch';
 import { FaQ } from 'react-icons/fa6';
 import Faq_downloads from '../faq/faq';
 import PartnersSection from '../partner_section/partner_section';
+import Testimonial from '../testominals/testominals';
 
 const DownloadAppSection = () => {
   return (
@@ -63,7 +64,7 @@ const DownloadAppSection = () => {
     <Faq_downloads/>
 
     </div>
-   
+    <Testimonial/>
    
     
     

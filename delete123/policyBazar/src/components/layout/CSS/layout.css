@@ -131,3 +131,8 @@
     background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
       url('https://images.unsplash.com/photo-1568992688065-536aad8a12f6') no-repeat 50% 50% / cover;
 }
+
+
+.slick-disabled {
+    display: none;
+  }
