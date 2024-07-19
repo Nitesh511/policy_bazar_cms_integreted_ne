@@ -34,7 +34,7 @@ const InsuranceComponent = () => {
   }, []);
 
   return (
-    <div className="relative z-10">
+    <div className="relative z-10 ">
       <div className="container mx-auto p-4 py-12 mt-14">
         {dashboard.map((item, index) => (
           <div

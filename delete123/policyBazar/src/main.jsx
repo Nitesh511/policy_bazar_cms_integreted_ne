@@ -22,6 +22,7 @@ import InsuranceComponent from "./components/layout/home/home_second.jsx";
 import ScrollToTop from "./scrollTop.jsx";
 import Our_team from "./components/layout/teams/our_team.jsx";
 
+
 const theme = {
   background: "#f5f8fb",
   fontFamily: "Helvetica Neue",
@@ -50,6 +51,7 @@ const MainApp = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
+
       <ScrollToTop/>
         <Navbar />
         <Routes>
@@ -95,6 +97,7 @@ const MainApp = () => {
             userDelay={1000}
           />
         </ThemeProvider>
+   
       </BrowserRouter>
     </Provider>
   );

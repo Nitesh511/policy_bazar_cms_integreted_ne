@@ -57,7 +57,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-      <div className="relative" data-aos="slide-left" data-aos-duration='2000'>
+      <div className="relative" >
         {" "}
         <AboutSection />
       </div>
