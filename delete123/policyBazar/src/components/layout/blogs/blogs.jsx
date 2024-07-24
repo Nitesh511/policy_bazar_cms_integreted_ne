@@ -1,14 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import Company from "../../../assets/Company.jfif";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+
+
+  
+const SeoContext = React.createContext();
+
+const Seo = () => {
+  const { title, description, url, shareImage, keywords, preventIndexing, shareImageAlt } = useContext(SeoContext);
+
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} key="description" />
+      <meta name="keywords" content={keywords} />
+      <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+      <meta property="og:url" content={url} key="og:url" />
+      <meta property="og:title" content={title} key="og:title" />
+      <meta property="og:description" content={description} key="og:description" />
+      <meta property="og:image" content={shareImage} key="og:image"  />
+      <meta property="og:image:alt" content={shareImageAlt} key="og:image:alt" /> {/* Added alt text for image */}
+      <link rel="canonical" href={url} />
+
+      {preventIndexing && (
+        <>
+          <meta name="robots" content="noindex" />
+          <meta name="googlebot" content="noindex" />
+        </>
+      )}
+    </Helmet>
+  );
+};
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
+  const [metaData, setMetaData] = useState({
+    metaTitle: 'Insurance Plans',
+    metaDescription: 'Discover our insurance plans and services.',
+    metaKeywords: 'insurance, plans, services',
+    shareImage: '',
+    shareImageAlt: '', // Added alt text field
+    preventIndexing: false,
+  });
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await fetch(
-          "http://localhost:1337/api/blogs?populate=*",
+          `${ process.env.STRAPI_API}/api/blogs?populate=*`,
           {
             headers: {
               Authorization:
@@ -20,6 +59,17 @@ const Blogs = () => {
         const result = await response.json();
         if (result && result.data) {
           setBlogs(result.data);
+          if (result.data.length > 0) {
+            const firstItem = result.data[0];
+            setMetaData({
+              metaTitle: firstItem.attributes.Seo.metaTitle || metaData.metaTitle,
+              metaDescription: firstItem.attributes.Seo.metaDescription || metaData.metaDescription,
+              metaKeywords: firstItem.attributes.metaKeywords || metaData.keywords,
+              shareImage: `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data?.attributes?.url}` || '',
+              shareImageAlt: firstItem.attributes.metaImages?.data?.attributes?.alternativeText || '', // Set alt text from API
+              preventIndexing: firstItem.attributes.preventindexing || metaData.preventIndexing,
+            });
+          }
         }
       } catch (error) {
         console.log("Error Fetching Data", error);
@@ -29,6 +79,17 @@ const Blogs = () => {
   }, []);
 
   return (
+    <HelmetProvider>
+    <SeoContext.Provider value={{ 
+      title: metaData.metaTitle,
+      description: metaData.metaDescription,
+      url: window.location.href,
+      shareImage: metaData.shareImage,
+      keywords: metaData.metaKeywords,
+      preventIndexing: metaData.preventIndexing,
+      shareImageAlt: metaData.shareImageAlt // Provide alt text to context
+    }}>
+      <Seo />
     <div>
       <div className="relative h-72 bg-gray-300 overflow-hidden">
         {/* Background image */}
@@ -47,7 +108,7 @@ const Blogs = () => {
             <a href="#">
               <img
                 className="rounded-t-lg"
-                src={`http://localhost:1337${item.attributes.image.data.attributes.url}`} // Adjusted image URL handling
+                src={`${ process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`} // Adjusted image URL handling
                 alt=""
               />
             </a>
@@ -71,6 +132,8 @@ const Blogs = () => {
         ))}
       </div>
     </div>
+    </SeoContext.Provider>
+    </HelmetProvider>
   );
 };
 

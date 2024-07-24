@@ -29,7 +29,7 @@ const DematFAQ = () => {
     const fetchFaq = async () => {
       try {
         const response = await fetch(
-          "http://localhost:1337/api/faqs?populate=*",
+         `${ process.env.STRAPI_API}/api/faqs?populate=*`,
           {
             headers: {
               Authorization:

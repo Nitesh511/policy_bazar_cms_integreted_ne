@@ -6,9 +6,9 @@ const AboutUs = () => {
 
   useEffect(() => {
     const fetchAbout = async () => {
-      try {
+      try {       
         const response = await fetch(
-          "http://localhost:1337/api/aboutus?populate=*",
+          `${ process.env.STRAPI_API}/api/aboutus?populate=*`,
           {
             headers: {
               Authorization:
@@ -20,6 +20,7 @@ const AboutUs = () => {
         const result = await response.json();
         if (result && result.data) {
           setAbout(result.data);
+          console.log(result.data);
         }
       } catch (error) {
         console.log("Error Fetching About Us:", error);
@@ -29,18 +30,18 @@ const AboutUs = () => {
   }, []);
 
   return (
-    <div>
-      <div className="bg-gray-100  py-24 px-4 sm:px-6 lg:px-8 ">
-        <div className="max-w-7xl mx-auto">
+    <div className="overflow-hidden">
+      <div className="bg-gray-100 py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {about.map((item, index) => (
               <React.Fragment key={index}>
                 <div className="md:order-2">
                   {item.attributes.image && (
                     <img
-                      src={`http://localhost:1337${item.attributes.image.data.attributes.url}`}
+                      src={`${process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`}
                       alt="Company"
-                      className="rounded-lg shadow-lg"
+                      className="rounded-lg shadow-lg max-w-full h-auto"
                     />
                   )}
                 </div>
@@ -57,8 +58,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-      <div className="relative" >
-        {" "}
+      <div className="relative">
         <AboutSection />
       </div>
     </div>

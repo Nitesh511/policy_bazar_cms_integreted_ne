@@ -10,7 +10,7 @@ const OurServices = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await fetch('http://localhost:1337/api/products?populate=*');
+        const response = await fetch(`${ process.env.STRAPI_API}/api/products?populate=*`);
         const result = await response.json();
 
         if (result && result.data) {
@@ -84,7 +84,7 @@ const OurServices = () => {
               <div
                 className="bg-cover bg-center h-full flex flex-col justify-end p-4"
                 style={{
-                  backgroundImage: `url('http://localhost:1337${service.attributes.image.data.attributes.url}')`,
+                  backgroundImage: `url(${ process.env.STRAPI_API+service.attributes.image.data.attributes.url})`,
                   opacity: '0.8', // Adjust opacity as needed
                 }}
               >

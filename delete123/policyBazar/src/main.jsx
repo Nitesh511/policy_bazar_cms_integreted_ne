@@ -21,6 +21,8 @@ import store from "./store.js";  // Import the Redux store
 import InsuranceComponent from "./components/layout/home/home_second.jsx";
 import ScrollToTop from "./scrollTop.jsx";
 import Our_team from "./components/layout/teams/our_team.jsx";
+import Product_details from "./components/layout/product_details_page/product_details.jsx";
+import { HelmetProvider } from "react-helmet-async";
 
 
 const theme = {
@@ -49,10 +51,12 @@ const MainApp = () => {
   }
 
   return (
+    <HelmetProvider>
     <Provider store={store}>
       <BrowserRouter>
 
       <ScrollToTop/>
+ 
         <Navbar />
         <Routes>
           {/* <Route path="" element={<Home />}></Route> */}
@@ -62,7 +66,9 @@ const MainApp = () => {
           <Route path="/ourstory" element={<Story />}></Route>
           <Route path="/contactus" element={<Contactpage />}></Route>
           <Route path="/our_teams" element={<Our_team/>}></Route>
+          <Route path="/product_details/:id" element={<Product_details/>}></Route>
         </Routes>
+    
         <Footer />
         <ThemeProvider theme={theme}>
           <ChatBot
@@ -100,6 +106,7 @@ const MainApp = () => {
    
       </BrowserRouter>
     </Provider>
+    </HelmetProvider>
   );
 };
 

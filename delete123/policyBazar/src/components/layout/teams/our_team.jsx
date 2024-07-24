@@ -9,7 +9,7 @@ const Our_team = () => {
     const fetchOurTeam = async () => {
       try {
         const response = await fetch(
-          "http://localhost:1337/api/ourteams?populate=*",
+         `${ process.env.STRAPI_API}/api/ourteams?populate=*`,
           {
             headers: {
               Authorization:
@@ -53,8 +53,8 @@ const Our_team = () => {
                     >
                       <div className="inline-block mb-4 relative shrink-0 rounded-[.95rem]">
                         <img
-                          className="inline-block shrink-0 rounded-[.95rem] w-[350px] h-[350px] hover:scale-110 hover:shadow-lg hover:shadow-gray-700 transition duration-500"
-                          src={`http://localhost:1337${item.attributes.image.data.attributes.url}`}
+                          className="inline-block shrink-0 rounded-[.95rem] w-[300px] h-[330px] hover:scale-110 hover:shadow-lg hover:shadow-gray-700 transition duration-500"
+                          src={`${ process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`}
                           alt="avatar"
                         />
                       </div>

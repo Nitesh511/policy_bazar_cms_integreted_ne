@@ -1,17 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import { motion } from "framer-motion";
 import background from "../../../assets/Background.png";
 import mission from "../../../assets/mission.png";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
+
+const SeoContext = React.createContext();
+
+const Seo = () => {
+  const { title, description, url, shareImage, keywords, preventIndexing, shareImageAlt } = useContext(SeoContext);
+
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} key="description" />
+      <meta name="keywords" content={keywords} />
+      <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+      <meta property="og:url" content={url} key="og:url" />
+      <meta property="og:title" content={title} key="og:title" />
+      <meta property="og:description" content={description} key="og:description" />
+      <meta property="og:image" content={shareImage} key="og:image"  />
+      <meta property="og:image:alt" content={shareImageAlt} key="og:image:alt" /> {/* Added alt text for image */}
+      <link rel="canonical" href={url} />
+
+      {preventIndexing && (
+        <>
+          <meta name="robots" content="noindex" />
+          <meta name="googlebot" content="noindex" />
+        </>
+      )}
+    </Helmet>
+  );
+};
 const Story = () => {
   const [stories, setStories] = useState([]);
   const [loading, setLoading] = useState(true); // Adding loading state
+  const [metaData, setMetaData] = useState({
+    metaTitle: 'Insurance Plans',
+    metaDescription: 'Discover our insurance plans and services.',
+    metaKeywords: 'insurance, plans, services',
+    shareImage: '',
+    shareImageAlt: '', // Added alt text field
+    preventIndexing: false,
+  });
 
   useEffect(() => {
     const fetchStoryData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:1337/api/mission-and-visions?populate=*",
+        `${ process.env.STRAPI_API}/api/mission-and-visions?populate=*`,
           {
             headers: {
               Authorization:
@@ -24,6 +61,17 @@ const Story = () => {
 
         if (result && result.data) {
           setStories(result.data);
+          if (result.data.length > 0) {
+            const firstItem = result.data[0];
+            setMetaData({
+              metaTitle: firstItem.attributes.Seo.metaTitle || metaData.metaTitle,
+              metaDescription: firstItem.attributes.Seo.metaDescription || metaData.metaDescription,
+              metaKeywords: firstItem.attributes.metaKeywords || metaData.keywords,
+              shareImage: `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data?.attributes?.url}` || '',
+              shareImageAlt: firstItem.attributes.metaImages?.data?.attributes?.alternativeText || '', // Set alt text from API
+              preventIndexing: firstItem.attributes.preventindexing || metaData.preventIndexing,
+            });
+          }
         }
       } catch (error) {
         console.log("Error fetching the data", error);
@@ -40,6 +88,17 @@ const Story = () => {
   };
 
   return (
+    <HelmetProvider>
+    <SeoContext.Provider value={{ 
+      title: metaData.metaTitle,
+      description: metaData.metaDescription,
+      url: window.location.href,
+      shareImage: metaData.shareImage,
+      keywords: metaData.metaKeywords,
+      preventIndexing: metaData.preventIndexing,
+      shareImageAlt: metaData.shareImageAlt // Provide alt text to context
+    }}>
+      <Seo />
     <section>
       {loading ? ( // Show custom loading animation while loading
         <div className="flex justify-center items-center h-screen">
@@ -78,7 +137,7 @@ const Story = () => {
               <img
                 src={
                   item.attributes.image?.data?.attributes?.url
-                    ? `http://localhost:1337${item.attributes.image.data.attributes.url}`
+                    ? `${ process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`
                     : background
                 }
                 alt="our story"
@@ -158,6 +217,8 @@ const Story = () => {
         ))
       )}
     </section>
+    </SeoContext.Provider>
+    </HelmetProvider>
   );
 };
 

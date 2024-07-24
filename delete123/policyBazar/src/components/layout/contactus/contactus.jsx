@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Company from "../../../assets/Contactus.jpg";
 import { Alert } from "@material-tailwind/react";
+import { HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 const Contactpage = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -31,6 +33,22 @@ const Contactpage = () => {
   };
 
   return (
+    <HelmetProvider>
+          <Helmet>
+        <title>Contact Us - Policy Bazar Nepal</title>
+        <meta name="description" content="Contact Policy Bazar Nepal for any inquiries or support. We are here to help you with your insurance and policy needs." />
+        <meta name="keywords" content="Contact, Policy Bazar Nepal, insurance, support" />
+        <meta name="author" content="Policy Bazar Nepal" />
+        <meta property="og:title" content="Contact Us - Policy Bazar Nepal" />
+        <meta property="og:description" content="Contact Policy Bazar Nepal for any inquiries or support. We are here to help you with your insurance and policy needs." />
+        <meta property="og:image" content={Company} />
+        <meta property="og:url" content="https://www.policybazarnepal.com/contact" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Us - Policy Bazar Nepal" />
+        <meta name="twitter:description" content="Contact Policy Bazar Nepal for any inquiries or support. We are here to help you with your insurance and policy needs." />
+        <meta name="twitter:image" content={Company} />
+      </Helmet>
+
     <div>
       <div className="relative h-72 bg-gray-300 overflow-hidden">
         <div
@@ -163,6 +181,7 @@ const Contactpage = () => {
         </div>
       )}
     </div>
+    </HelmetProvider>
   );
 };
 

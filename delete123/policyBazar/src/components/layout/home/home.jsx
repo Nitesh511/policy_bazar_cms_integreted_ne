@@ -53,7 +53,7 @@ const Home = () => {
           {selectDashboardData.map((item, index) => (
             <div className="relative" key={index}>
               <img
-                src={`http://localhost:1337${item.attributes.image?.data?.attributes?.url}`}
+                src={`${ process.env.STRAPI_API}${item.attributes.image?.data?.attributes?.url}`}
                 alt={item.attributes.title}
                 className="w-full object-cover"
                 style={{ height: "calc(120vh - 100px)" }}

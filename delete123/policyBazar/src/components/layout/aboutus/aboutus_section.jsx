@@ -9,7 +9,7 @@ const AboutSection = () => {
     const fetchAboutsection = async () => {
       try {
         const response = await fetch(
-          "http://localhost:1337/api/partners?populate=*",
+          `${ process.env.STRAPI_API}/api/partners?populate=*`,
           {
             headers: {
               Authorization:
@@ -66,7 +66,7 @@ const AboutSection = () => {
                   <React.Fragment key={index}>
                     <div className="bg-white shadow-md rounded-lg p-5 hover:bg-gradient-to-r from-blue-400 to-green-500 hover:scale-110 transition duration-300 ease-in-out group">
                       <img
-                        src={`http://localhost:1337${section.attributes.image.data.attributes.url}`}
+                        src={`${ process.env.STRAPI_API}${section.attributes.image.data.attributes.url}`}
                         alt="product"
                         width="64"
                         className="mx-auto mb-3"
@@ -100,9 +100,9 @@ const AboutSection = () => {
           </div>
         </div>
       </section>
-      <div className="mt-4">
+      {/* <div className="mt-4">
         <Advertisement/>
-    </div>
+    </div> */}
       <div className="relative" data-aos="flip-right" data-aos-duration="5000"  >
       <QuickLinksSection />
 
