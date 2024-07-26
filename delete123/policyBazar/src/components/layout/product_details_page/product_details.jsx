@@ -1,23 +1,119 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import InsuranceForm from "./insurance_form";
 
-const Product_details = () => {
+const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [formData, setFormData] = useState({
+    insuranceType: "",
+    name: "",
+    email: "",
+    phone: "",
+  });
+  const [showForm, setShowForm] = useState(false);
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(`${ process.env.STRAPI_API}/api/products/${id}?populate=*`);
-        const data = await response.json();
-        if (data && data.data) {
-          setProduct(data.data);
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const validatePhoneNumber = (phone) => {
+    const nepalPhoneRegex = /^(98[45]\d{7}|97[4]\d{7})$/;
+    return nepalPhoneRegex.test(phone);
+  };
+
+  const validateForm = () => {
+    const { name, email, phone } = formData;
+    if (!name || !email || !phone) {
+      toast.error("Please fill out all fields");
+      return false;
+    }
+    if (!validatePhoneNumber(phone)) {
+      toast.error("Please enter a valid Nepal phone number");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    try {
+      const response = await fetch(
+        "http://45.117.153.94:1007/api/suscribes?populate=*",
+        {
+          method: "POST",
+          headers: {
+            Authorization:
+              "Bearer cb6977f556ef939cc2dec9cffef081aec6784cd62adc7e6fff50f20f9e56610703876a424ddf177b7fbb8c26887bb280c09fffc955c4999fc8f0a8ff114699e7c1609e6734313c75c535f9addb25d4ca0fe737bdbe2c3cbfae0fea39e12fc134925fb539e3a4767880808f98f4051fa09d75db181eb16f5abca3575ddf69837c",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data: {
+              insurancetype: formData.insuranceType,
+              name: formData.name,
+              email: formData.email,
+              phone: formData.phone,
+            },
+          }),
         }
-      } catch (error) {
-        console.log("Error fetching product details", error);
-      }
-    };
+      );
+      console.log("Response Status:", response.status);
 
+      if (response.ok) {
+        toast.success("Form successfully submitted", {});
+        setShowForm(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+        });
+        fetchProduct();
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (err) {
+      toast.error("Error occurred while submitting form", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 5000,
+      });
+      console.log("Error Has been Cached", err);
+    }
+  };
+
+  const handleQuoteClick = () => {
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
+  const fetchProduct = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.STRAPI_API}/api/products/${id}?populate=*`
+      );
+      const data = await response.json();
+      if (data && data.data) {
+        setProduct(data.data);
+
+        setFormData({
+          insuranceType: data.data.attributes.title || "",
+        });
+      }
+    } catch (error) {
+      console.log("Error fetching product details", error);
+    }
+  };
+  useEffect(() => {
     fetchProduct();
   }, [id]);
 
@@ -30,121 +126,94 @@ const Product_details = () => {
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="w-full max-w-3xl overflow-hidden rounded-t-lg mt-8">
-        <img
-          className="  object-cover object-bottom"
-          src={`${ process.env.STRAPI_API}${product.attributes.image.data.attributes.url}`}
-          alt={product.attributes.title}
+    <div className="flex flex-col h-full">
+    <div
+      className="relative w-full h-72 overflow-hidden rounded-t-lg mt-18"
+      style={{ height: "30rem" }}
+    >
+      <img
+        className="w-full h-full object-cover opacity-75"
+        style={{ height: "70rem" }}
+        src={`${process.env.STRAPI_API}${product.attributes.image.data.attributes.url}`}
+        alt={product.attributes.title}
+      />
+      <button
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 -translate-y-40 bg-green-600 text-white px-6 py-3 rounded-lg shadow-md transition duration-300 ease-in-out hover:scale-105"
+        onClick={handleQuoteClick}
+      >
+        Get a Quote
+      </button>
+    </div>
+  
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-4 text-indigo-600">
+        {product.attributes.title}
+      </h1>
+      <p className="text-gray-700 mb-4 leading-relaxed">
+        {product.attributes.description}
+      </p>
+      <ul className="list-disc pl-6 mb-4 text-gray-700 leading-relaxed">
+        {product.attributes.bigdesctiption.split("\n").map((line, idx) => (
+          <li key={idx}>{line}</li>
+        ))}
+      </ul>
+  
+      <div className="bg-white rounded-lg py-10">
+        <h2 className="text-3xl font-bold mb-6 text-indigo-800">
+          Why Choose Policybazaar Nepal
+        </h2>
+        <div className="space-y-4 text-gray-700">
+          <p>
+            <strong>Easy Online Purchase:</strong> Conveniently purchase your
+            trekker’s insurance through our user-friendly website.
+          </p>
+          <p>
+            <strong>Claims Assistance:</strong> Our dedicated claims team is
+            ready to assist you through a hassle-free claims process.
+          </p>
+          <p>
+            <strong>Flexible Premiums:</strong> Choose coverage options and
+            durations that suit your trekking plans, with premiums tailored to
+            your needs.
+          </p>
+          <p>
+            <strong>Renewable Policies:</strong> Enjoy peace of mind on all
+            your treks with policies that are easily renewable for your future
+            adventures.
+          </p>
+          <p>
+            <strong>Cancellation Refund:</strong> Plans change, and we
+            understand. Our policies offer a free-look period for
+            cancellations and full refunds.
+          </p>
+        </div>
+      </div>
+    </div>
+  
+    <div className="flex justify-end p-6  w-1/4 ml-auto relative -mt-96  " >
+      <div className="w-full max-w-md  -mt-32">
+        <InsuranceForm
+          formData={formData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
         />
       </div>
-      <div className="p-6">
-        <h1 className="text-3xl font-bold mb-4 text-indigo-600">{product.attributes.title}</h1>
-        <p className="text-gray-700 mb-4 leading-relaxed">{product.attributes.description}</p>
-        <ul className="list-disc pl-6 mb-4 text-gray-700 leading-relaxed">
-          {product.attributes.bigdesctiption.split("\n").map((line, idx) => (
-            <li key={idx}>{line}</li>
-          ))}
-        </ul>
-        <div className=" mx-auto">
-
-      
-      <section className="mb-8">
-        <h2 className="text-3xl font-bold mb-4 text-indigo-600">Key Benefits</h2>
-        
-        <div className="mb-4">
-          <h3 className="text-2xl font-bold mb-2">Maturity Benefit</h3>
-          <div className="mb-2">
-            <h4 className="text-xl font-semibold mb-1">Under Option-1</h4>
-            <p className="text-gray-700">Sum assured along with the accrued bonuses (if any).</p>
-          </div>
-          <div>
-            <h4 className="text-xl font-semibold mb-1">Under Option-2</h4>
-            <p className="text-gray-700">100% of the sum assured is payable at the end of the premium payment term. After the completion of the premium payment term, 5% of the sum assured is payable every year (policy anniversary date) until the age of 79 years along with accrued bonuses (if any) accumulated till the end of the premium payment term is payable at the age of 80.</p>
-          </div>
-        </div>
-        
-        <div>
-          <h3 className="text-2xl font-bold mb-2">Death Benefit</h3>
-          <div className="mb-2">
-            <h4 className="text-xl font-semibold mb-1">Under Option-1</h4>
-            <p className="text-gray-700">Insured death during the premium paying period the Product pays out 100% of the sum assured plus accrued bonuses (if any).</p>
-          </div>
-          <div>
-            <h4 className="text-xl font-semibold mb-1">Under Option-2</h4>
-            <p className="text-gray-700">Insured death during the premium paying period, 100% of the sum assured plus accrued bonuses (if any). Post the premium payment term 50% of the sum assured along with accrued bonuses (if any) will be payable on death till 80 years.</p>
-          </div>
-        </div>
-      </section>
-      
-      <section className="mb-8">
-        <h2 className="text-3xl font-bold mb-4 text-indigo-600">Eligibility</h2>
-        <ul className="list-disc pl-6 text-gray-700">
-          <li>Minimum Sum Assured: NPR 25,000.</li>
-          <li>Maximum Sum Assured: As per the source and level of income.</li>
-          <li>Minimum and Maximum Entry Age: 18-65 Years.</li>
-          <li>Policy Term (Option - 1 & 2 ): 5-35 Years.</li>
-          <li>Risk Coverage Period (Option - 2): 15-62 Years.</li>
-          <li>Maximum Maturity Age (Option-1): 70 Years.</li>
-          <li>Maximum Maturity Age (Option-2): 80 Years.</li>
-          <li>Maximum Age at the end of the premium paying Term: 70 for both options 1 and 2.</li>
-          <li>Premium Payment Mode: Yearly, Half-Yearly, Quarterly, Monthly / Salary Saving and Single Mode (For Option-1 Only).</li>
-        </ul>
-      </section>
-      
-      <section className="mb-8">
-        <h2 className="text-3xl font-bold mb-4 text-indigo-600">Policy Loan & Surrender</h2>
-        <p className="text-gray-700 mb-4">Under Both Options:</p>
-        <ul className="list-decimal pl-6 text-gray-700">
-          <li>Surrender is only applicable upon completion of three full policy years & 3 full premium payments from the date of commencement.</li>
-          <li>After completion of three years of premium payment 90% of its surrender value will be applicable for the policy loan.</li>
-        </ul>
-      </section>
-      
-      <section className="mb-8">
-        <h2 className="text-3xl font-bold mb-4 text-indigo-600">Comprehensive Additional Benefit</h2>
-        <p className="text-gray-700 mb-4">Option to Choose:</p>
-        <ul className="list-disc pl-6 text-gray-700">
-          <li>Accidental Rider Benefit</li>
-          <li>Accidental Rider Benefit / Permanent Total Disability Benefit / Premium Wavier Benefit</li>
-          <li>Critical Illness</li>
-        </ul>
-      </section>
-      
-      <section className="mb-8">
-        <h2 className="text-3xl font-bold mb-4 text-indigo-600">Risk Not Covered by Insurance</h2>
-        <p className="text-gray-700 mb-4">If the death of the insured is directly or indirectly due to any of the following reasons, the amount to be paid under the insurance policy is not as per the sum assured mentioned in the schedule but if there is any surrender value of the insurance policy, only that amount will be paid calculation as per NIA guidelines.</p>
-        
-        <h3 className="text-2xl font-bold mb-2">For Single Plan</h3>
-        <ul className="list-disc pl-6 text-gray-700 mb-4">
-          <li>1-3 years after date of commencement: 80% of paid premium (except riders + vested bonus)</li>
-          <li>After completion of 3 years from date of commencement: 80% of paid premium (except riders + vested bonus)</li>
-          <li>After completion of 4 years from date of commencement: 85% of paid premium (except riders + vested bonus)</li>
-          <li>After completion of 5 years from date of commencement: 90% of paid premium (except riders + vested bonus)</li>
-        </ul>
-        
-        <h3 className="text-2xl font-bold mb-2">Claims Exclusion</h3>
-        <ul className="list-disc pl-6 text-gray-700">
-          <li>Engaging in aviation other than as a fare-paying passenger on a regular route of a recognized aviation service</li>
-          <li>Any war-like operations (whether war be declared or not), riot, civil commotion, rebellion or invasion</li>
-          <li>Any breach of civil or military law</li>
-          <li>Suicide, whether sane or insane, within two years after the date of commencement of assurance.</li>
-          <li>Engaging in risky occupations without formal notification to the Company.</li>
-          <li>Except for the risks mentioned above, this policy will not restrict migration, travel, or occupation abroad.</li>
-        </ul>
-        
-        <p className="text-gray-700 mt-4">If any dispute arises under this policy, it will be solved in accordance with the Insurance Act, 2079.</p>
-      </section>
     </div>
-        <div className="text-center">
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-            Get a Quote
-          </button>
-        </div>
+  
+    {showForm && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <InsuranceForm
+          formData={formData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleCloseForm={handleCloseForm}
+        />
       </div>
-      
-    </div>
+    )}
+  
+    <ToastContainer />
+  </div>
   );
 };
 
-export default Product_details;
+export default ProductDetails;

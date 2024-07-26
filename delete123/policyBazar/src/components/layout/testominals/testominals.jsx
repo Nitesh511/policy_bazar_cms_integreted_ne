@@ -100,10 +100,10 @@ const Testimonial = () => {
                     key={index}
                     className="flex-1 bg-white p-6 rounded-lg shadow-md"
                   >
-                    <p className="text-lg italic">
+                    <p className="text-lg italic font-sans">
                       "{truncateText(testimonial.attributes.description, 100)}"
                     </p>
-                    <p className="mt-4 font-bold text-right">
+                    <p className="mt-4 font-bold text-right font-sans">
                       - {testimonial.attributes.name}
                     </p>
                   </div>

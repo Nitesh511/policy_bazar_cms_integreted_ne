@@ -1,9 +1,8 @@
-import React, { useState, useEffect ,useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import background from "../../../assets/Background.png";
 import mission from "../../../assets/mission.png";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-
 
 const SeoContext = React.createContext();
 
@@ -19,8 +18,8 @@ const Seo = () => {
       <meta property="og:url" content={url} key="og:url" />
       <meta property="og:title" content={title} key="og:title" />
       <meta property="og:description" content={description} key="og:description" />
-      <meta property="og:image" content={shareImage} key="og:image"  />
-      <meta property="og:image:alt" content={shareImageAlt} key="og:image:alt" /> {/* Added alt text for image */}
+      <meta property="og:image" content={shareImage} key="og:image" />
+      <meta property="og:image:alt" content={shareImageAlt} key="og:image:alt" />
       <link rel="canonical" href={url} />
 
       {preventIndexing && (
@@ -32,15 +31,16 @@ const Seo = () => {
     </Helmet>
   );
 };
+
 const Story = () => {
   const [stories, setStories] = useState([]);
-  const [loading, setLoading] = useState(true); // Adding loading state
+  const [loading, setLoading] = useState(true);
   const [metaData, setMetaData] = useState({
-    metaTitle: 'Insurance Plans',
-    metaDescription: 'Discover our insurance plans and services.',
-    metaKeywords: 'insurance, plans, services',
-    shareImage: '',
-    shareImageAlt: '', // Added alt text field
+    metaTitle: "Insurance Plans",
+    metaDescription: "Discover our insurance plans and services.",
+    metaKeywords: "insurance, plans, services",
+    shareImage: "",
+    shareImageAlt: "",
     preventIndexing: false,
   });
 
@@ -48,7 +48,7 @@ const Story = () => {
     const fetchStoryData = async () => {
       try {
         const response = await fetch(
-        `${ process.env.STRAPI_API}/api/mission-and-visions?populate=*`,
+          `${process.env.STRAPI_API}/api/mission-and-visions?populate=*`,
           {
             headers: {
               Authorization:
@@ -67,8 +67,8 @@ const Story = () => {
               metaTitle: firstItem.attributes.Seo.metaTitle || metaData.metaTitle,
               metaDescription: firstItem.attributes.Seo.metaDescription || metaData.metaDescription,
               metaKeywords: firstItem.attributes.metaKeywords || metaData.keywords,
-              shareImage: `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data?.attributes?.url}` || '',
-              shareImageAlt: firstItem.attributes.metaImages?.data?.attributes?.alternativeText || '', // Set alt text from API
+              shareImage: `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data?.attributes?.url}` || "",
+              shareImageAlt: firstItem.attributes.metaImages?.data?.attributes?.alternativeText || "",
               preventIndexing: firstItem.attributes.preventindexing || metaData.preventIndexing,
             });
           }
@@ -76,7 +76,7 @@ const Story = () => {
       } catch (error) {
         console.log("Error fetching the data", error);
       } finally {
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false);
       }
     };
     fetchStoryData();
@@ -89,136 +89,129 @@ const Story = () => {
 
   return (
     <HelmetProvider>
-    <SeoContext.Provider value={{ 
-      title: metaData.metaTitle,
-      description: metaData.metaDescription,
-      url: window.location.href,
-      shareImage: metaData.shareImage,
-      keywords: metaData.metaKeywords,
-      preventIndexing: metaData.preventIndexing,
-      shareImageAlt: metaData.shareImageAlt // Provide alt text to context
-    }}>
-      <Seo />
-    <section>
-      {loading ? ( // Show custom loading animation while loading
-        <div className="flex justify-center items-center h-screen">
-          <motion.div
-            className="w-16 h-16 bg-green-500 rounded-full"
-            initial="initial"
-            animate="animate"
-            variants={loadingAnimation}
-          />
-        </div>
-      ) : (
-        stories.map((item, index) => (
-          <div key={index}>
-            <div className="container mx-auto text-center mt-20 lg:ml-16">
-              <p className="main-heading mb-3 mt-40 text-4xl lg:text-5xl font-mono">
-                {item.attributes.storyheading && (
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: item.attributes.storyheading
-                        .replace(
-                          /(Insurance)/gi,
-                          '<span class="text-red-500">$1</span>'
-                        )
-                        .replace(
-                          /(Accessible)/gi,
-                          '<span class="text-red-500">$1</span>'
-                        )
-                        .replace(/(Gap)/gi, "<br>$1<br>"), // Assuming "Gap" is the text you want to replace with <br> tags
-                    }}
-                  />
-                )}
-              </p>
-            </div>
-
-            <div className="relative">
-              <img
-                src={
-                  item.attributes.image?.data?.attributes?.url
-                    ? `${ process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`
-                    : background
-                }
-                alt="our story"
-                className="w-full h-1/3 "
+      <SeoContext.Provider
+        value={{
+          title: metaData.metaTitle,
+          description: metaData.metaDescription,
+          url: window.location.href,
+          shareImage: metaData.shareImage,
+          keywords: metaData.metaKeywords,
+          preventIndexing: metaData.preventIndexing,
+          shareImageAlt: metaData.shareImageAlt,
+        }}
+      >
+        <Seo />
+        <section className="p-4 lg:p-8">
+          {loading ? (
+            <div className="flex justify-center items-center h-screen">
+              <motion.div
+                className="w-16 h-16 bg-green-500 rounded-full"
+                initial="initial"
+                animate="animate"
+                variants={loadingAnimation}
               />
             </div>
+          ) : (
+            stories.map((item, index) => (
+              <div key={index}>
+                <div className="container mx-auto text-center mt-20 lg:mt-40 lg:ml-16">
+                  <p className="main-heading mb-3 text-4xl lg:text-5xl font-sans">
+                    {item.attributes.storyheading && (
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: item.attributes.storyheading
+                            .replace(/(Insurance)/gi, '<span class="text-red-500">$1</span>')
+                            .replace(/(Accessible)/gi, '<span class="text-red-500">$1</span>')
+                            .replace(/(Gap)/gi, "<br>$1<br>"),
+                        }}
+                      />
+                    )}
+                  </p>
+                </div>
 
-            <div className="container mx-auto relative mt-24 lg:-mt-96 lg:ml-16">
-              <div className="text-center">
-                <p className="main-heading text-3xl lg:text-5xl font-serif font-bold">
-                  {item.attributes.storyheading2 && (
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: item.attributes.storyheading2.replace(
-                          /(Story)/gi,
-                          '<span class="text-red-500">$1</span>'
-                        ),
-                      }}
-                    ></span>
-                  )}
-                </p>
-                <div className="row text-center mt-4">
-                  <div className="hidden lg:block lg:col-3"></div>
-                  <div className="col-12 col-md-10 mx-auto">
-                    <p className="text-base lg:text-lg font-mono">
-                      {item.attributes.storydescription && (
+                <div className="relative">
+                  <img
+                    src={
+                      item.attributes.image?.data?.attributes?.url
+                        ? `${process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`
+                        : background
+                    }
+                    alt="our story"
+                    className="w-full h-1/3 object-cover"
+                  />
+                </div>
+
+                <div className="container mx-auto relative mt-24 lg:-mt-96 lg:ml-16">
+                  <div className="text-center">
+                    <p className="main-heading text-3xl lg:text-5xl font-serif font-bold font-sans">
+                      {item.attributes.storyheading2 && (
                         <span
                           dangerouslySetInnerHTML={{
-                            __html: item.attributes.storydescription.replace(
-                              /(Your Policybazaar Nepal)/gi,
-                              '<span class="text-green-500 text-2xl font-bold">$1</span>'
-                            ),
+                            __html: item.attributes.storyheading2.replace(/(Story)/gi, '<span class="text-red-500">$1</span>'),
                           }}
-                        />
+                        ></span>
                       )}
                     </p>
-                  </div>
-                  <div className="hidden lg:block lg:col-3"></div>
-                </div>
-              </div>
-            </div>
-
-            <div className="container mx-auto flex flex-col lg:flex-row items-center py-12">
-              {/* Left Side */}
-              <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
-                {/* Mission Card */}
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-400 to-green-500 hover:scale-110 group transition duration-300 ease-in-out">
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white">
-                      {item.attributes.missiontext}
+                    <div className="row text-center mt-4">
+                      <div className="hidden lg:block lg:col-3"></div>
+                      <div className="col-12 col-md-10 mx-auto">
+                        <p className="text-base lg:text-lg font-sans">
+                          {item.attributes.storydescription && (
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: item.attributes.storydescription.replace(
+                                  /(Your Policybazaar Nepal)/gi,
+                                  '<span class="text-green-500 text-2xl font-bold">$1</span>'
+                                ),
+                              }}
+                            />
+                          )}
+                        </p>
+                      </div>
+                      <div className="hidden lg:block lg:col-3"></div>
                     </div>
-                    <p className="text-gray-700 text-base lg:text-lg group-hover:text-white">
-                      {item.attributes.missiondescription}
-                    </p>
                   </div>
                 </div>
 
-                {/* Vision Card */}
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-300 to-green-600 hover:scale-110 group transition duration-300 ease-in-out mt-8 lg:mt-10">
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white">
-                      {item.attributes.visiontext}
+                <div className="container mx-auto flex flex-col lg:flex-row items-center py-12">
+                  {/* Left Side */}
+                  <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                    {/* Mission Card */}
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-400 to-green-500 hover:scale-110 group transition duration-300 ease-in-out">
+                      <div className="px-6 py-4">
+                        <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white font-sans">
+                          {item.attributes.missiontext}
+                        </div>
+                        <p className="text-gray-700 text-base lg:text-lg group-hover:text-white font-sans">
+                          {item.attributes.missiondescription}
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-gray-700 text-base lg:text-lg group-hover:text-white">
-                      {item.attributes.vissiondescription}
-                    </p>
+
+                    {/* Vision Card */}
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-300 to-green-600 hover:scale-110 group transition duration-300 ease-in-out mt-8 lg:mt-10">
+                      <div className="px-6 py-4">
+                        <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white font-sans">
+                          {item.attributes.visiontext}
+                        </div>
+                        <p className="text-gray-700 text-base lg:text-lg group-hover:text-white font-sans">
+                          {item.attributes.vissiondescription}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Side - Image */}
+                  <div className="w-full lg:w-1/2 px-4">
+                    <img src={mission} alt="Mission and Vision" className="w-full object-cover" />
                   </div>
                 </div>
               </div>
-
-              {/* Right Side - Image */}
-              <div className="w-full lg:w-1/2 px-4">
-                <img src={mission} alt="Mission and Vision" className="w-full" />
-              </div>
-            </div>
-          </div>
-        ))
-      )}
-    </section>
-    </SeoContext.Provider>
-    </HelmetProvider>
+            ))
+          )}
+        </section>
+      </SeoContext.Provider>
+    </HelmetProvider> 
   );
 };
 

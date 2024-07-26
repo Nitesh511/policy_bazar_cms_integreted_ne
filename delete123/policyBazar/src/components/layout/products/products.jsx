@@ -101,17 +101,17 @@ const Products = () => {
       <div className="container mx-auto px-4 lg:px-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 py-8 lg:py-12">
           <div className="col-span-1">
-            <p className="main-heading text-4xl lg:text-5xl font-mono mb-3 mt-5">
+            <p className="main-heading text-4xl lg:text-5xl font-mono mb-3 mt-5 font-sans">
               Our Recommended <br />
-              <span className="text-red-500 text-6xl lg:text-7xl">Insurance Plans</span>
+              <span className="text-red-500 text-6xl lg:text-7xl font-sans">Insurance Plans</span>
             </p>
             <div className="lg:hidden">
-              <p className="supporting-text">
+              <p className="supporting-text font-sans">
                 Insurance Company has been serving policyholders, protecting businesses, and mitigating Travel Insurance for added peace of mind.
               </p>
             </div>
             <div className="hidden lg:block">
-              <p className="supporting-text">
+              <p className="supporting-text font-sans">
                 Insurance Company has been serving policyholders, protecting businesses, <br />
                 and mitigating Travel Insurance for added peace of mind.
               </p>
@@ -136,11 +136,11 @@ const Products = () => {
             </a>
             <div className="p-4">
               <a href="#">
-                <h5 className="text-gray-900 font-bold text-xl lg:text-2xl tracking-tight mb-2 group-hover:text-white">
+                <h5 className="text-gray-900 font-bold text-xl lg:text-2xl tracking-tight mb-2 group-hover:text-white font-sans">
                   {item.attributes.title}
                 </h5>
               </a>
-              <p className="text-gray-700 mb-4 group-hover:text-white">
+              <p className="text-gray-700 mb-4 group-hover:text-white font-sans">
                 <ul className="list-disc list-inside">
                   {item.attributes.bigdesctiption.split("\n").map((line, idx) => (
                     <li key={idx}>{line}</li>
