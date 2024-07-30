@@ -97,13 +97,13 @@ const InsuranceComponent = () => {
         <Seo />
 
         <div className="relative z-10">
-          <div className="container mx-auto p-4 py-12 mt-14">
+          <div className="container mx-auto p-4 py-12 mt-0 md:mt-14">
             {dashboard.map((item, index) => (
               <div
                 className="flex flex-col md:flex-row justify-between items-start gap-8"
                 key={index}
               >
-                <div className="w-full md:w-3/5">
+                <div className="w-full md:w-3/5 mt-10">
                   {item.attributes.image && item.attributes.image.data && (
                     <img
                       src={`${process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`}
@@ -112,7 +112,7 @@ const InsuranceComponent = () => {
                     />
                   )}
                 </div>
-                <div className="p-0 md:p-4 py-0 -mt-4 md:py-16 rounded-lg w-full md:w-2/5">
+                <div className="p-0 md:p-4 py-0 -mt-4 md:py-16  rounded-lg w-full md:w-2/4 ">
                   <Carousel autoplay loop arrows={false}>
                     {item.attributes.imagescraousel &&
                       item.attributes.imagescraousel.data &&
@@ -122,7 +122,7 @@ const InsuranceComponent = () => {
                             <img
                               src={`${process.env.STRAPI_API}${carouselImage.attributes.url}`}
                               alt={`Insurance ${carouselIndex + 1}`}
-                              className="w-full h-60 object-cover rounded-lg"
+                              className="w-full h-70 object-cover rounded-lg"
                             />
                             <button className="absolute bottom-4 left-4 bg-blue-500 text-white px-2 py-1 rounded mt-2">
                               View plans

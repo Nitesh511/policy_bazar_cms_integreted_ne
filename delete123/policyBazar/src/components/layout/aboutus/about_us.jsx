@@ -8,7 +8,7 @@ const AboutUs = () => {
     const fetchAbout = async () => {
       try {       
         const response = await fetch(
-          `${ process.env.STRAPI_API}/api/aboutus?populate=*`,
+          `${process.env.STRAPI_API}/api/aboutus?populate=*`,
           {
             headers: {
               Authorization:
@@ -31,8 +31,8 @@ const AboutUs = () => {
 
   return (
     <div className="overflow-hidden">
-      <div className="bg-gray-100 py-24 sm:px-6 ">
-        <div className="max-w-full mx-auto">
+      <div className="bg-gray-100 py-24 sm:px-6">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {about.map((item, index) => (
               <React.Fragment key={index}>

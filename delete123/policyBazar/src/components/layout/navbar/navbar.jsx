@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import { LuLogIn } from "react-icons/lu";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -19,7 +20,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed w-full z-30 top-0 start-0 bg-gradient-to-r from-green-200 to-green-500">
+      <nav className="fixed w-full z-30 top-0 start-0 bg-white  border-b-2 border-green-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
           <Link
             to="/"
@@ -63,8 +64,8 @@ function Navbar() {
               <li>
                 <Link
                   to="/"
-                  className={`block py-2 px-3 rounded md:p-0 font-sans text-14px ${
-                    isActive("/") ? "text-blue-700 " : "text-white"
+                  className={`block py-2 px-3 rounded md:p-0 font-sans text-14px font-normal ${
+                    isActive("/") ? "text-blue-700 " : "text-black"
                   }`}
                   aria-current={isActive("/") ? "page" : undefined}
                   onClick={closeMenu}
@@ -76,7 +77,7 @@ function Navbar() {
                 <Link
                   to="/products"
                   className={`block py-2 px-3 rounded md:p-0 font-sans ${
-                    isActive("/products") ? "text-blue-700 " : "text-white"
+                    isActive("/products") ? "text-blue-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
                 >
@@ -87,7 +88,7 @@ function Navbar() {
                 <Link
                   to="/ourstory"
                   className={`block py-2 px-3 rounded md:p-0 font-sans ${
-                    isActive("/ourstory") ? "text-blue-700 " : "text-white"
+                    isActive("/ourstory") ? "text-blue-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
                 >
@@ -98,7 +99,7 @@ function Navbar() {
                 <Link
                   to="/blogs"
                   className={`block py-2 px-3 rounded md:p-0 font-sans ${
-                    isActive("/blogs") ? "text-blue-700 " : "text-white"
+                    isActive("/blogs") ? "text-blue-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
                 >
@@ -109,7 +110,7 @@ function Navbar() {
                 <Link
                   to="/contactus"
                   className={`block py-2 px-3 rounded md:p-0 font-sans ${
-                    isActive("/contactus") ? "text-blue-700 " : "text-white"
+                    isActive("/contactus") ? "text-blue-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
                 >
@@ -122,23 +123,23 @@ function Navbar() {
                     (window.location.href =
                       "https://digital.policybazaarnepal.com/")
                   }
-                  className="w-full text-white bg-blue-700 hover:bg-blue-800 font-sans focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-green-800"
+                  className="w-full text-white rounded-full font-sans border-b-4 border-blue-700 text-lg py-2  bg-blue-500"
                 >
                   Login
                 </button>
               </li>
             </ul>
           </div>
+
           <div className="hidden md:flex md:order-2">
-            <button
-              onClick={() =>
-                (window.location.href =
-                  "https://digital.policybazaarnepal.com/")
-              }
-              className="w-full text-white bg-blue-700 hover:bg-blue-800 font-sans focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            <LuLogIn className="mt-3 w-full h-full" />
+
+            <Link to={"/commingsoon"}
+            
+              className="w-full text-black  font-sans hover:text-red-900   font-medium rounded-lg text-lg px-1 py-2 text-center "
             >
               Login
-            </button>
+            </Link>
           </div>
         </div>
       </nav>

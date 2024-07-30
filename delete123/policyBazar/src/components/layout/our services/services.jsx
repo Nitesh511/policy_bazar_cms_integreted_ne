@@ -32,7 +32,7 @@ const OurServices = () => {
         spaceBetween: 10,
         loop: true,
         autoplay: {
-          delay: 3000, // Duration between slides in milliseconds
+          delay: 2000, // Duration between slides in milliseconds
           disableOnInteraction: false, // Continue autoplay after user interactions
         },
         pagination: {
@@ -90,7 +90,7 @@ const OurServices = () => {
                 className="bg-cover bg-center h-full w-full flex flex-col justify-end p-4 relative"
                 style={{
                   backgroundImage: `url(${process.env.STRAPI_API + service.attributes.image.data.attributes.url})`,
-                  opacity: '0.8', // Adjust opacity as needed
+         
                 }}
               >
                 <div className={`absolute top-10 left-1 p-2 ${getBadgeColor(index)} text-white rounded-md`}>

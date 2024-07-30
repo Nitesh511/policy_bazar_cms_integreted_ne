@@ -23,6 +23,9 @@ import ScrollToTop from "./scrollTop.jsx";
 import Our_team from "./components/layout/teams/our_team.jsx";
 import Product_details from "./components/layout/product_details_page/product_details.jsx";
 import { HelmetProvider } from "react-helmet-async";
+import BlogDetails from "./components/layout/blogs/blogs_readmore.jsx";
+import Home_third from "./components/layout/home/home_third.jsx";
+import ComingSoon from "./components/layout/login/commingSoon.jsx";
 
 
 const theme = {
@@ -60,13 +63,16 @@ const MainApp = () => {
         <Navbar />
         <Routes>
           {/* <Route path="" element={<Home />}></Route> */}
+          {/* <Route path="" element={<Home_third/>}></Route> */}
           <Route path="" element={<InsuranceComponent />}></Route>
           <Route path="/blogs" element={<Blogs />}></Route>
           <Route path="/products" element={<Products />}></Route>
           <Route path="/ourstory" element={<Story />}></Route>
           <Route path="/contactus" element={<Contactpage />}></Route>
           <Route path="/our_teams" element={<Our_team/>}></Route>
-          <Route path="/product_details/:id" element={<Product_details/>}></Route>
+          <Route path="/products/:slug" element={<Product_details/>}></Route>
+          <Route path="/blogs/:slug" element={<BlogDetails/>}></Route>
+          <Route path="/commingsoon" element={<ComingSoon/>}></Route>
         </Routes>
     
         <Footer />

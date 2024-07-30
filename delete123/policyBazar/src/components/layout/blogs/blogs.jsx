@@ -1,6 +1,7 @@
 import React, { useState, useEffect,useContext } from "react";
-import Company from "../../../assets/Company.jfif";
+import blogst from "../../../assets/blogging.jpeg"
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 
   
@@ -94,10 +95,10 @@ const Blogs = () => {
       <div className="relative h-72 bg-gray-300 overflow-hidden">
         {/* Background image */}
         <div
-          className="absolute inset-0 bg-cover bg-center filter blur-sm"
+          className="absolute inset-0 bg-cover bg-center  "
           style={{
-            backgroundImage: `url(${Company})`,
-            transform: "scale(1.0)",
+            backgroundImage: `url(${blogst})`,
+            
           }}
         ></div>
       </div>
@@ -105,28 +106,28 @@ const Blogs = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-8 ">
         {blogs.map((item, index) => (
           <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm mb-5 mt-5" key={index}>
-            <a href="#">
+            <Link  to={`/blogs/${item.attributes.slug}`}>
               <img
                 className="rounded-t-lg"
                 src={`${ process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`} // Adjusted image URL handling
                 alt=""
               />
-            </a>
+            </Link>
             <div className="p-5">
-              <a href="#">
+              <Link  to={`/blogs/${item.attributes.slug}`}>
                 <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 font-sans">
                   {item.attributes.title}
                 </h5>
-              </a>
+              </Link>
               <p className="font-normal text-gray-700 mb-3 font-sans">
                 {item.attributes.description}
               </p>
-              <a
+              <Link
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center font-sans"
-                href="#"
+                to={`/blogs/${item.attributes.slug}`}
               >
                 Read more
-              </a>
+              </Link>
             </div>
           </div>
         ))}

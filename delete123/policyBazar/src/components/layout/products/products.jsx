@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useContext } from "react";
-import Company from "../../../assets/insurance.jfif";
+import Company from "../../../assets/coverpage.jpg"
 import { Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
@@ -87,12 +87,13 @@ const Products = () => {
       <Seo />
     <div>
       {/* Background image */}
-      <div className="relative h-72 bg-gray-300 overflow-hidden">
+      <div className="relative h-60 md:h-96  overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center filter"
+          className="absolute md:inset-14 inset-0 mt-16 md:mt-6 bg-cover bg-center "
           style={{
             backgroundImage: `url(${Company})`,
-            transform: "scale(1.0)",
+            height:"100%"
+            
           }}
         ></div>
       </div>
@@ -127,28 +128,31 @@ const Products = () => {
             key={index}
             className="bg-white shadow-md border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-400 to-green-500 hover:scale-105 group transition duration-300 ease-in-out"
           >
-            <a href="#">
+              <Link
+               to={`/products/${item.attributes.slug}`}>
               <img
                 className="w-full h-64 object-cover object-center rounded-t-lg"
                 src={`${ process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`}
                 alt={item.attributes.title}
               />
-            </a>
+            </Link>
             <div className="p-4">
-              <a href="#">
+              <Link to={`/products/${item.attributes.slug}`}>
                 <h5 className="text-gray-900 font-bold text-xl lg:text-2xl tracking-tight mb-2 group-hover:text-white font-sans">
                   {item.attributes.title}
                 </h5>
-              </a>
+              </Link>
+              <Link    to={`/products/${item.attributes.slug}`}>
               <p className="text-gray-700 mb-4 group-hover:text-white font-sans">
                 <ul className="list-disc list-inside">
-                  {item.attributes.bigdesctiption.split("\n").map((line, idx) => (
+                  {item.attributes.description.split("\n").map((line, idx) => (
                     <li key={idx}>{line}</li>
                   ))}
                 </ul>
               </p>
+              </Link>
               <Link
-               to={`/product_details/${item.id}`}
+               to={`/products/${item.attributes.slug}`}
                 className="inline-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-white font-medium rounded-lg px-4 py-2 text-sm"
               >
                 Read more

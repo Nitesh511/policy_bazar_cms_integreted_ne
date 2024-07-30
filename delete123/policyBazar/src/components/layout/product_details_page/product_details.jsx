@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import InsuranceForm from "./insurance_form";
 
 const ProductDetails = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [formData, setFormData] = useState({
     insuranceType: "",
@@ -99,23 +99,25 @@ const ProductDetails = () => {
   const fetchProduct = async () => {
     try {
       const response = await fetch(
-        `${process.env.STRAPI_API}/api/products/${id}?populate=*`
+        `${process.env.STRAPI_API}/api/products?filters[slug][$eq]=${slug}&populate=*`
       );
       const data = await response.json();
-      if (data && data.data) {
-        setProduct(data.data);
+      if (data && data.data && data.data.length > 0) {
+        setProduct(data.data[0]);
+        console.log(data.data);
 
         setFormData({
-          insuranceType: data.data.attributes.title || "",
+          insuranceType: data.data[0].attributes.title || "",
         });
       }
     } catch (error) {
       console.log("Error fetching product details", error);
     }
   };
+
   useEffect(() => {
     fetchProduct();
-  }, [id]);
+  }, [slug]);
 
   if (!product) {
     return (
@@ -125,94 +127,119 @@ const ProductDetails = () => {
     );
   }
 
+  const DescriptionList = ({ description }) => {
+    const formatLine = (line) => {
+      // Check if the line contains a colon
+      const colonIndex = line.indexOf(":");
+      if (colonIndex !== -1) {
+        // Split the line into two parts
+        const beforeColon = line.substring(0, colonIndex + 1);
+        const afterColon = line.substring(colonIndex + 1).trim();
+
+        return (
+          <div key={line}>
+            <strong>{beforeColon}</strong> {afterColon}.
+          </div>
+        );
+      }
+      // Return line as is if no colon
+      return <div key={line}>{line}</div>;
+    };
+
+    return (
+      <ul className="list-disc mb-4 text-gray-700 leading-relaxed">
+        {description.split("\n").map((line, idx) => formatLine(line))}
+      </ul>
+    );
+  };
+
   return (
     <div className="flex flex-col h-full">
-    <div
-      className="relative w-full h-72 overflow-hidden rounded-t-lg mt-18"
-      style={{ height: "30rem" }}
-    >
-      <img
-        className="w-full h-full object-cover opacity-75"
-        style={{ height: "70rem" }}
-        src={`${process.env.STRAPI_API}${product.attributes.image.data.attributes.url}`}
-        alt={product.attributes.title}
-      />
-      <button
-        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 -translate-y-40 bg-green-600 text-white px-6 py-3 rounded-lg shadow-md transition duration-300 ease-in-out hover:scale-105"
-        onClick={handleQuoteClick}
+      <div
+        className="relative w-full h-72 overflow-hidden rounded-t-lg mt-18"
+        style={{ height: "30rem" }}
       >
-        Get a Quote
-      </button>
-    </div>
-  
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4 text-indigo-600">
-        {product.attributes.title}
-      </h1>
-      <p className="text-gray-700 mb-4 leading-relaxed">
-        {product.attributes.description}
-      </p>
-      <ul className="list-disc pl-6 mb-4 text-gray-700 leading-relaxed">
-        {product.attributes.bigdesctiption.split("\n").map((line, idx) => (
-          <li key={idx}>{line}</li>
-        ))}
-      </ul>
-  
-      <div className="bg-white rounded-lg py-10">
-        <h2 className="text-3xl font-bold mb-6 text-indigo-800">
-          Why Choose Policybazaar Nepal
-        </h2>
-        <div className="space-y-4 text-gray-700">
-          <p>
-            <strong>Easy Online Purchase:</strong> Conveniently purchase your
-            trekker’s insurance through our user-friendly website.
-          </p>
-          <p>
-            <strong>Claims Assistance:</strong> Our dedicated claims team is
-            ready to assist you through a hassle-free claims process.
-          </p>
-          <p>
-            <strong>Flexible Premiums:</strong> Choose coverage options and
-            durations that suit your trekking plans, with premiums tailored to
-            your needs.
-          </p>
-          <p>
-            <strong>Renewable Policies:</strong> Enjoy peace of mind on all
-            your treks with policies that are easily renewable for your future
-            adventures.
-          </p>
-          <p>
-            <strong>Cancellation Refund:</strong> Plans change, and we
-            understand. Our policies offer a free-look period for
-            cancellations and full refunds.
-          </p>
+        <img
+          className="w-full h-full object-cover "
+          style={{ height: "30rem" }}
+          src={`${process.env.STRAPI_API}${product.attributes.details_image.data[0].attributes.url}`}
+          alt={product.attributes.title}
+        />
+        <button
+          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 -translate-y-90 bg-green-600 text-white px-6 py-3 rounded-lg shadow-md transition duration-300 ease-in-out hover:scale-105"
+          onClick={handleQuoteClick}
+        >
+          Get a Quote
+        </button>
+      </div>
+
+      <div className="p-6 w-full md:w-2/3">
+        <h1 className="text-3xl font-bold mb-4 text-indigo-600">
+          {product.attributes.title}
+        </h1>
+        <p className="text-gray-700 mb-4 leading-relaxed">
+          {product.attributes.description}
+        </p>
+        <div className="">
+          <DescriptionList description={product.attributes.bigdesctiption} />
+        </div>
+
+        <div className="bg-white rounded-lg py-10">
+          <h2 className="text-3xl font-bold mb-6 text-indigo-800">
+            Why Choose Policybazaar Nepal
+          </h2>
+          <div className="space-y-4 text-gray-700">
+            <p>
+              <strong>Easy Online Purchase:</strong> Conveniently purchase your
+              trekker’s insurance through our user-friendly website.
+            </p>
+            <p>
+              <strong>Claims Assistance:</strong> Our dedicated claims team is
+              ready to assist you through a hassle-free claims process.
+            </p>
+            <p>
+              <strong>Flexible Premiums:</strong> Choose coverage options and
+              durations that suit your trekking plans, with premiums tailored
+              <br></br> to your needs.
+            </p>
+            <p>
+              <strong>Renewable Policies:</strong> Enjoy peace of mind on all
+              your treks with policies that are easily renewable for your future
+              <br></br>
+              adventures.
+            </p>
+            <p>
+              <strong>Cancellation Refund:</strong> Plans change, and we
+              understand. Our policies offer a free-look period for
+              cancellations and <br></br> full refunds.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  
-    <div className="flex justify-end p-6  w-1/4 ml-auto relative -mt-96  " >
-      <div className="w-full max-w-md  -mt-32">
-        <InsuranceForm
-          formData={formData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
+
+      <div className="hidden lg:flex p-6 lg:ml-auto absolute inset-x-0 bottom-0 lg:bottom-auto lg:top-[570px] lg:left-[860px] w-full lg:w-[400px] flex items-end justify-end">
+        <div className="w-full max-w-md -mt-24">
+          <InsuranceForm
+            formData={formData}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        </div>
       </div>
+
+      {showForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
+          <InsuranceForm
+            formData={formData}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            handleCloseForm={handleCloseForm}
+          />
+        </div>
+      )}
+
+      <ToastContainer />
     </div>
-  
-    {showForm && (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <InsuranceForm
-          formData={formData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleCloseForm={handleCloseForm}
-        />
-      </div>
-    )}
-  
-    <ToastContainer />
-  </div>
   );
 };
 

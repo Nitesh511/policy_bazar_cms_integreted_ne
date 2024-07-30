@@ -1,25 +1,45 @@
 import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import background from "../../../assets/Background.png";
-import mission from "../../../assets/mission.png";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import modernjpe from "../../../assets/modern.jpeg";
 
 const SeoContext = React.createContext();
 
 const Seo = () => {
-  const { title, description, url, shareImage, keywords, preventIndexing, shareImageAlt } = useContext(SeoContext);
+  const {
+    title,
+    description,
+    url,
+    shareImage,
+    keywords,
+    preventIndexing,
+    shareImageAlt,
+  } = useContext(SeoContext);
 
   return (
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} key="description" />
       <meta name="keywords" content={keywords} />
-      <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+      <meta
+        name="twitter:card"
+        content="summary_large_image"
+        key="twitter:card"
+      />
       <meta property="og:url" content={url} key="og:url" />
       <meta property="og:title" content={title} key="og:title" />
-      <meta property="og:description" content={description} key="og:description" />
+      <meta
+        property="og:description"
+        content={description}
+        key="og:description"
+      />
       <meta property="og:image" content={shareImage} key="og:image" />
-      <meta property="og:image:alt" content={shareImageAlt} key="og:image:alt" />
+      <meta
+        property="og:image:alt"
+        content={shareImageAlt}
+        key="og:image:alt"
+      />
       <link rel="canonical" href={url} />
 
       {preventIndexing && (
@@ -64,12 +84,22 @@ const Story = () => {
           if (result.data.length > 0) {
             const firstItem = result.data[0];
             setMetaData({
-              metaTitle: firstItem.attributes.Seo.metaTitle || metaData.metaTitle,
-              metaDescription: firstItem.attributes.Seo.metaDescription || metaData.metaDescription,
-              metaKeywords: firstItem.attributes.metaKeywords || metaData.keywords,
-              shareImage: `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data?.attributes?.url}` || "",
-              shareImageAlt: firstItem.attributes.metaImages?.data?.attributes?.alternativeText || "",
-              preventIndexing: firstItem.attributes.preventindexing || metaData.preventIndexing,
+              metaTitle:
+                firstItem.attributes.Seo.metaTitle || metaData.metaTitle,
+              metaDescription:
+                firstItem.attributes.Seo.metaDescription ||
+                metaData.metaDescription,
+              metaKeywords:
+                firstItem.attributes.metaKeywords || metaData.keywords,
+              shareImage:
+                `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data?.attributes?.url}` ||
+                "",
+              shareImageAlt:
+                firstItem.attributes.metaImages?.data?.attributes
+                  ?.alternativeText || "",
+              preventIndexing:
+                firstItem.attributes.preventindexing ||
+                metaData.preventIndexing,
             });
           }
         }
@@ -84,7 +114,10 @@ const Story = () => {
 
   const loadingAnimation = {
     initial: { y: -20 },
-    animate: { y: [0, -20], transition: { duration: 0.5, repeat: Infinity, repeatType: "reverse" } },
+    animate: {
+      y: [0, -20],
+      transition: { duration: 0.5, repeat: Infinity, repeatType: "reverse" },
+    },
   };
 
   return (
@@ -114,15 +147,21 @@ const Story = () => {
           ) : (
             stories.map((item, index) => (
               <div key={index}>
-                <div className="container mx-auto text-center mt-20 lg:mt-40 lg:ml-16">
+                <div className="container mx-auto text-center mt-20 lg:mt-40 ">
                   <p className="main-heading mb-3 text-4xl lg:text-5xl font-sans">
                     {item.attributes.storyheading && (
                       <span
                         dangerouslySetInnerHTML={{
                           __html: item.attributes.storyheading
-                            .replace(/(Insurance)/gi, '<span class="text-red-500">$1</span>')
-                            .replace(/(Accessible)/gi, '<span class="text-red-500">$1</span>')
-                            .replace(/(Gap)/gi, "<br>$1<br>"),
+                            .replace(
+                              /(Insurance)/gi,
+                              '<span class="text-red-500">$1</span>'
+                            )
+                            .replace(
+                              /(Accessible)/gi,
+                              '<span class="text-red-500">$1</span>'
+                            )
+                            .replace(/(Journey)/gi, "<br>$1<br>"),
                         }}
                       />
                     )}
@@ -140,38 +179,36 @@ const Story = () => {
                     className="w-full h-1/3 object-cover"
                   />
                 </div>
-
-                <div className="container mx-auto relative mt-24 lg:-mt-96 lg:ml-16">
-                  <div className="text-center">
-                    <p className="main-heading text-3xl lg:text-5xl font-serif font-bold font-sans">
-                      {item.attributes.storyheading2 && (
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: item.attributes.storyheading2.replace(/(Story)/gi, '<span class="text-red-500">$1</span>'),
-                          }}
-                        ></span>
-                      )}
-                    </p>
-                    <div className="row text-center mt-4">
-                      <div className="hidden lg:block lg:col-3"></div>
-                      <div className="col-12 col-md-10 mx-auto">
-                        <p className="text-base lg:text-lg font-sans">
+                  <div className="container mx-auto relative -mt-24 md:-mt-[490px]  px-4 lg:px-8 ">
+                    <div className="text-center">
+                      <p className="main-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-sans">
+                        {item.attributes.storyheading2 && (
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: item.attributes.storyheading2.replace(
+                                /(Story)/gi,
+                                '<span class="text-red-500">$1</span>'
+                              ),
+                            }}
+                          ></span>
+                        )}
+                      </p>
+                      <div className="mt-4 md:mt-6 lg:mt-8">
+                        <div className="text-base md:text-lg lg:text-xl xl:text-2xl font-sans">
                           {item.attributes.storydescription && (
                             <span
                               dangerouslySetInnerHTML={{
                                 __html: item.attributes.storydescription.replace(
-                                  /(Your Policybazaar Nepal)/gi,
-                                  '<span class="text-green-500 text-2xl font-bold">$1</span>'
+                                  /(Policybazaar Nepal)/gi,
+                                  '<span class="text-green-500 text-xl lg:text-2xl font-bold">$1</span>'
                                 ),
                               }}
                             />
                           )}
-                        </p>
+                        </div>
                       </div>
-                      <div className="hidden lg:block lg:col-3"></div>
                     </div>
                   </div>
-                </div>
 
                 <div className="container mx-auto flex flex-col lg:flex-row items-center py-12">
                   {/* Left Side */}
@@ -202,8 +239,12 @@ const Story = () => {
                   </div>
 
                   {/* Right Side - Image */}
-                  <div className="w-full lg:w-1/2 px-4">
-                    <img src={mission} alt="Mission and Vision" className="w-full object-cover" />
+                  <div className="w-full lg:w-1/2  ">
+                    <img
+                      src={modernjpe}
+                      alt="Mission and Vision"
+                      className="w-full object-cover"
+                    />
                   </div>
                 </div>
               </div>
@@ -211,7 +252,7 @@ const Story = () => {
           )}
         </section>
       </SeoContext.Provider>
-    </HelmetProvider> 
+    </HelmetProvider>
   );
 };
 

@@ -73,10 +73,10 @@ const DownloadAppSection = () => {
         {" "}
         <ContactSection />
       </div>
-
+{/* 
       <div data-aos="slide-right">
         <PartnersSection />
-      </div>
+      </div> */}
     </div>
   );
 };

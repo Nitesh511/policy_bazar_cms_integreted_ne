@@ -26,7 +26,7 @@ const ContactSection = () => {
           {/* Facebook link */}
           <div className="flex items-center justify-center mb-4">
             <a
-              href="https://www.facebook.com/yourcompany"
+              href="https://www.facebook.com/profile.php?id=61555884898391"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-300"

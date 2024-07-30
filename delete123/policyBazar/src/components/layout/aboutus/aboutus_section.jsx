@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import QuickLinksSection from "./quicklink";
-import Advertisement from "../advertise/adertise";
 
 const AboutSection = () => {
   const [aboutsection, setAboutsection] = useState([]);
@@ -45,8 +44,8 @@ const AboutSection = () => {
                         <span
                           dangerouslySetInnerHTML={{
                             __html: section.attributes.title1.replace(
-                              /(insurance)/gi,
-                              '<span class="text-red-500">$1</span>'
+                              /( Policybazaar Nepal)/gi,
+                              '<span class="text-green-500">$1</span>'
                             ),
                           }}
                         />

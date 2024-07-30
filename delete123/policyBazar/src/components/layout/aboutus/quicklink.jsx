@@ -1,6 +1,9 @@
 import React from 'react';
-import efficency from "../../../assets/Effeciency.svg";
+import efficency from "../../../assets/fileaclaim.png";
+import efficency2 from "../../../assets/trackaclaim.png"
 import DownloadAppSection from '../dowloadsection/download';
+
+
 
 const QuickLinksSection = () => {
   return (
@@ -24,7 +27,7 @@ const QuickLinksSection = () => {
               <h6 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-white">File A Claim</h6>
             </div>
             <div className="bg-white shadow-lg rounded-lg py-5 px-5 md:px-32 text-center hover:bg-gradient-to-r from-blue-400 to-green-500 hover:scale-110 transition duration-300 ease-in-out group">
-              <img src={efficency} alt="Track Claim" width="45" className="mx-auto mb-3" />
+              <img src={efficency2} alt="Track Claim" width="45" className="mx-auto mb-3" />
               <h6 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-white">Track Claim</h6>
             </div>
           </div>

@@ -73,7 +73,7 @@ const Testimonial = () => {
   return (
     <div className="container mx-auto py-8">
       <div className="flex items-center justify-center mb-4">
-        <h2 className="text-center text-2xl font-bold">
+        <h2 className="text-center text-2xl font-bold font-sans">
           Read trusted reviews from our customers
         </h2>
       </div>
