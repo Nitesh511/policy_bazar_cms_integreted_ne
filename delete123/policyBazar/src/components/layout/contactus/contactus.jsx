@@ -5,7 +5,6 @@ import Company from "../../../assets/Contactus.jpg";
 import contactimage from "../../../assets/contact.jpg";
 import { HelmetProvider } from "react-helmet-async";
 import { Helmet } from "react-helmet";
-import emailjs from 'emailjs-com';
 
 const Contactpage = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -24,27 +23,12 @@ const Contactpage = () => {
     message: "",
   };
 
-  const SERVICE_ID = 'service_bwvxj4c'; // Replace with your actual Service ID
-  const TEMPLATE_ID = 'template_rfujfto'; // Replace with your actual Template ID
-  const USER_ID = 'a_BB6-fF-IJK34pqA'; // Replace with your actual User ID
-
   const onSubmit = (values, { resetForm }) => {
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      name: values.name,
-      email: values.email,
-      message: values.message,
-    }, USER_ID)
-      .then((response) => {
-        console.log('Email sent successfully:', response);
-        setShowAlert(true);
-        resetForm();
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 5000); // Hide alert after 5 seconds
-      })
-      .catch((error) => {
-        console.error('Error sending email:', error);
-      });
+    setShowAlert(true);
+    resetForm(); // Reset form values
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000); // Hide alert after 5 seconds
   };
 
   return (
@@ -83,7 +67,10 @@ const Contactpage = () => {
                   Contact Information
                 </h2>
                 <p className="mb-4 group-hover:text-white">
-                  <strong>Contact Number:</strong> 014547991
+                 <a href="tel:014547991"> <strong>Contact Number:</strong> 014547991</a>
+                </p>
+                <p className="mb-4 group-hover:text-white">
+                <a href="tel:+9779841393054"> <strong>Contact Number:</strong> +977 9841393054</a>
                 </p>
                 <p className="mb-4 group-hover:text-white">
                   <strong>Location:</strong> Policy Bazar Nepal, Kathmandu, Nepal
@@ -111,74 +98,76 @@ const Contactpage = () => {
                   validationSchema={validationSchema}
                   onSubmit={onSubmit}
                 >
-                  <Form className="space-y-4">
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Name
-                      </label>
-                      <Field
-                        type="text"
-                        id="name"
-                        name="name"
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                      <ErrorMessage
-                        name="name"
-                        component="div"
-                        className="text-red-500 text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Email
-                      </label>
-                      <Field
-                        type="email"
-                        id="email"
-                        name="email"
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                      <ErrorMessage
-                        name="email"
-                        component="div"
-                        className="text-red-500 text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="message"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Message
-                      </label>
-                      <Field
-                        as="textarea"
-                        id="message"
-                        name="message"
-                        rows="4"
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                      <ErrorMessage
-                        name="message"
-                        component="div"
-                        className="text-red-500 text-sm"
-                      />
-                    </div>
-                    <div>
-                      <button
-                        type="submit"
-                        className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </Form>
+              
+                    <Form className="space-y-4">
+                      <div>
+                        <label
+                          htmlFor="name"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Name
+                        </label>
+                        <Field
+                          type="text"
+                          id="name"
+                          name="name"
+                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        />
+                        <ErrorMessage
+                          name="name"
+                          component="div"
+                          className="text-red-500 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Email
+                        </label>
+                        <Field
+                          type="email"
+                          id="email"
+                          name="email"
+                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        />
+                        <ErrorMessage
+                          name="email"
+                          component="div"
+                          className="text-red-500 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="message"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Message
+                        </label>
+                        <Field
+                          as="textarea"
+                          id="message"
+                          name="message"
+                          rows="4"
+                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        />
+                        <ErrorMessage
+                          name="message"
+                          component="div"
+                          className="text-red-500 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <button
+                          type="submit"
+                          className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </Form>
+                  
                 </Formik>
               </div>
             </div>

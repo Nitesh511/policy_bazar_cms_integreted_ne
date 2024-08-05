@@ -147,7 +147,7 @@ const Story = () => {
           ) : (
             stories.map((item, index) => (
               <div key={index}>
-                <div className="container mx-auto text-center mt-20 lg:mt-40 ">
+                <div className="container mx-auto text-center mt-20 lg:mt-40 cursor-pointer ">
                   <p className="main-heading mb-3 text-4xl lg:text-5xl font-sans">
                     {item.attributes.storyheading && (
                       <span
@@ -161,7 +161,7 @@ const Story = () => {
                               /(Accessible)/gi,
                               '<span class="text-red-500">$1</span>'
                             )
-                            .replace(/(Journey)/gi, "<br>$1<br>"),
+                            .replace(/(: )/gi, "$1<br>")
                         }}
                       />
                     )}
@@ -179,45 +179,72 @@ const Story = () => {
                     className="w-full h-1/3 object-cover"
                   />
                 </div>
-                  <div className="container mx-auto relative -mt-24 md:-mt-[490px]  px-4 lg:px-8 ">
-                    <div className="text-center">
-                      <p className="main-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-sans">
-                        {item.attributes.storyheading2 && (
+                <div className="container mx-auto relative -mt-24 md:-mt-[490px]  px-4 lg:px-8  ">
+                  <div className="text-center">
+                    <p className="main-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-sans">
+                      {item.attributes.storyheading2 && (
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: item.attributes.storyheading2.replace(
+                              /(Story)/gi,
+                              '<span class="text-red-500">$1</span>'
+                            ),
+                          }}
+                        ></span>
+                      )}
+                    </p>
+                    <div className="mt-4 md:mt-6 lg:mt-8  ">
+                      <div className="text-base md:text-lg lg:text-xl xl:text-2xl font-sans">
+                        {item.attributes.storydescription && (
                           <span
                             dangerouslySetInnerHTML={{
-                              __html: item.attributes.storyheading2.replace(
-                                /(Story)/gi,
-                                '<span class="text-red-500">$1</span>'
-                              ),
-                            }}
-                          ></span>
-                        )}
-                      </p>
-                      <div className="mt-4 md:mt-6 lg:mt-8">
-                        <div className="text-base md:text-lg lg:text-xl xl:text-2xl font-sans">
-                          {item.attributes.storydescription && (
-                            <span
-                              dangerouslySetInnerHTML={{
-                                __html: item.attributes.storydescription.replace(
+                              __html: item.attributes.storydescription
+                                .replace(
                                   /(Policybazaar Nepal)/gi,
                                   '<span class="text-green-500 text-xl lg:text-2xl font-bold">$1</span>'
-                                ),
-                              }}
-                            />
-                          )}
-                        </div>
+                                )
+                                .replace(/(COVID-19 pandemic.)/gi, "$1<br>")
+                                .replace(/(we are dedicated to.)/gi, "$1<br>")
+
+                                .replace(
+                                  /(Transparency:)/gi,
+                                  '<span class="text-xl lg:text-2xl font-bold">$1</span>'
+                                )
+                                .replace(/(informed decisions.)/gi, "$1<br>")
+
+                                .replace(
+                                  /(Integrity:)/gi,
+                                  '<span class="text-xl lg:text-2xl font-bold">$1</span>'
+                                )
+                                .replace(
+                                  /(Customer-Centric Approach:)/gi,
+                                  '<span class="text-xl lg:text-2xl font-bold">$1</span>'
+                                )
+
+                                .replace(/(coverage. )/gi, "$1<br>")
+                                
+
+                                
+
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
+                </div>
 
-                <div className="container mx-auto flex flex-col lg:flex-row items-center py-12">
+                <div className="container mx-auto flex flex-col lg:flex-row items-center py-12 cursor-pointer ">
                   {/* Left Side */}
                   <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
                     {/* Mission Card */}
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-400 to-green-500 hover:scale-110 group transition duration-300 ease-in-out">
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-400 to-green-500 hover:scale-105 group transition duration-300 ease-in-out">
                       <div className="px-6 py-4">
                         <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white font-sans">
                           {item.attributes.missiontext}
+                        </div>
+                        <div className="font-bold text-2xl lg:text-lg mb-2 text-center group-hover:text-white font-sans">
+                          {item.attributes.missiontext2}
                         </div>
                         <p className="text-gray-700 text-base lg:text-lg group-hover:text-white font-sans">
                           {item.attributes.missiondescription}
@@ -226,10 +253,13 @@ const Story = () => {
                     </div>
 
                     {/* Vision Card */}
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-300 to-green-600 hover:scale-110 group transition duration-300 ease-in-out mt-8 lg:mt-10">
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-300 to-green-600 hover:scale-105 group transition duration-300 ease-in-out mt-8 lg:mt-10">
                       <div className="px-6 py-4">
                         <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white font-sans">
                           {item.attributes.visiontext}
+                        </div>
+                        <div className="font-bold text-lg lg:text-lg mb-2 text-center group-hover:text-white font-sans">
+                          {item.attributes.vissiontext2}
                         </div>
                         <p className="text-gray-700 text-base lg:text-lg group-hover:text-white font-sans">
                           {item.attributes.vissiondescription}

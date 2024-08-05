@@ -89,7 +89,7 @@ const Products = () => {
       {/* Background image */}
       <div className="relative h-60 md:h-96  overflow-hidden">
         <div
-          className="absolute md:inset-14 inset-0 mt-16 md:mt-6 bg-cover bg-center "
+          className="absolute md:inset-44 inset-0 mt-16 md:-mt-40 bg-cover bg-center "
           style={{
             backgroundImage: `url(${Company})`,
             height:"100%"
@@ -99,7 +99,7 @@ const Products = () => {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 lg:px-0">
+      <div className="container mx-auto px-4 lg:px-0 md:-mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 py-8 lg:py-12">
           <div className="col-span-1">
             <p className="main-heading text-4xl lg:text-5xl font-mono mb-3 mt-5 font-sans">
@@ -144,16 +144,14 @@ const Products = () => {
               </Link>
               <Link    to={`/products/${item.attributes.slug}`}>
               <p className="text-gray-700 mb-4 group-hover:text-white font-sans">
-                <ul className="list-disc list-inside">
-                  {item.attributes.description.split("\n").map((line, idx) => (
-                    <li key={idx}>{line}</li>
-                  ))}
-                </ul>
+            
+                  {item.attributes.description.split("\n")}
+             
               </p>
               </Link>
               <Link
                to={`/products/${item.attributes.slug}`}
-                className="inline-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-white font-medium rounded-lg px-4 py-2 text-sm"
+                className="inline-block bg-green-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-white font-medium rounded-lg px-4 py-2 text-base"
               >
                 Read more
               </Link>

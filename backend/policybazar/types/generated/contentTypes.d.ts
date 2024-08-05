@@ -910,6 +910,37 @@ export interface ApiDashboardDashboard extends Schema.CollectionType {
   };
 }
 
+export interface ApiDashboard2Dashboard2 extends Schema.CollectionType {
+  collectionName: 'dashboard2s';
+  info: {
+    singularName: 'dashboard2';
+    pluralName: 'dashboard2s';
+    displayName: 'dashboard2';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    imagescraousel: Attribute.Media<'images', true> & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::dashboard2.dashboard2',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::dashboard2.dashboard2',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFaqFaq extends Schema.CollectionType {
   collectionName: 'faqs';
   info: {
@@ -1164,6 +1195,49 @@ export interface ApiProductProduct extends Schema.CollectionType {
   };
 }
 
+export interface ApiTestomonialTestomonial extends Schema.CollectionType {
+  collectionName: 'testomonials';
+  info: {
+    singularName: 'testomonial';
+    pluralName: 'testomonials';
+    displayName: 'testomonial';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 200;
+      }>;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 2000;
+      }>;
+    slug: Attribute.UID<'api::testomonial.testomonial', 'name'> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::testomonial.testomonial',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::testomonial.testomonial',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1185,11 +1259,13 @@ declare module '@strapi/types' {
       'api::aboutu.aboutu': ApiAboutuAboutu;
       'api::blog.blog': ApiBlogBlog;
       'api::dashboard.dashboard': ApiDashboardDashboard;
+      'api::dashboard2.dashboard2': ApiDashboard2Dashboard2;
       'api::faq.faq': ApiFaqFaq;
       'api::mission-and-vision.mission-and-vision': ApiMissionAndVisionMissionAndVision;
       'api::ourteam.ourteam': ApiOurteamOurteam;
       'api::partner.partner': ApiPartnerPartner;
       'api::product.product': ApiProductProduct;
+      'api::testomonial.testomonial': ApiTestomonialTestomonial;
     }
   }
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Carousel } from "@material-tailwind/react";
 import OurServices from "../our services/services";
 import AboutUs from "../aboutus/about_us";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import './home.css';
 
 // SeoContext to provide SEO-related data
@@ -135,7 +135,7 @@ const InsuranceComponent = () => {
               </div>
             ))}
           </div>
-          <div className="-mt-20 md:-mt-8">
+          <div className="-mt-20 md:-mt-20">
             <OurServices />
           </div>
           <div data-aos="slide-right">

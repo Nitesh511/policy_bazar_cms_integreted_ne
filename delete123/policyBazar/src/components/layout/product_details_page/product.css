@@ -1,0 +1,18 @@
+/* product.css */
+
+.sticky-form {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+    z-index: 1000; /* Make sure it's above other content */
+  }
+  
+  .sticky-form {
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  

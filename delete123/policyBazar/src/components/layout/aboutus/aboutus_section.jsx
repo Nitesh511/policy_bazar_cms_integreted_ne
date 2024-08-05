@@ -33,7 +33,7 @@ const AboutSection = () => {
   return (
     <div>
       <section className="">
-        <div className="container mx-auto pt-5">
+        <div className="container md:ml-7 -mt-1 ">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="hidden md:block col-span-1">
               <div className="px-4">
@@ -60,7 +60,7 @@ const AboutSection = () => {
             </div>
 
             <div className="col-span-1 md:col-span-1 md:col-start-2">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
                 {aboutsection.map((section, index) => (
                   <React.Fragment key={index}>
                     <div className="bg-white shadow-md rounded-lg p-5 hover:bg-gradient-to-r from-blue-400 to-green-500 hover:scale-110 transition duration-300 ease-in-out group">

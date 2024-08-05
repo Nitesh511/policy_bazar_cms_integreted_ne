@@ -20,7 +20,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed w-full z-30 top-0 start-0 bg-white  border-b-2 border-green-200">
+      <nav className=" navbar fixed w-full z-30 top-0 start-0 bg-white  border-b-2 border-green-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
           <Link
             to="/"
@@ -65,7 +65,7 @@ function Navbar() {
                 <Link
                   to="/"
                   className={`block py-2 px-3 rounded md:p-0 font-sans text-14px font-normal ${
-                    isActive("/") ? "text-blue-700 " : "text-black"
+                    isActive("/") ? "text-green-700 " : "text-black"
                   }`}
                   aria-current={isActive("/") ? "page" : undefined}
                   onClick={closeMenu}
@@ -77,7 +77,7 @@ function Navbar() {
                 <Link
                   to="/products"
                   className={`block py-2 px-3 rounded md:p-0 font-sans ${
-                    isActive("/products") ? "text-blue-700 " : "text-black"
+                    isActive("/products") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
                 >
@@ -88,7 +88,7 @@ function Navbar() {
                 <Link
                   to="/ourstory"
                   className={`block py-2 px-3 rounded md:p-0 font-sans ${
-                    isActive("/ourstory") ? "text-blue-700 " : "text-black"
+                    isActive("/ourstory") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
                 >
@@ -99,7 +99,7 @@ function Navbar() {
                 <Link
                   to="/blogs"
                   className={`block py-2 px-3 rounded md:p-0 font-sans ${
-                    isActive("/blogs") ? "text-blue-700 " : "text-black"
+                    isActive("/blogs") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
                 >
@@ -110,7 +110,7 @@ function Navbar() {
                 <Link
                   to="/contactus"
                   className={`block py-2 px-3 rounded md:p-0 font-sans ${
-                    isActive("/contactus") ? "text-blue-700 " : "text-black"
+                    isActive("/contactus") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
                 >

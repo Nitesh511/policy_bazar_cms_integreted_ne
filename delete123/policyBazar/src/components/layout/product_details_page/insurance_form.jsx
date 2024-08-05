@@ -11,7 +11,10 @@ const InsuranceForm = ({
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">Insurance Form</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-2">
-          <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="insuranceType">
+          <label
+            className="block text-gray-700 text-sm font-medium mb-2"
+            htmlFor="insuranceType"
+          >
             Type of Insurance
           </label>
           <input
@@ -24,8 +27,37 @@ const InsuranceForm = ({
             required
           />
         </div>
+
+        {formData.insuranceType === "Vehicle Insurance" && (
+          <div className="mb-2">
+            <label
+              className="block text-gray-700 text-sm font-medium mb-2"
+              htmlFor="vehicleType"
+            >
+              Select Your Vehicle Type
+            </label>
+            <select
+              id="vehicleType"
+              name="vehicleType"
+              value={formData.vehicleType}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="">Select a vehicle type</option>
+              <option value="Car">Car</option>
+              <option value="Motorbike">Motorbike</option>
+              <option value="Truck">Truck</option>
+              <option value="Bus">Bus</option>
+            </select>
+          </div>
+        )}
+
         <div className="mb-2">
-          <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="name">
+          <label
+            className="block text-gray-700 text-sm font-medium mb-2"
+            htmlFor="name"
+          >
             Name
           </label>
           <input
@@ -39,7 +71,10 @@ const InsuranceForm = ({
           />
         </div>
         <div className="mb-2">
-          <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="email">
+          <label
+            className="block text-gray-700 text-sm font-medium mb-2"
+            htmlFor="email"
+          >
             Email
           </label>
           <input
@@ -53,7 +88,10 @@ const InsuranceForm = ({
           />
         </div>
         <div className="mb-2">
-          <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="phone">
+          <label
+            className="block text-gray-700 text-sm font-medium mb-2"
+            htmlFor="phone"
+          >
             Phone
           </label>
           <input

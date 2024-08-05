@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testomonials",
+  "info": {
+    "singularName": "testomonial",
+    "pluralName": "testomonials",
+    "displayName": "testomonial"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200,
+      "minLength": 2
+    },
+    "description": {
+      "type": "richtext",
+      "required": true,
+      "minLength": 10,
+      "maxLength": 2000
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    }
+  }
+}

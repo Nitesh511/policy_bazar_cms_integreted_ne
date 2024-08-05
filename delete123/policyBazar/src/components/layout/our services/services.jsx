@@ -80,20 +80,20 @@ const OurServices = () => {
   return (
     <div className="py-4 px-4 sm:px-8 mt-10 text-lg">
       <div className="flex justify-center items-center">
-        <h1 className="text-center text-black text-4xl font-display font-sans">Our Services</h1>
+        <h1 className="text-center  text-3xl font-display font-sans ">Our Services</h1>
       </div>
       <div className="swiper-container custom-carousel overflow-hidden">
-        <div className="swiper-wrapper cursor-grabbing">
+        <div className="swiper-wrapper cursor-grabbing h-80">
           {services.map((service, index) => (
             <div className="swiper-slide relative" key={index}>
               <Link to={"/products"}
-                className="bg-cover bg-center h-full w-full flex flex-col justify-end p-4 relative"
+                className="bg-cover bg-center h-full w-full flex flex-col justify-end p-4 relative mb-20"
                 style={{
                   backgroundImage: `url(${process.env.STRAPI_API + service.attributes.image.data.attributes.url})`,
          
                 }}
               >
-                <div className={`absolute top-10 left-1 p-2 ${getBadgeColor(index)} text-white rounded-md`}>
+                <div className={`absolute top-7 left-1 p-2 ${getBadgeColor(index)} text-white rounded-md`}>
                   {service.attributes.title}
                 </div>
                 {/* <p className="text-white relative bottom-4 left-4 right-4">{truncateDescription(service.attributes.description, 140)}</p> */}

@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dashboard2s",
+  "info": {
+    "singularName": "dashboard2",
+    "pluralName": "dashboard2s",
+    "displayName": "dashboard2"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "imagescraousel": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

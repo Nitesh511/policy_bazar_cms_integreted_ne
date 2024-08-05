@@ -15,6 +15,12 @@ const ContactSection = () => {
   const handleOpenWhatsappDialog = () => setOpenWhatsappDialog(true);
   const handleCloseWhatsappDialog = () => setOpenWhatsappDialog(false);
 
+  // Define the phone number and message
+  const phoneNumber = "9779841393054"; // E.164 format, no spaces or dashes
+  const message = "Hello, I would like to inquire about your services."; // Default message
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
   return (
     <section className="bg-gray-100 py-12">
       <div className="container mx-auto px-4 md:px-0">
@@ -57,7 +63,14 @@ const ContactSection = () => {
               <DialogBody className="text-center">
                 Send a message to:
                 <br />
-                <span className="text-green-600">+977-9841393054</span>
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-600 hover:underline"
+                >
+                  {phoneNumber}
+                </a>
               </DialogBody>
               <DialogFooter>
                 <Button

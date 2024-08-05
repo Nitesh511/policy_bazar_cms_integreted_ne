@@ -1,12 +1,8 @@
 import React from "react";
-import playstoreimg from "../../../assets/playstore_app.webp";
 import app1 from "../../../assets/app_1.png";
 import app2 from "../../../assets/app_2.png";
 import app3 from "../../../assets/app_3.png";
 import ContactSection from "../getintouch/getintouch";
-import { FaQ } from "react-icons/fa6";
-import Faq_downloads from "../faq/faq";
-import PartnersSection from "../partner_section/partner_section";
 import Testimonial from "../testominals/testominals";
 
 const DownloadAppSection = () => {
@@ -22,9 +18,9 @@ const DownloadAppSection = () => {
                   Download Our App Today and Access
                   <br /> Your Insurance Anytime, Anywhere!
                 </h2>
-                <div className="flex mb-4 mr-40">
+                {/* <div className="flex mb-4 mr-40">
                   <img src={playstoreimg} alt="playstore" className="h-32 " />
-                </div>
+                </div> */}
                 <div className="flex items-center justify-center md:justify-start ml-32">
                   <img
                     src={app1}
@@ -73,7 +69,7 @@ const DownloadAppSection = () => {
         {" "}
         <ContactSection />
       </div>
-{/* 
+      {/* 
       <div data-aos="slide-right">
         <PartnersSection />
       </div> */}
