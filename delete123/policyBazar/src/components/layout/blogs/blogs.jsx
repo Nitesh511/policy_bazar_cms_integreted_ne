@@ -113,13 +113,13 @@ const Blogs = () => {
                 alt=""
               />
             </Link>
-            <div className="p-5">
+            <div className="p-5 font-subheading">
               <Link  to={`/blogs/${item.attributes.slug}`}>
-                <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 font-sans">
+                <h5 className="text-gray-900 font-bold text-  xl tracking-tight mb-2 font-sans">
                   {item.attributes.title}
                 </h5>
               </Link>
-              <p className="font-normal text-gray-700 mb-3 font-sans">
+              <p className="font-normal text-gray-700 mb-3 font-subheading text-lg">
                 {item.attributes.description}
               </p>
               <Link

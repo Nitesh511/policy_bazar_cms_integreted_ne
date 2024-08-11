@@ -39,7 +39,7 @@ const AboutSection = () => {
               <div className="px-4">
                 {aboutsection.map((section, index) => (
                   <React.Fragment key={index}>
-                    <h2 className="text-3xl font-bold mb-3 text-gray-800 font-sans">
+                    <h2 className="text-3xl font-bold mb-3 text-gray-800 font-ubheading">
                       {section.attributes.title1 && (
                         <span
                           dangerouslySetInnerHTML={{
@@ -51,7 +51,7 @@ const AboutSection = () => {
                         />
                       )}
                     </h2>
-                    <p className="text-lg text-gray-700 font-sans">
+                    <p className="text-lg text-gray-700 font-subheading ">
                       {section.attributes.description1}
                     </p>
                   </React.Fragment>
@@ -70,10 +70,10 @@ const AboutSection = () => {
                         width="64"
                         className="mx-auto mb-3"
                       />
-                      <h6 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-white">
+                      <h6 className="text-lg font-semibold font-subheading text-gray-800 mb-2 group-hover:text-white">
                         {section.attributes.title2}
                       </h6>
-                      <p className="text-sm text-gray-700 group-hover:text-white font-sans">
+                      <p className="text-base text-gray-700 group-hover:text-white font-subheading">
                         {section.attributes.description2}
                       </p>
                     </div>
@@ -86,10 +86,10 @@ const AboutSection = () => {
               <div className="px-4">
                 {aboutsection.map((section, index) => (
                   <React.Fragment key={index}>
-                    <h2 className="text-3xl font-bold text-gray-800 mb-3 font-sans">
+                    <h2 className="text-3xl font-bold text-gray-800 mb-3 font-subheading">
                       {section.attributes.title1}
                     </h2>
-                    <p className="text-lg text-gray-700 font-sans">
+                    <p className="text-lg text-gray-700 font-subheading">
                       {section.attributes.description1}
                     </p>
                   </React.Fragment>

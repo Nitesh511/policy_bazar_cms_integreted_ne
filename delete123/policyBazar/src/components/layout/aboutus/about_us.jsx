@@ -46,10 +46,10 @@ const AboutUs = () => {
                   )}
                 </div>
                 <div className="md:order-1">
-                  <h1 className="text-3xl sm:text-3xl lg:text-3xl font-bold text-gray-800 mb-4 font-sans">
+                  <h1 className="text-3xl sm:text-3xl lg:text-3xl font-bold text-gray-800 mb-4 font-subheading">
                     {item.attributes.title}
                   </h1>
-                  <p className="text-lg text-gray-600 mb-4 font-sans">
+                  <p className="text-lg text-gray-600 mb-4 font-subheading">
                     {item.attributes.bigdesctiption}
                   </p>
                 </div>

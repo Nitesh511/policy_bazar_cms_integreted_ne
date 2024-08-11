@@ -63,16 +63,16 @@ const Contactpage = () => {
             {/* Left side: Contact details and Google Map */}
             <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
               <div className="group bg-white shadow-md rounded-lg p-6 mb-8 transition-transform transform hover:scale-110 hover:bg-green-500">
-                <h2 className="text-2xl font-bold mb-4 group-hover:text-white">
+                <h2 className="text-2xl font-bold font-subheading mb-4 group-hover:text-white">
                   Contact Information
                 </h2>
-                <p className="mb-4 group-hover:text-white">
+                <p className="mb-4 group-hover:text-white font-subheading ">
                  <a href="tel:014547991"> <strong>Contact Number:</strong> 014547991</a>
                 </p>
-                <p className="mb-4 group-hover:text-white">
+                <p className="mb-4 group-hover:text-white font-subheading ">
                 <a href="tel:+9779841393054"> <strong>Contact Number:</strong> +977 9841393054</a>
                 </p>
-                <p className="mb-4 group-hover:text-white">
+                <p className="mb-4 group-hover:text-white font-subheading ">
                   <strong>Location:</strong> Policy Bazar Nepal, Kathmandu, Nepal
                 </p>
               </div>
@@ -92,7 +92,7 @@ const Contactpage = () => {
             {/* Right side: Contact form */}
             <div className="w-full lg:w-1/2 px-4">
               <div className="bg-white shadow-md rounded-lg p-6">
-                <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+                <h2 className="text-2xl font-bold mb-4 font-subheading ">Contact Us</h2>
                 <Formik
                   initialValues={initialValues}
                   validationSchema={validationSchema}
@@ -103,7 +103,7 @@ const Contactpage = () => {
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium font-subheading text-gray-700"
                         >
                           Name
                         </label>
@@ -122,7 +122,7 @@ const Contactpage = () => {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium font-subheading text-gray-700"
                         >
                           Email
                         </label>
@@ -141,7 +141,7 @@ const Contactpage = () => {
                       <div>
                         <label
                           htmlFor="message"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium font-subheading text-gray-700"
                         >
                           Message
                         </label>
@@ -161,7 +161,7 @@ const Contactpage = () => {
                       <div>
                         <button
                           type="submit"
-                          className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                          className="w-full py-2 px-4 font-subheading border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                           Submit
                         </button>

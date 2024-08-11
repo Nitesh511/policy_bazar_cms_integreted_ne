@@ -102,17 +102,17 @@ const Products = () => {
       <div className="container mx-auto px-4 lg:px-0 md:-mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 py-8 lg:py-12">
           <div className="col-span-1">
-            <p className="main-heading text-4xl lg:text-5xl font-mono mb-3 mt-5 font-sans">
+            <p className="main-heading text-4xl lg:text-5xl font-mono mb-3 mt-6 font-subheading ">
               Our Recommended <br />
-              <span className="text-red-500 text-6xl lg:text-7xl font-sans">Insurance Plans</span>
+              <span className="text-red-500 text-6xl lg:text-7xl font-subheading ">Insurance Plans</span>
             </p>
             <div className="lg:hidden">
-              <p className="supporting-text font-sans">
+              <p className="supporting-text font-subheading ">
                 Insurance Company has been serving policyholders, protecting businesses, and mitigating Travel Insurance for added peace of mind.
               </p>
             </div>
             <div className="hidden lg:block">
-              <p className="supporting-text font-sans">
+              <p className="supporting-text font-subheading text-base">
                 Insurance Company has been serving policyholders, protecting businesses, <br />
                 and mitigating Travel Insurance for added peace of mind.
               </p>
@@ -126,7 +126,7 @@ const Products = () => {
         {products.map((item, index) => (
           <div
             key={index}
-            className="bg-white shadow-md border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl hover:bg-gradient-to-r from-gray-400 to-green-500 hover:scale-105 group transition duration-300 ease-in-out"
+            className="bg-white shadow-md border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl hover:bg-green-600 hover:scale-105 group transition duration-300 ease-in-out"
           >
               <Link
                to={`/products/${item.attributes.slug}`}>
@@ -138,12 +138,12 @@ const Products = () => {
             </Link>
             <div className="p-4">
               <Link to={`/products/${item.attributes.slug}`}>
-                <h5 className="text-gray-900 font-bold text-xl lg:text-2xl tracking-tight mb-2 group-hover:text-white font-sans">
+                <h5 className="text-green-600 font-bold text-xl lg:text-2xl tracking-tight mb-2 group-hover:text-white font-subheading ">
                   {item.attributes.title}
                 </h5>
               </Link>
               <Link    to={`/products/${item.attributes.slug}`}>
-              <p className="text-gray-700 mb-4 group-hover:text-white font-sans">
+              <p className="text-gray-700 mb-4 group-hover:text-white font-subheading font-lg">
             
                   {item.attributes.description.split("\n")}
              

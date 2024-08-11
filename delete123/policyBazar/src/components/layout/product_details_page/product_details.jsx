@@ -284,7 +284,7 @@ const ProductDetails = () => {
           </div>
 
           <div className="p-6 w-full md:w-2/3">
-            <h1 className="text-3xl font-bold mb-4 text-black">
+            <h1 className="text-3xl font-bold mb-4 text-green-600">
               {product.attributes.title}
             </h1>
             <p className="text-gray-700 mb-4 leading-relaxed">
@@ -297,7 +297,7 @@ const ProductDetails = () => {
             </div>
 
             <div className="bg-white rounded-lg py-10">
-              <h2 className="text-3xl font-bold mb-6 text-black">
+              <h2 className="text-3xl font-bold mb-6 text-green-600">
                 Why Choose Policybazaar Nepal for Your Insurance Needs
               </h2>
               <div className="space-y-4 text-black">

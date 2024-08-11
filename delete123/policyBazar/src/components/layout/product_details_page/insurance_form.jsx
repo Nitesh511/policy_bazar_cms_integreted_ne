@@ -8,7 +8,7 @@ const InsuranceForm = ({
 }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto w-full border border-gray-200">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Insurance Form</h2>
+      <h2 className="text-2xl font-semibold text-green-600 mb-6">Insurance Form</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-2">
           <label

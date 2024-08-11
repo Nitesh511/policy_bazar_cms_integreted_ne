@@ -26,6 +26,8 @@ import Product_details from "./components/layout/product_details_page/product_de
 import BlogDetails from "./components/layout/blogs/blogs_readmore.jsx";
 import Home_third from "./components/layout/home/home_third.jsx";
 import ComingSoon from "./components/layout/login/commingSoon.jsx";
+import DematFAQ from "./components/layout/faq/life_insurance_faq.jsx";
+import DematFAQHealth from "./components/layout/faq/faq_health.jsx";
 
 const theme = {
   background: "#f5f8fb",
@@ -70,6 +72,8 @@ const MainApp = () => {
             <Route path="/products/:slug" element={<Product_details />}></Route>
             <Route path="/blogs/:slug" element={<BlogDetails />}></Route>
             <Route path="/commingsoon" element={<ComingSoon />}></Route>
+            <Route path="/faq" element={<DematFAQ/>}></Route>
+            <Route path="/faqhealth" element={<DematFAQHealth/>}></Route>
           </Routes>
 
           <Footer />

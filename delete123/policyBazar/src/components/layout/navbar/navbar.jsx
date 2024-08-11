@@ -64,7 +64,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/"
-                  className={`block py-2 px-3 rounded md:p-0 font-sans text-14px font-normal ${
+                  className={`block py-2 px-3 rounded md:p-0 text-xl  font-subheading ${
                     isActive("/") ? "text-green-700 " : "text-black"
                   }`}
                   aria-current={isActive("/") ? "page" : undefined}
@@ -76,7 +76,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/products"
-                  className={`block py-2 px-3 rounded md:p-0 font-sans ${
+                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-xl ${
                     isActive("/products") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
@@ -87,7 +87,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/ourstory"
-                  className={`block py-2 px-3 rounded md:p-0 font-sans ${
+                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-xl ${
                     isActive("/ourstory") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
@@ -98,7 +98,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/blogs"
-                  className={`block py-2 px-3 rounded md:p-0 font-sans ${
+                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-xl ${
                     isActive("/blogs") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
@@ -109,7 +109,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/contactus"
-                  className={`block py-2 px-3 rounded md:p-0 font-sans ${
+                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-xl ${
                     isActive("/contactus") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}

@@ -21,11 +21,11 @@ const DownloadAppSection = () => {
                 {/* <div className="flex mb-4 mr-40">
                   <img src={playstoreimg} alt="playstore" className="h-32 " />
                 </div> */}
-                <div className="flex items-center justify-center md:justify-start ml-32">
+                <div className="flex items-center justify-center md:justify-start ml-42">
                   <img
                     src={app1}
                     alt="app 1"
-                    className="h-auto md:h-96 max-w-full -mt-40"
+                    className="h-auto md:h-96 max-w-full mt-1"
                   />
                 </div>
               </div>
@@ -39,10 +39,10 @@ const DownloadAppSection = () => {
                   alt="app 2"
                   className="h-60 mx-auto md:mx-0 mb-4"
                 />
-                <h3 className="text-xl font-bold mb-2 text-center md:text-left">
+                <h3 className="text-xl font-bold  font-subheading mb-2 text-center md:text-left">
                   Get All Features In One Simple App
                 </h3>
-                <p className="text-sm text-gray-600 text-center md:text-left">
+                <p className="text-xl text-gray-600 font-subheading text-center md:text-left">
                   Make Changes to Your Policy on the Go - Anytime, Anywhere!
                 </p>
               </div>
@@ -51,10 +51,10 @@ const DownloadAppSection = () => {
             {/* Right Section */}
             <div className="col-span-1 md:col-span-1">
               <div className="card shadow-lg bg-white border-0 h-full p-6">
-                <h3 className="text-xl font-bold mb-2 text-center md:text-left">
+                <h3 className="text-xl font-bold font-subheading mb-2 text-center md:text-left">
                   Get Insured in Minutes with Our Easy Buy Feature
                 </h3>
-                <p className="text-sm text-gray-600 mb-4 text-center md:text-left">
+                <p className="text-xl font-subheading text-gray-600 mb-4 text-center md:text-left">
                   Simplified Insurance Purchasing - Anytime, Anywhere!
                 </p>
                 <img src={app3} alt="app 3" className="h-60 mx-auto md:mx-0" />

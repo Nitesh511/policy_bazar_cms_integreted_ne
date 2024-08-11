@@ -6,14 +6,14 @@ module.exports = withMT({
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
+ theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
+        heading: ["Playfair Display", "serif"],
+        subheading: ["Roboto", "sans-serif"],
+        body: ["Roboto", "sans-serif"],
       },
-  
     },
-
   },
   plugins: [],
 });
