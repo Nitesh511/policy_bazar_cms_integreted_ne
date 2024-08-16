@@ -58,9 +58,9 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-      <div className="relative">
+      
         <AboutSection />
-      </div>
+      
     </div>
   );
 };

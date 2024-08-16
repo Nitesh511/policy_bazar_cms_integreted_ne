@@ -12,9 +12,9 @@ function DocumentList() {
 
   return (
     <>
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex flex-col lg:flex-row ">
       {/* Left panel */}
-      <div className="w-full lg:w-2/3 p-4">
+      <div className="w-full lg:w-2/3 p-4 ">
         {selectedCategory ? (
           <DematFAQ category={selectedCategory} />
         ) : (
@@ -25,7 +25,7 @@ function DocumentList() {
       </div>
 
       {/* Right panel */}
-      <div className="w-full lg:w-1/3 bg-white p-4 mt-10 lg:mt-0">
+      {/* <div className="w-full lg:w-1/3 bg-white p-4 mt-10 lg:mt-0">
         <h1 className='text-3xl font-bold'>Categories</h1>
         <ul className="space-y-2">
           {categories.map((category, index) => (
@@ -38,7 +38,7 @@ function DocumentList() {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
 
     
     </div>

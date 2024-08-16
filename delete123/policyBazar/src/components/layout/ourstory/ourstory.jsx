@@ -237,8 +237,22 @@ const Story = () => {
                 <div className="container mx-auto flex flex-col lg:flex-row items-center py-12 cursor-pointer ">
                   {/* Left Side */}
                   <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                      {/* Vision Card */}
+                      <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-green-600 hover:scale-105 group transition duration-300 ease-in-out mt-8 lg:mt-10">
+                      <div className="px-6 py-4">
+                        <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white font-subheading ">
+                          {item.attributes.visiontext}
+                        </div>
+                        <div className="font-bold text-lg lg:text-lg mb-2  group-hover:text-white text-center group-hover:text-whitefont-subheading ">
+                          {item.attributes.vissiontext2}
+                        </div>
+                        <p className="text-gray-700 text-base lg:text-lg group-hover:text-white font-subheading ">
+                          {item.attributes.vissiondescription}
+                        </p>
+                      </div>
+                    </div>
                     {/* Mission Card */}
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-green-500 hover:scale-105 group transition duration-300 ease-in-out">
+                    <div className="bg-white rounded-lg shadow-lg mt-10 overflow-hidden hover:shadow-xl hover:bg-green-500 hover:scale-105 group transition duration-300 ease-in-out">
                       <div className="px-6 py-4">
                         <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white font-subheading ">
                           {item.attributes.missiontext}
@@ -252,20 +266,7 @@ const Story = () => {
                       </div>
                     </div>
 
-                    {/* Vision Card */}
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:bg-green-600 hover:scale-105 group transition duration-300 ease-in-out mt-8 lg:mt-10">
-                      <div className="px-6 py-4">
-                        <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white font-subheading ">
-                          {item.attributes.visiontext}
-                        </div>
-                        <div className="font-bold text-lg lg:text-lg mb-2  group-hover:text-white text-center group-hover:text-whitefont-subheading ">
-                          {item.attributes.vissiontext2}
-                        </div>
-                        <p className="text-gray-700 text-base lg:text-lg group-hover:text-white font-subheading ">
-                          {item.attributes.vissiondescription}
-                        </p>
-                      </div>
-                    </div>
+                
                   </div>
 
                   {/* Right Side - Image */}

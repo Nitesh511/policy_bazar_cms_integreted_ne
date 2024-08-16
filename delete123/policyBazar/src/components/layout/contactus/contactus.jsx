@@ -103,7 +103,7 @@ const Contactpage = () => {
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-sm font-medium font-subheading text-gray-700"
+                          className="block text-sm font-medium font-subheading text-black"
                         >
                           Name
                         </label>
@@ -111,7 +111,7 @@ const Contactpage = () => {
                           type="text"
                           id="name"
                           name="name"
-                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-green-600 focus:ring-green-600 focus:border-green-600 sm:text-sm"
                         />
                         <ErrorMessage
                           name="name"
@@ -122,7 +122,7 @@ const Contactpage = () => {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm font-medium font-subheading text-gray-700"
+                          className="block text-sm font-medium font-subheading text-black"
                         >
                           Email
                         </label>
@@ -130,7 +130,7 @@ const Contactpage = () => {
                           type="email"
                           id="email"
                           name="email"
-                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-green-600 focus:ring-green-600 focus:border-green-600 sm:text-sm"
                         />
                         <ErrorMessage
                           name="email"
@@ -141,7 +141,7 @@ const Contactpage = () => {
                       <div>
                         <label
                           htmlFor="message"
-                          className="block text-sm font-medium font-subheading text-gray-700"
+                          className="block text-sm font-medium font-subheading text-black"
                         >
                           Message
                         </label>
@@ -150,7 +150,7 @@ const Contactpage = () => {
                           id="message"
                           name="message"
                           rows="4"
-                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-green-600 focus:ring-green-600 focus:border-green-600 sm:text-sm"
                         />
                         <ErrorMessage
                           name="message"
@@ -161,7 +161,7 @@ const Contactpage = () => {
                       <div>
                         <button
                           type="submit"
-                          className="w-full py-2 px-4 font-subheading border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                          className="w-full py-2 px-4 font-subheading border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none"
                         >
                           Submit
                         </button>

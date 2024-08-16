@@ -123,7 +123,7 @@ const Blogs = () => {
                 {item.attributes.description}
               </p>
               <Link
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center font-sans"
+                className="text-white bg-green-600 hover:bg-gray-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-3 py-2 text-center inline-flex items-center font-subheading"
                 to={`/blogs/${item.attributes.slug}`}
               >
                 Read more

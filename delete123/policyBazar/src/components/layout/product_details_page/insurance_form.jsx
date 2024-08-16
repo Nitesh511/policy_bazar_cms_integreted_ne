@@ -7,12 +7,12 @@ const InsuranceForm = ({
   handleCloseForm,
 }) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto w-full border border-gray-200">
-      <h2 className="text-2xl font-semibold text-green-600 mb-6">Insurance Form</h2>
+    <div className="bg-white p-6  rounded-lg shadow-lg max-w-md mx-auto w-full border border-gray-200">
+      <h2 className="text-2xl font-semibold text-green-600 mb-6">GET A QUOTE</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-2">
           <label
-            className="block text-gray-700 text-sm font-medium mb-2"
+            className="block text-black text-base font-subheading font-bold mb-2"
             htmlFor="insuranceType"
           >
             Type of Insurance
@@ -23,7 +23,7 @@ const InsuranceForm = ({
             name="insuranceType"
             value={formData.insuranceType}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-600"
             required
           />
         </div>
@@ -31,7 +31,7 @@ const InsuranceForm = ({
         {formData.insuranceType === "Vehicle Insurance" && (
           <div className="mb-2">
             <label
-              className="block text-gray-700 text-sm font-medium mb-2"
+              className="block text-black text-base font-subheading font-bold mb-2"
               htmlFor="vehicleType"
             >
               Select Your Vehicle Type
@@ -41,7 +41,7 @@ const InsuranceForm = ({
               name="vehicleType"
               value={formData.vehicleType}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-600"
               required
             >
               <option value="">Select a vehicle type</option>
@@ -55,7 +55,7 @@ const InsuranceForm = ({
 
         <div className="mb-2">
           <label
-            className="block text-gray-700 text-sm font-medium mb-2"
+            className="block text-black text-base font-subheading font-bold mb-2"
             htmlFor="name"
           >
             Name
@@ -66,13 +66,13 @@ const InsuranceForm = ({
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-600"
             required
           />
         </div>
         <div className="mb-2">
           <label
-            className="block text-gray-700 text-sm font-medium mb-2"
+            className="block text-black text-base font-subheading font-bold mb-2"
             htmlFor="email"
           >
             Email
@@ -83,13 +83,13 @@ const InsuranceForm = ({
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-600"
             required
           />
         </div>
         <div className="mb-2">
           <label
-            className="block text-gray-700 text-sm font-medium mb-2"
+            className="block text-black text-base font-subheading font-bold mb-2"
             htmlFor="phone"
           >
             Phone
@@ -100,21 +100,21 @@ const InsuranceForm = ({
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
             required
           />
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <button
             type="submit"
-            className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="bg-green-600 text-white font-bold font-subheading py-2 px-4 rounded-lg shadow hover:bg-gray-000 focus:outline-none focus:ring-2 focus:ring-green-600"
           >
             Submit
           </button>
           {handleCloseForm && (
             <button
               type="button"
-              className="text-gray-700 font-medium py-2 px-4 rounded-lg hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="text-red-700 font-medium py-2 px-4 rounded-lg hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500"
               onClick={handleCloseForm}
             >
               Close

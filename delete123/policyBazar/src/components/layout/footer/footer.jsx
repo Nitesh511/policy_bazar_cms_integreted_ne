@@ -25,7 +25,7 @@ const Footer = () => {
     fetchProducts();
   }, []);
   return (
-    <div class="bg-zinc-50 text-center text-surface/75 bg-gradient-to-r from-gray-200 to-green-400 dark:text-white/75 lg:text-left">
+    <div class="bg-zinc-50 text-center text-surface/75 bg-gradient-to-r from-green-200 to-green-500 dark:text-white/75 lg:text-left">
       <div class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
         <div class="me-12 hidden lg:block font-subheading text-xl">
           <span>Get connected with us on social networks:</span>
@@ -99,7 +99,7 @@ const Footer = () => {
               <p key={index} className="mb-1 font-subheading">
                 <Link
                   to={`/products/${item.attributes.slug}`}
-                  className="inline-block text-black font-medium rounded-lg px-4 py-2 text-base"
+                  className="inline-block text-black font-normal rounded-lg px-4 py-2 text-base"
                 >
                   {item.attributes.title}
                 </Link>

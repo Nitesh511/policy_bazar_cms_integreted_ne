@@ -8,7 +8,7 @@ const AboutSection = () => {
     const fetchAboutsection = async () => {
       try {
         const response = await fetch(
-          `${ process.env.STRAPI_API}/api/partners?populate=*`,
+          `${process.env.STRAPI_API}/api/partners?populate=*`,
           {
             headers: {
               Authorization:
@@ -31,15 +31,16 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <div>
-      <section className="">
-        <div className="container md:ml-7 -mt-1 ">
+    <div className="overflow-hidden">
+      <section className="py-10 px-4 sm:px-6 lg:px-4">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="hidden md:block col-span-1">
-              <div className="px-4">
+            {/* Desktop View */}
+            <div className="hidden md:block">
+              <div className="lg:px-8">
                 {aboutsection.map((section, index) => (
                   <React.Fragment key={index}>
-                    <h2 className="text-3xl font-bold mb-3 text-gray-800 font-ubheading">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 text-gray-800 font-ubheading">
                       {section.attributes.title1 && (
                         <span
                           dangerouslySetInnerHTML={{
@@ -51,7 +52,7 @@ const AboutSection = () => {
                         />
                       )}
                     </h2>
-                    <p className="text-lg text-gray-700 font-subheading ">
+                    <p className="text-base sm:text-lg lg:text-xl text-gray-700 font-subheading">
                       {section.attributes.description1}
                     </p>
                   </React.Fragment>
@@ -59,21 +60,21 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <div className="col-span-1 md:col-span-1 md:col-start-2">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
+            {/* Desktop Cards */}
+            <div className="md:col-span-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {aboutsection.map((section, index) => (
                   <React.Fragment key={index}>
-                    <div className="bg-white shadow-md rounded-lg p-5 hover:bg-gradient-to-r from-blue-400 to-green-500 hover:scale-110 transition duration-300 ease-in-out group">
+                    <div className="bg-white shadow-md rounded-lg p-5 hover:bg-gradient-to-r from-blue-400 to-green-500 hover:scale-105 transition duration-300 ease-in-out group">
                       <img
-                        src={`${ process.env.STRAPI_API}${section.attributes.image.data.attributes.url}`}
+                        src={`${process.env.STRAPI_API}${section.attributes.image.data.attributes.url}`}
                         alt="product"
-                        width="64"
-                        className="mx-auto mb-3"
+                        className="mx-auto mb-3 w-16 h-16 object-contain"
                       />
-                      <h6 className="text-lg font-semibold font-subheading text-gray-800 mb-2 group-hover:text-white">
+                      <h6 className="text-base sm:text-lg lg:text-xl font-semibold font-subheading text-gray-800 mb-2 group-hover:text-white">
                         {section.attributes.title2}
                       </h6>
-                      <p className="text-base text-gray-700 group-hover:text-white font-subheading">
+                      <p className="text-sm sm:text-base lg:text-lg text-gray-700 group-hover:text-white font-subheading">
                         {section.attributes.description2}
                       </p>
                     </div>
@@ -82,14 +83,15 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <div className="md:hidden col-span-1">
+            {/* Mobile View */}
+            <div className="md:hidden">
               <div className="px-4">
                 {aboutsection.map((section, index) => (
                   <React.Fragment key={index}>
-                    <h2 className="text-3xl font-bold text-gray-800 mb-3 font-subheading">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 font-subheading">
                       {section.attributes.title1}
                     </h2>
-                    <p className="text-lg text-gray-700 font-subheading">
+                    <p className="text-base sm:text-lg text-gray-700 font-subheading">
                       {section.attributes.description1}
                     </p>
                   </React.Fragment>
@@ -99,14 +101,11 @@ const AboutSection = () => {
           </div>
         </div>
       </section>
-      {/* <div className="mt-4">
-        <Advertisement/>
-    </div> */}
-      <div className="relative" data-aos="flip-right" data-aos-duration="5000"  >
-      <QuickLinksSection />
 
+      {/* Quick Links Section */}
+      <div className="relative mt-10" data-aos="flip-right" data-aos-duration="5000">
+        <QuickLinksSection />
       </div>
-    
     </div>
   );
 };

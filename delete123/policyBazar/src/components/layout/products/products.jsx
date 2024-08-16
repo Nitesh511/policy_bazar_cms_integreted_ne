@@ -151,7 +151,7 @@ const Products = () => {
               </Link>
               <Link
                to={`/products/${item.attributes.slug}`}
-                className="inline-block bg-green-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 text-white font-medium rounded-lg px-4 py-2 text-base"
+                className="inline-block bg-green-700 hover:bg-gray-900 focus:ring-4 focus:ring-green-600 text-white font-medium rounded-lg px-4 py-2 text-base"
               >
                 Read more
               </Link>

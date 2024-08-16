@@ -28,6 +28,16 @@ import Home_third from "./components/layout/home/home_third.jsx";
 import ComingSoon from "./components/layout/login/commingSoon.jsx";
 import DematFAQ from "./components/layout/faq/life_insurance_faq.jsx";
 import DematFAQHealth from "./components/layout/faq/faq_health.jsx";
+import DematFAQMarine from "./components/layout/faq/faqmarine.jsx";
+import DematFAQPersonalAccident from "./components/layout/faq/personalaccident.jsx";
+import DematFAQMTerm from "./components/layout/faq/termlife.jsx";
+import bot1 from "./assets/mas1.png";
+import bot2 from "./assets/mas2.png";
+import './components/layout/CSS/bot.css';
+import DematFAQProperty from "./components/layout/faq/faq_property.jsx";
+import DematFAQEndoment from "./components/layout/faq/faq_endoments.jsx";
+import DematFAQTravels from "./components/layout/faq/faq_travels.jsx";
+import DematFAQTrekkers from "./components/layout/faq/faq_trekkers.jsx";
 
 const theme = {
   background: "#f5f8fb",
@@ -74,37 +84,46 @@ const MainApp = () => {
             <Route path="/commingsoon" element={<ComingSoon />}></Route>
             <Route path="/faq" element={<DematFAQ/>}></Route>
             <Route path="/faqhealth" element={<DematFAQHealth/>}></Route>
+            <Route path="/faqmarine" element={<DematFAQMarine/>}></Route>
+            <Route path="/faqpersonal" element={<DematFAQPersonalAccident/>}></Route>
+            <Route path="/faqterm" element={<DematFAQMTerm/>}></Route>
+            <Route path="/faqproperty" element={<DematFAQProperty/>}></Route>
+            <Route path="/faqendoment" element={<DematFAQEndoment/>}></Route>
+            <Route path="/faqtravels" element={<DematFAQTravels/>}></Route>
+            <Route path="/faqtrekkers" element={<DematFAQTrekkers/>}></Route>
           </Routes>
 
           <Footer />
           <ThemeProvider theme={theme}>
+       
             <ChatBot
               floating={true}
               cache={false}
               steps={ChatbotSteps}
               floatingIcon={
                 <img
-                  src={GreenRobotAvatar1}
+                  src={bot1}
                   alt="Chatbot Icon"
+                  className="bounce-animation"
                   style={{
-                    width: "60px",
-                    height: "60px",
+                    width: "90px",
+                    height: "80px",
                     borderRadius: "50%",
-                    backgroundColor: "#4CAF50",
+                    backgroundColor: "white",
                     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
                     zIndex: 1000,
+                  
                   }}
                 />
               }
-              botAvatar={GreenRobotAvatar}
+              botAvatar={bot2}
               bubbleStyle={{ background: "#4CAF50", color: "white" }}
               style={{ bottom: "10px", right: "20px", position: "fixed" }}
               floatingStyle={{
-                width: "60px",
-                height: "60px",
-                background: "#4CAF50",
+           
+               
                 borderRadius: "50%",
-                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+              
               }}
               headerTitle="Policybazar Nepal"
               userDelay={1000}

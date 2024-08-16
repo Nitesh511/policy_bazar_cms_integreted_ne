@@ -1,9 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { json, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InsuranceForm from "./insurance_form";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import InsuranceFormNew from "./newinsuranceform";
+import why1 from "../../../assets/why1.png";
+import why2 from "../../../assets/why2.png";
+import why3 from "../../../assets/why3.png";
+import why4 from "../../../assets/why4.png";
+import why5 from "../../../assets/why5.png";
 
 // SeoContext to provide SEO-related data
 const SeoContext = React.createContext();
@@ -57,7 +63,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [formData, setFormData] = useState({
     insuranceType: "",
-    vehicleType:"",
+    vehicleType: "",
     name: "",
     email: "",
     phone: "",
@@ -104,7 +110,7 @@ const ProductDetails = () => {
     }
     try {
       const response = await fetch(
-       `${process.env.STRAPI_API}/api/suscribes?populate=*`,
+        `${process.env.STRAPI_API}/api/suscribes?populate=*`,
         {
           method: "POST",
           headers: {
@@ -117,7 +123,7 @@ const ProductDetails = () => {
               insurancetype: formData.insuranceType,
               vehicleType: formData.vehicleType,
               name: formData.name,
-              email: formData.email, 
+              email: formData.email,
               phone: formData.phone,
             },
           }),
@@ -205,50 +211,59 @@ const ProductDetails = () => {
     );
   }
 
-
-  const DescriptionList = ({ description }) => {
-    const formatLine = (line) => {
-      // Remove hyphens
-      const cleanedLine = line.replace(/-/g, '');
-  
-      // Check if the line contains a colon or question mark
-      const colonIndex = cleanedLine.indexOf(":");
-      const questionMarkIndex = cleanedLine.indexOf("?");
-  
-      if (colonIndex !== -1) {
-        // Split the line into two parts
-        const beforeColon = cleanedLine.substring(0, colonIndex + 1);
-        const afterColon = cleanedLine.substring(colonIndex + 1).trim();
-  
-        return (
-          <div key={line}>
-            <strong>{beforeColon}</strong> {afterColon}
-          </div>
-        );
-      }
-  
-      if (questionMarkIndex !== -1) {
-        // Split the line into two parts
-        const beforeQuestionMark = cleanedLine.substring(0, questionMarkIndex + 1);
-        const afterQuestionMark = cleanedLine.substring(questionMarkIndex + 1).trim();
-  
-        return (
-          <div key={line}>
-            <strong>{beforeQuestionMark}</strong> {afterQuestionMark}
-          </div>
-        );
-      }
-  
-      // Return line as is if no colon or question mark
-      return <div key={line}>{cleanedLine}</div>;
-    };
-  
-    return (
-      <ul className="list-disc mb-4 text-gray-700 leading-relaxed">
-        {description.split("\n").map((line, idx) => formatLine(line))}
-      </ul>
+const DescriptionList = ({ description }) => {
+  const formatLine = (line) => {
+    // Handle bold text (**bold**)
+    const boldPattern = /\*\*(.*?)\*\*/g;
+    const boldFormattedLine = line.replace(
+      boldPattern,
+      (match, p1) => `<strong>${p1}</strong>`
     );
+
+   
+
+    // Handle headings (#, ##, ###)
+    if (boldFormattedLine.startsWith("### ")) {
+      return <h3 className="text-lg font-semibold mt-4 mb-2">{boldFormattedLine.replace("### ", "")}</h3>;
+    } else if (boldFormattedLine.startsWith("## ")) {
+      return <h2 className="text-xl font-bold mt-4 mb-2">{boldFormattedLine.replace("## ", "")}</h2>;
+    } else if (boldFormattedLine.startsWith("# ")) {
+      return <h1 className="text-lg font-normal mt-4 mb-2">{boldFormattedLine.replace("# ", "")}</h1>;
+      
+    }else if(boldFormattedLine.startsWith('<strong>')){
+     return  <p>
+     {boldFormattedLine.split(/(<strong>.*?<\/strong>)/g).map((part, index) => {
+       if (part.startsWith('<strong>') && part.endsWith('</strong>')) {
+         const boldText = part.replace(/<\/?strong>/g, ''); // Remove <strong> tags
+         return <strong key={index} className="font-bold">{boldText}</strong>;
+       }
+       return part;
+     })}
+   </p>
+    }
+
+
+
+   
+
+    
+
+    // Return formatted line with bold text
+    return <div key={line} dangerouslySetInnerHTML={{ __html: boldFormattedLine }} />;
   };
+
+  return (
+    <div className="text-gray-700 ">
+      {description.split("\n").map((line, idx) => (
+        <React.Fragment key={idx}>
+          {formatLine(line, idx)}
+          <br />
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
 
   return (
     <HelmetProvider>
@@ -300,31 +315,73 @@ const ProductDetails = () => {
               <h2 className="text-3xl font-bold mb-6 text-green-600">
                 Why Choose Policybazaar Nepal for Your Insurance Needs
               </h2>
-              <div className="space-y-4 text-black">
-                <p>
-                  <strong>Easy Online Purchase:</strong> Effortlessly buy your
-                  insurance through our intuitive and user-friendly website.
-                </p>
-                <p>
-                  <strong>Claims Assistance:</strong>  Our dedicated team ensures a smooth and hassle-free claims process, providing you with the support you need.
-                </p>
-                <p>
-                  <strong>Flexible Premiums:</strong>Select coverage options and durations that match your plans, with premiums designed to fit your budget.
-             
-                </p>
-                <p>
-                  <strong>Renewable Policies:</strong> : Enjoy peace of mind knowing our policies are easily renewable for your future needs.
-                </p>
-                <p>
-                  <strong>Cancellation Refund:</strong> Plans change, and we understand. Enjoy a free-look period with full refunds for cancellations..
-                </p>
+              <div className="space-y-5 text-black">
+                <div className="flex items-start space-x-4 ">
+                  <img
+                    src={why4} // Replace with the correct path or URL
+                    alt="Easy Online Purchase"
+                    className="w-12 h-12 object-contain"
+                  />
+                  <p className="mt-4">
+                    <strong>Easy Online Purchase:</strong> Effortlessly buy your
+                    insurance through our intuitive and user-friendly website.
+                  </p>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <img
+                    src={why3} // Replace with the correct path or URL
+                    alt="Claims Assistance"
+                    className="w-12 h-12 object-contain"
+                  />
+                  <p>
+                    <strong>Claims Assistance:</strong> Our dedicated team
+                    ensures a smooth and hassle-free claims process, providing
+                    you with the support you need.
+                  </p>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <img
+                    src={why5} // Replace with the correct path or URL
+                    alt="Flexible Premiums"
+                    className="w-12 h-12 object-contain"
+                  />
+                  <p className="mt-3">
+                    <strong>Flexible Premiums:</strong> Select coverage options
+                    and durations that match your plans, with premiums designed
+                    to fit your budget.
+                  </p>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <img
+                    src={why1}
+                    alt="Renewable Policies"
+                    className="w-12 h-12 object-contain"
+                  />
+                  <p className="mt-2">
+                    <strong>Renewable Policies:</strong> Enjoy peace of mind
+                    knowing our policies are easily renewable for your future
+                    needs.
+                  </p>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <img
+                    src={why2}
+                    alt="Cancellation Refund"
+                    className="w-12 h-12 object-contain"
+                  />
+                  <p className="mt-3">
+                    <strong>Cancellation Refund:</strong> Plans change, and we
+                    understand. Enjoy a free-look period with full refunds for
+                    cancellations.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="hidden lg:flex p-6 lg:ml-auto absolute inset-x-0 bottom-0 lg:bottom-auto lg:top-[570px] lg:left-[860px] w-full lg:w-[400px] flex items-end justify-end">
             <div className="w-full max-w-md -mt-24">
-              <InsuranceForm
+              <InsuranceFormNew
                 formData={formData}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
@@ -333,7 +390,7 @@ const ProductDetails = () => {
           </div>
 
           {showForm && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
+            <div className="fixed inset-0 bg-black bg-opacity-50 mt-10 flex items-center justify-center ">
               <InsuranceForm
                 formData={formData}
                 handleChange={handleChange}
