@@ -10,6 +10,7 @@ import why2 from "../../../assets/why2.png";
 import why3 from "../../../assets/why3.png";
 import why4 from "../../../assets/why4.png";
 import why5 from "../../../assets/why5.png";
+import { string } from "yup";
 
 // SeoContext to provide SEO-related data
 const SeoContext = React.createContext();
@@ -169,20 +170,18 @@ const ProductDetails = () => {
       );
       const data = await response.json();
       if (data && data.data && data.data.length > 0) {
-        let check = data?.data[0]?.attributes?.test123
+        let check = data?.data[0]?.attributes?.test123;
         let holdArr = check.map((item, key) => {
-          var {bold, text} = item.children[0];
+          var { bold, text } = item.children[0];
           var level = item?.level;
           var type = item?.type;
 
-          
           // Create the new object
           const newObject = { bold, text, level, type };
-           checkArr.push(newObject);
-        })
+          checkArr.push(newObject);
+        });
         newArr(checkArr);
         setProduct(data.data[0]);
-
 
         setFormData({
           insuranceType: data.data[0].attributes.title || "",
@@ -216,9 +215,6 @@ const ProductDetails = () => {
     fetchProduct();
   }, [slug]);
 
-  useEffect(() => {
-    console.log("NewArr", arr);
-  })
 
 
   if (!product) {
@@ -230,93 +226,118 @@ const ProductDetails = () => {
   }
 
   const descReturn = (itm) => {
-    const {bold, text, level, type} = itm;
-
-    if(bold){
-     return <strong>{text}</strong>
+    const { bold, text, level, type } = itm;
+    var txt = "";
+    debugger;
+    if (bold && bold != undefined) {
+      txt  = `<strong>${text}</strong>`;
+    } else if (level == "1" && type == "heading" && bold == undefined) {
+      txt = `<h1 class="text-xl">${text}</h1>`;
+    } else if (level == "2" && type == "heading" && bold == undefined) {
+      txt = `<h2 class="text-4xl">${text}</h2>`;
+    } else if (level == "3" && type == "heading" && bold == undefined) {
+      txt = `<h3 class="text-base">${text}</h3>`;
+    } else if (level == "4" && type == "heading" && bold == undefined) {
+      txt = `<h4>${text}</h4>`;
+    } else if (level == "5" && type == "heading" && bold == undefined) {
+      txt = `<h5>${text}</h5>`;
+    } else if (level == "6" && type == "heading" && bold == undefined) {
+      txt = `<h6>${text}</h6>`;
     }
-    else if(level === "1" && type === "heading"){
-     return <h1>{text}</h1>
-    }
-    else if(level === "2" && type === "heading"){
-     return <h2>{text}</h2>
-    }
-    else if(level === "3" && type === "heading"){
-     return <h3>{text}</h3>
-    }
-    else if(level === "4" && type === "heading"){
-     return <h4>{text}</h4>
-    }
-    else if(level === "5" && type === "heading"){
-     return <h5>{text}</h5>
-    }
-    else if(level === "6" && type === "heading"){
-     return <h6>{text}</h6>
-    }
-   }
-
-const DescriptionList = ({ description }) => {
-  const formatLine = (line) => {
-    // Handle bold text (**bold**)
-    const boldPattern = /\*\*(.*?)\*\*/g;
-    const boldFormattedLine = line.replace( 
-      boldPattern,
-      (match, p1) => `<strong>${p1}</strong>`
-    );
-
-   
-
-    // Handle headings (#, ##, ###)
-    if (boldFormattedLine.startsWith("### ")) {
-      return <h3 className="text-base font-bold mt-4 mb-2">{boldFormattedLine.replace("### ", "")}</h3>;
-    } else if (boldFormattedLine.startsWith("## ")) {
-      return <h2 className="text-lg font-bold mt-4 mb-2">{boldFormattedLine.replace("## ", "")}</h2>;
-    } else if (boldFormattedLine.startsWith("# ")) {
-      return <h3 className="text-xl font-bold mt-4 mb-2">{boldFormattedLine.replace("# ", "")}</h3>;
-    } else if (boldFormattedLine.startsWith("#### ")) {
-      return <h3 className="text-base font-bold mt-4 mb-2">{boldFormattedLine.replace("#### ", "")}</h3>;
-
-    } else if (boldFormattedLine.startsWith("###### ")) {
-      return <h4 className="text-base font-bold mt-4 mb-2">{boldFormattedLine.replace("###### ", "")}</h4>;
-      
-    } else if (boldFormattedLine.startsWith("##### ")) {
-      return <h4 className="text-base font-bold mt-4 mb-2">{boldFormattedLine.replace("##### ", "")}</h4>;
-    }else if(boldFormattedLine.startsWith('<strong>')){
-     return  <p>
-     {boldFormattedLine.split(/(<strong>.*?<\/strong>)/g).map((part, index) => {
-       if (part.startsWith('<strong>') && part.endsWith('</strong>')) {
-         const boldText = part.replace(/<\/?strong>/g, ''); // Remove <strong> tags
-         return <strong key={index} className="font-bold">{boldText}</strong>;
-       }
-       return part;
-     })}
-   </p>
+    else{
+      txt =`<p>${text}</p>`;
     }
 
-
-
-   
-
-    
-
-    // Return formatted line with bold text
-    return <div key={line} dangerouslySetInnerHTML={{ __html: boldFormattedLine }} />;
+    console.log("txt", txt);
+    return txt;
   };
 
+  const DescriptionList = ({ description }) => {
+    const formatLine = (line) => {
+      // Handle bold text (**bold**)
+      const boldPattern = /\*\*(.*?)\*\*/g;
+      const boldFormattedLine = line.replace(
+        boldPattern,
+        (match, p1) => `<strong>${p1}</strong>`
+      );
 
+      // Handle headings (#, ##, ###)
+      if (boldFormattedLine.startsWith("### ")) {
+        return (
+          <h3 className="text-base font-bold mt-4 mb-2">
+            {boldFormattedLine.replace("### ", "")}
+          </h3>
+        );
+      } else if (boldFormattedLine.startsWith("## ")) {
+        return (
+          <h2 className="text-lg font-bold mt-4 mb-2">
+            {boldFormattedLine.replace("## ", "")}
+          </h2>
+        );
+      } else if (boldFormattedLine.startsWith("# ")) {
+        return (
+          <h3 className="text-xl font-bold mt-4 mb-2">
+            {boldFormattedLine.replace("# ", "")}
+          </h3>
+        );
+      } else if (boldFormattedLine.startsWith("#### ")) {
+        return (
+          <h3 className="text-base font-bold mt-4 mb-2">
+            {boldFormattedLine.replace("#### ", "")}
+          </h3>
+        );
+      } else if (boldFormattedLine.startsWith("###### ")) {
+        return (
+          <h4 className="text-base font-bold mt-4 mb-2">
+            {boldFormattedLine.replace("###### ", "")}
+          </h4>
+        );
+      } else if (boldFormattedLine.startsWith("##### ")) {
+        return (
+          <h4 className="text-base font-bold mt-4 mb-2">
+            {boldFormattedLine.replace("##### ", "")}
+          </h4>
+        );
+      } else if (boldFormattedLine.startsWith("<strong>")) {
+        return (
+          <p>
+            {boldFormattedLine
+              .split(/(<strong>.*?<\/strong>)/g)
+              .map((part, index) => {
+                if (part.startsWith("<strong>") && part.endsWith("</strong>")) {
+                  const boldText = part.replace(/<\/?strong>/g, ""); // Remove <strong> tags
+                  return (
+                    <strong key={index} className="font-bold">
+                      {boldText}
+                    </strong>
+                  );
+                }
+                return part;
+              })}
+          </p>
+        );
+      }
 
-  return (
-    <div className="text-gray-700 ">
-      {description.split("\n").map((line, idx) => (
-        <React.Fragment key={idx}>
-          {formatLine(line, idx)}
-          <br />
-        </React.Fragment>
-      ))}
-    </div>
-  );
-};
+      // Return formatted line with bold text
+      return (
+        <div
+          key={line}
+          dangerouslySetInnerHTML={{ __html: boldFormattedLine }}
+        />
+      );
+    };
 
+    return (
+      <div className="text-gray-700 ">
+        {description.split("\n").map((line, idx) => (
+          <React.Fragment key={idx}>
+            {formatLine(line, idx)}
+            <br />
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <HelmetProvider>
@@ -362,21 +383,28 @@ const DescriptionList = ({ description }) => {
               {/* <DescriptionList
                 description={product.attributes.bigdesctiption}
               /> */}
-              {arr.length > 0 && arr.map((item, key) => {
-                const sizeArr = arr.length;
-                let tstAgain;
-                if(sizeArr > key){
-                  debugger;
-                  tstAgain = descReturn(item);
-                }
-                
-                console.log(tstAgain)
-                return(
-                  <React.Fragment key={key}>
-                    {tstAgain}
-                  </React.Fragment>
-                )
-              })}
+              {arr.length > 0 &&
+                arr.map((item, key) => {
+                  const sizeArr = arr.length;
+                  var tstAgain;
+                  if (sizeArr > key) {
+                    tstAgain = descReturn(item);
+                    debugger;
+                    console.log(descReturn(item));
+                  }
+
+                  console.log(tstAgain);
+                  return (
+                    <React.Fragment key={key}>
+                      <div>
+                      
+                        <div dangerouslySetInnerHTML={{ __html: tstAgain }} />
+
+                      
+                      </div>
+                    </React.Fragment>
+                  );
+                })}
             </div>
 
             <div className="bg-white rounded-lg py-10">
