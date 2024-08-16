@@ -39,6 +39,7 @@ import DematFAQEndoment from "./components/layout/faq/faq_endoments.jsx";
 import DematFAQTravels from "./components/layout/faq/faq_travels.jsx";
 import DematFAQTrekkers from "./components/layout/faq/faq_trekkers.jsx";
 
+
 const theme = {
   background: "#f5f8fb",
   fontFamily: "Helvetica Neue",
@@ -106,8 +107,8 @@ const MainApp = () => {
                   alt="Chatbot Icon"
                   className="bounce-animation"
                   style={{
-                    width: "90px",
-                    height: "80px",
+                    width: "80px",
+                    height: "70px",
                     borderRadius: "50%",
                     backgroundColor: "white",
                     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",

@@ -78,6 +78,8 @@ const ProductDetails = () => {
     preventIndexing: false,
   });
 
+  var checkArr = [];
+  const [arr, newArr] = useState("");
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -129,7 +131,6 @@ const ProductDetails = () => {
           }),
         }
       );
-      console.log("Response Status:", response.status);
 
       if (response.ok) {
         toast.success("Form successfully submitted", {});
@@ -168,8 +169,20 @@ const ProductDetails = () => {
       );
       const data = await response.json();
       if (data && data.data && data.data.length > 0) {
+        let check = data?.data[0]?.attributes?.test123
+        let holdArr = check.map((item, key) => {
+          var {bold, text} = item.children[0];
+          var level = item?.level;
+          var type = item?.type;
+
+          
+          // Create the new object
+          const newObject = { bold, text, level, type };
+           checkArr.push(newObject);
+        })
+        newArr(checkArr);
         setProduct(data.data[0]);
-        console.log(data.data);
+
 
         setFormData({
           insuranceType: data.data[0].attributes.title || "",
@@ -203,6 +216,11 @@ const ProductDetails = () => {
     fetchProduct();
   }, [slug]);
 
+  useEffect(() => {
+    console.log("NewArr", arr);
+  })
+
+
   if (!product) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -211,11 +229,37 @@ const ProductDetails = () => {
     );
   }
 
+  const descReturn = (itm) => {
+    const {bold, text, level, type} = itm;
+
+    if(bold){
+     return <strong>{text}</strong>
+    }
+    else if(level === "1" && type === "heading"){
+     return <h1>{text}</h1>
+    }
+    else if(level === "2" && type === "heading"){
+     return <h2>{text}</h2>
+    }
+    else if(level === "3" && type === "heading"){
+     return <h3>{text}</h3>
+    }
+    else if(level === "4" && type === "heading"){
+     return <h4>{text}</h4>
+    }
+    else if(level === "5" && type === "heading"){
+     return <h5>{text}</h5>
+    }
+    else if(level === "6" && type === "heading"){
+     return <h6>{text}</h6>
+    }
+   }
+
 const DescriptionList = ({ description }) => {
   const formatLine = (line) => {
     // Handle bold text (**bold**)
     const boldPattern = /\*\*(.*?)\*\*/g;
-    const boldFormattedLine = line.replace(
+    const boldFormattedLine = line.replace( 
       boldPattern,
       (match, p1) => `<strong>${p1}</strong>`
     );
@@ -224,12 +268,19 @@ const DescriptionList = ({ description }) => {
 
     // Handle headings (#, ##, ###)
     if (boldFormattedLine.startsWith("### ")) {
-      return <h3 className="text-lg font-semibold mt-4 mb-2">{boldFormattedLine.replace("### ", "")}</h3>;
+      return <h3 className="text-base font-bold mt-4 mb-2">{boldFormattedLine.replace("### ", "")}</h3>;
     } else if (boldFormattedLine.startsWith("## ")) {
-      return <h2 className="text-xl font-bold mt-4 mb-2">{boldFormattedLine.replace("## ", "")}</h2>;
+      return <h2 className="text-lg font-bold mt-4 mb-2">{boldFormattedLine.replace("## ", "")}</h2>;
     } else if (boldFormattedLine.startsWith("# ")) {
-      return <h1 className="text-lg font-normal mt-4 mb-2">{boldFormattedLine.replace("# ", "")}</h1>;
+      return <h3 className="text-xl font-bold mt-4 mb-2">{boldFormattedLine.replace("# ", "")}</h3>;
+    } else if (boldFormattedLine.startsWith("#### ")) {
+      return <h3 className="text-base font-bold mt-4 mb-2">{boldFormattedLine.replace("#### ", "")}</h3>;
+
+    } else if (boldFormattedLine.startsWith("###### ")) {
+      return <h4 className="text-base font-bold mt-4 mb-2">{boldFormattedLine.replace("###### ", "")}</h4>;
       
+    } else if (boldFormattedLine.startsWith("##### ")) {
+      return <h4 className="text-base font-bold mt-4 mb-2">{boldFormattedLine.replace("##### ", "")}</h4>;
     }else if(boldFormattedLine.startsWith('<strong>')){
      return  <p>
      {boldFormattedLine.split(/(<strong>.*?<\/strong>)/g).map((part, index) => {
@@ -251,6 +302,8 @@ const DescriptionList = ({ description }) => {
     // Return formatted line with bold text
     return <div key={line} dangerouslySetInnerHTML={{ __html: boldFormattedLine }} />;
   };
+
+
 
   return (
     <div className="text-gray-700 ">
@@ -306,9 +359,24 @@ const DescriptionList = ({ description }) => {
               {product.attributes.description}
             </p>
             <div className="">
-              <DescriptionList
+              {/* <DescriptionList
                 description={product.attributes.bigdesctiption}
-              />
+              /> */}
+              {arr.length > 0 && arr.map((item, key) => {
+                const sizeArr = arr.length;
+                let tstAgain;
+                if(sizeArr > key){
+                  debugger;
+                  tstAgain = descReturn(item);
+                }
+                
+                console.log(tstAgain)
+                return(
+                  <React.Fragment key={key}>
+                    {tstAgain}
+                  </React.Fragment>
+                )
+              })}
             </div>
 
             <div className="bg-white rounded-lg py-10">
