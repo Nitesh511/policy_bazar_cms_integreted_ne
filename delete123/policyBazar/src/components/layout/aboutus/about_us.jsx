@@ -49,7 +49,7 @@ const AboutUs = () => {
                   <h1 className="text-3xl sm:text-3xl lg:text-3xl font-bold text-gray-800 mb-4 font-subheading">
                     {item.attributes.title}
                   </h1>
-                  <p className="text-lg text-gray-600 mb-4 font-subheading">
+                  <p className="text-lg text-black mb-4 font-subheading">
                     {item.attributes.bigdesctiption}
                   </p>
                 </div>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Company from "../../../assets/Contactus.jpg";
-import contactimage from "../../../assets/contact.jpg";
+import Company from "../../../assets/contactheader.jpg";
+import contactimage from "../../../assets/Contactus.jpg";
 import { HelmetProvider } from "react-helmet-async";
 import { Helmet } from "react-helmet";
 
@@ -49,12 +49,12 @@ const Contactpage = () => {
       </Helmet>
 
       <div>
-        <div className="relative h-72 overflow-hidden">
+        <div className="relative h-80 overflow-hidden md:mt-0 -mt-10 inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${contactimage})`,
-              top: "64px",
+              top: "3px",
             }}
           ></div>
         </div>
@@ -62,17 +62,17 @@ const Contactpage = () => {
           <div className="container mx-auto flex flex-wrap justify-center items-start">
             {/* Left side: Contact details and Google Map */}
             <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
-              <div className="group bg-white shadow-md rounded-lg p-6 mb-8 transition-transform transform hover:scale-110 hover:bg-green-500">
+              <div className="group bg-white shadow-md rounded-lg p-6 mb-8 transition-transform transform  cursor-pointer  hover:bg-green-500">
                 <h2 className="text-2xl font-bold font-subheading mb-4 group-hover:text-white">
                   Contact Information
                 </h2>
-                <p className="mb-4 group-hover:text-white font-subheading ">
+                <p className="mb-4 group-hover:text-white font-subheading text-lg ">
                  <a href="tel:014547991"> <strong>Contact Number:</strong> 014547991</a>
                 </p>
-                <p className="mb-4 group-hover:text-white font-subheading ">
+                <p className="mb-4 group-hover:text-white font-subheading text-lg ">
                 <a href="tel:+9779841393054"> <strong>Contact Number:</strong> +977 9841393054</a>
                 </p>
-                <p className="mb-4 group-hover:text-white font-subheading ">
+                <p className="mb-4 group-hover:text-white font-subheading text-lg ">
                   <strong>Location:</strong> Policy Bazar Nepal, Kathmandu, Nepal
                 </p>
               </div>
@@ -103,7 +103,7 @@ const Contactpage = () => {
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-sm font-medium font-subheading text-black"
+                          className="block text-lg font-bold font-subheading text-black"
                         >
                           Name
                         </label>
@@ -122,7 +122,7 @@ const Contactpage = () => {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm font-medium font-subheading text-black"
+                          className="block text-lg font-bold font-subheading text-black"
                         >
                           Email
                         </label>
@@ -141,7 +141,7 @@ const Contactpage = () => {
                       <div>
                         <label
                           htmlFor="message"
-                          className="block text-sm font-medium font-subheading text-black"
+                          className="block text-lg font-bold font-subheading text-black"
                         >
                           Message
                         </label>
@@ -161,7 +161,7 @@ const Contactpage = () => {
                       <div>
                         <button
                           type="submit"
-                          className="w-full py-2 px-4 font-subheading border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none"
+                          className="w-full py-2 px-4 font-subheading border border-transparent rounded-md shadow-sm text-lg font-bold text-white bg-green-600 hover:bg-green-700 focus:outline-none"
                         >
                           Submit
                         </button>

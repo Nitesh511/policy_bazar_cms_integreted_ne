@@ -38,6 +38,8 @@ import DematFAQProperty from "./components/layout/faq/faq_property.jsx";
 import DematFAQEndoment from "./components/layout/faq/faq_endoments.jsx";
 import DematFAQTravels from "./components/layout/faq/faq_travels.jsx";
 import DematFAQTrekkers from "./components/layout/faq/faq_trekkers.jsx";
+import TopNavbar from "./components/layout/topnav/topnav.jsx";
+import NavbarBelow from "./components/layout/navbar/newnavbar.jsx";
 
 
 const theme = {
@@ -45,7 +47,7 @@ const theme = {
   fontFamily: "Helvetica Neue",
   headerBgColor: "#11cf59",
   headerFontColor: "#fff",
-  headerFontSize: "15px",
+  headerFontSize: "20px",
   botBubbleColor: "#EF6C00",
   botFontColor: "#fff",
   userBubbleColor: "#fff",
@@ -54,6 +56,11 @@ const theme = {
 
 const MainApp = () => {
   const [loading, setLoading] = useState(true);
+  const [showChatbot, setShowChatbot] = useState(false);
+
+  const handleStartChat = () => {
+    setShowChatbot(true);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -70,7 +77,9 @@ const MainApp = () => {
       <Provider store={store}>
         <BrowserRouter>
           <ScrollToTop />
+          {/* <TopNavbar/> */}
           <Navbar />
+          {/* <NavbarBelow/> */}
           <Routes>
             {/* <Route path="" element={<Home />}></Route> */}
             {/* <Route path="" element={<Home_third/>}></Route> */}
@@ -92,6 +101,8 @@ const MainApp = () => {
             <Route path="/faqendoment" element={<DematFAQEndoment/>}></Route>
             <Route path="/faqtravels" element={<DematFAQTravels/>}></Route>
             <Route path="/faqtrekkers" element={<DematFAQTrekkers/>}></Route>
+            {/* <Route path="*" element={<NotFound />} />  */}
+
           </Routes>
 
           <Footer />
@@ -101,17 +112,19 @@ const MainApp = () => {
               floating={true}
               cache={false}
               steps={ChatbotSteps}
+              
               floatingIcon={
                 <img
                   src={bot1}
                   alt="Chatbot Icon"
-                  className="bounce-animation"
+                  className=""
                   style={{
-                    width: "80px",
+
                     height: "70px",
-                    borderRadius: "50%",
-                    backgroundColor: "white",
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                    borderRadius: "100%",
+                    backgroundColor: "#2d763c",
+                    maxWidth:"200%",
+                   
                     zIndex: 1000,
                   
                   }}
@@ -121,9 +134,8 @@ const MainApp = () => {
               bubbleStyle={{ background: "#4CAF50", color: "white" }}
               style={{ bottom: "10px", right: "20px", position: "fixed" }}
               floatingStyle={{
-           
-               
-                borderRadius: "50%",
+                
+
               
               }}
               headerTitle="Policybazar Nepal"

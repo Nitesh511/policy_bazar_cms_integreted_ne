@@ -170,7 +170,7 @@ const ProductDetails = () => {
       );
       const data = await response.json();
       if (data && data.data && data.data.length > 0) {
-        let check = data?.data[0]?.attributes?.test123;
+        let check = data?.data[0]?.attributes?.bigdesctiption;
         let holdArr = check.map((item, key) => {
           var { bold, text } = item.children[0];
           var level = item?.level;
@@ -182,6 +182,7 @@ const ProductDetails = () => {
         });
         newArr(checkArr);
         setProduct(data.data[0]);
+        console.log(data);
 
         setFormData({
           insuranceType: data.data[0].attributes.title || "",
@@ -215,8 +216,6 @@ const ProductDetails = () => {
     fetchProduct();
   }, [slug]);
 
-
-
   if (!product) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -225,118 +224,69 @@ const ProductDetails = () => {
     );
   }
 
-  const descReturn = (itm) => {
+  let imageAdded = false; // Declare a flag outside the function to track if the image has been added
+  let pTagCount = 0; // Counter for the number of <p> tags
+
+  const descReturn = (itm, imgSrc) => {
     const { bold, text, level, type } = itm;
-    var txt = "";
-    debugger;
-    if (bold && bold != undefined) {
-      txt  = `<strong>${text}</strong>`;
-    } else if (level == "1" && type == "heading" && bold == undefined) {
-      txt = `<h1 class="text-xl">${text}</h1>`;
-    } else if (level == "2" && type == "heading" && bold == undefined) {
-      txt = `<h2 class="text-4xl">${text}</h2>`;
-    } else if (level == "3" && type == "heading" && bold == undefined) {
-      txt = `<h3 class="text-base">${text}</h3>`;
-    } else if (level == "4" && type == "heading" && bold == undefined) {
+    let txt = "";
+
+    // Check if the text starts with "****"
+    if (text.startsWith("****")) {
+      txt += "<br/>"; // Add a newline before the text
+      txt += text.slice(4); // Remove the first 4 characters (****) from the text
+    }
+
+    // Process text based on properties
+    if (bold && bold !== undefined) {
+      txt = `<strong class="text-xl" >${text}</strong>`;
+    } else if (level == "1" && type == "heading" && bold === undefined) {
+      txt = `<h1 class="text-xl font-bold font-subheading">${text}</h1>`;
+    } else if (level == "2" && type == "heading" && bold === undefined) {
+      txt = `<h2 class="text-lg font-bold font-subheading">${text}</h2>`;
+    } else if (level == "3" && type == "heading" && bold === undefined) {
+      txt = `<h3 class="text-lg font-bold font-subheading">${text}</h3>`;
+    } else if (level == "4" && type == "heading" && bold === undefined) {
       txt = `<h4>${text}</h4>`;
-    } else if (level == "5" && type == "heading" && bold == undefined) {
-      txt = `<h5>${text}</h5>`;
-    } else if (level == "6" && type == "heading" && bold == undefined) {
-      txt = `<h6>${text}</h6>`;
+    } else if (level == "5" && type == "heading" && bold === undefined) {
+      txt = `<h5 class="font-subheading">${text}</h5>`;
+    } else if (level == "6" && type == "heading" && bold === undefined) {
+      txt = `<h6 class="font-subheading">${text}</h6>`;
+    } else {
+      txt = `<p class="text-lg font-subheading">${text}</p><br/>`;
+      pTagCount++; // Increment the <p> tag counter
     }
-    else{
-      txt =`<p>${text}</p>`;
+    let pTagLimit;
+    if (slug.includes("term-life-insurance-plan")) {
+      pTagLimit = 10;
+    } else if (slug.includes("personal-accidental-insurance")) {
+      pTagLimit = 12;
+    } else if (slug.includes("marine-transit")) {
+      pTagLimit = 11;
+    } else if (slug.includes("vehicle-insurance")) {
+      pTagLimit = 19;
+    } else if (slug.includes("travel-medical-insurance")) {
+      pTagLimit = 21;
+    }  else if (slug.includes("trekker-s-insurance")) {
+      pTagLimit = 17;
+    } else if (slug.includes("contractor-s-all-risk")) {
+      pTagLimit = 12;
+    } else if (slug.includes("endowment-plan")) {
+      pTagLimit = 11;
+    }else {
+      pTagLimit = 34;
     }
 
-    console.log("txt", txt);
+
+    // Insert the image after every 10 <p> tags if imgSrc is provided
+    if (!imageAdded && pTagCount >= pTagLimit && imgSrc) {
+      txt += `<div class="my-4 flex justify-center"> 
+                <img src="${imgSrc}" alt="Detail Image" class="max-w-full h-full relative"/>
+              </div>`;
+      imageAdded = true; // Set the flag to true after adding the image
+    }
+
     return txt;
-  };
-
-  const DescriptionList = ({ description }) => {
-    const formatLine = (line) => {
-      // Handle bold text (**bold**)
-      const boldPattern = /\*\*(.*?)\*\*/g;
-      const boldFormattedLine = line.replace(
-        boldPattern,
-        (match, p1) => `<strong>${p1}</strong>`
-      );
-
-      // Handle headings (#, ##, ###)
-      if (boldFormattedLine.startsWith("### ")) {
-        return (
-          <h3 className="text-base font-bold mt-4 mb-2">
-            {boldFormattedLine.replace("### ", "")}
-          </h3>
-        );
-      } else if (boldFormattedLine.startsWith("## ")) {
-        return (
-          <h2 className="text-lg font-bold mt-4 mb-2">
-            {boldFormattedLine.replace("## ", "")}
-          </h2>
-        );
-      } else if (boldFormattedLine.startsWith("# ")) {
-        return (
-          <h3 className="text-xl font-bold mt-4 mb-2">
-            {boldFormattedLine.replace("# ", "")}
-          </h3>
-        );
-      } else if (boldFormattedLine.startsWith("#### ")) {
-        return (
-          <h3 className="text-base font-bold mt-4 mb-2">
-            {boldFormattedLine.replace("#### ", "")}
-          </h3>
-        );
-      } else if (boldFormattedLine.startsWith("###### ")) {
-        return (
-          <h4 className="text-base font-bold mt-4 mb-2">
-            {boldFormattedLine.replace("###### ", "")}
-          </h4>
-        );
-      } else if (boldFormattedLine.startsWith("##### ")) {
-        return (
-          <h4 className="text-base font-bold mt-4 mb-2">
-            {boldFormattedLine.replace("##### ", "")}
-          </h4>
-        );
-      } else if (boldFormattedLine.startsWith("<strong>")) {
-        return (
-          <p>
-            {boldFormattedLine
-              .split(/(<strong>.*?<\/strong>)/g)
-              .map((part, index) => {
-                if (part.startsWith("<strong>") && part.endsWith("</strong>")) {
-                  const boldText = part.replace(/<\/?strong>/g, ""); // Remove <strong> tags
-                  return (
-                    <strong key={index} className="font-bold">
-                      {boldText}
-                    </strong>
-                  );
-                }
-                return part;
-              })}
-          </p>
-        );
-      }
-
-      // Return formatted line with bold text
-      return (
-        <div
-          key={line}
-          dangerouslySetInnerHTML={{ __html: boldFormattedLine }}
-        />
-      );
-    };
-
-    return (
-      <div className="text-gray-700 ">
-        {description.split("\n").map((line, idx) => (
-          <React.Fragment key={idx}>
-            {formatLine(line, idx)}
-            <br />
-          </React.Fragment>
-        ))}
-      </div>
-    );
   };
 
   return (
@@ -360,7 +310,7 @@ const ProductDetails = () => {
           >
             <img
               className="w-full h-full object-cover "
-              style={{ height: "30rem" }}
+              style={{ height: "30rem", marginTop:"65px",  }}
               src={`${process.env.STRAPI_API}${product.attributes.details_image.data[0].attributes.url}`}
               alt={product.attributes.title}
             />
@@ -373,54 +323,54 @@ const ProductDetails = () => {
           </div>
 
           <div className="p-6 w-full md:w-2/3">
-            <h1 className="text-3xl font-bold mb-4 text-green-600">
+            <h1 className="text-4xl font-bold mb-4 text-green-600">
               {product.attributes.title}
             </h1>
-            <p className="text-gray-700 mb-4 leading-relaxed">
+            <p className="text-black text-lg mb-4 leading-relaxed">
               {product.attributes.description}
             </p>
             <div className="">
-              {/* <DescriptionList
-                description={product.attributes.bigdesctiption}
-              /> */}
               {arr.length > 0 &&
                 arr.map((item, key) => {
                   const sizeArr = arr.length;
-                  var tstAgain;
+                  let tstAgain;
+
                   if (sizeArr > key) {
-                    tstAgain = descReturn(item);
-                    debugger;
-                    console.log(descReturn(item));
+                    // Check if the image URL is available, otherwise pass an empty string
+                    const imgSrc = product.attributes.middleimage?.data
+                      ?.attributes?.url
+                      ? `${process.env.STRAPI_API}${product.attributes.middleimage.data.attributes.url}`
+                      : "";
+
+                    // Correctly pass the item and imgSrc (which may be an empty string)
+                    tstAgain = descReturn(item, imgSrc);
                   }
 
-                  console.log(tstAgain);
                   return (
                     <React.Fragment key={key}>
                       <div>
-                      
                         <div dangerouslySetInnerHTML={{ __html: tstAgain }} />
-
-                      
                       </div>
                     </React.Fragment>
                   );
                 })}
             </div>
 
-            <div className="bg-white rounded-lg py-10">
-              <h2 className="text-3xl font-bold mb-6 text-green-600">
+            <div className="bg-white rounded-lg">
+              <h2 className="text-2xl font-bold font-subheading mb-6 text-green-600">
                 Why Choose Policybazaar Nepal for Your Insurance Needs
               </h2>
-              <div className="space-y-5 text-black">
+              <div className="space-y-5 text-black font-subheading">
                 <div className="flex items-start space-x-4 ">
                   <img
                     src={why4} // Replace with the correct path or URL
                     alt="Easy Online Purchase"
                     className="w-12 h-12 object-contain"
                   />
-                  <p className="mt-4">
-                    <strong>Easy Online Purchase:</strong> Effortlessly buy your
-                    insurance through our intuitive and user-friendly website.
+                  <p className="mt-2 text-lg">
+                    <strong className="text-xl">Easy Online Purchase:</strong>{" "}
+                    Effortlessly buy your insurance through our intuitive and
+                    user-friendly website.
                   </p>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -429,10 +379,10 @@ const ProductDetails = () => {
                     alt="Claims Assistance"
                     className="w-12 h-12 object-contain"
                   />
-                  <p>
-                    <strong>Claims Assistance:</strong> Our dedicated team
-                    ensures a smooth and hassle-free claims process, providing
-                    you with the support you need.
+                  <p className=" text-lg">
+                    <strong className="text-xl">Claims Assistance:</strong> Our
+                    dedicated team ensures a smooth and hassle-free claims
+                    process, providing you with the support you need.
                   </p>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -441,10 +391,10 @@ const ProductDetails = () => {
                     alt="Flexible Premiums"
                     className="w-12 h-12 object-contain"
                   />
-                  <p className="mt-3">
-                    <strong>Flexible Premiums:</strong> Select coverage options
-                    and durations that match your plans, with premiums designed
-                    to fit your budget.
+                  <p className="mt-3 text-lg">
+                    <strong className="text-xl">Flexible Premiums:</strong>{" "}
+                    Select coverage options and durations that match your plans,
+                    with premiums designed to fit your budget.
                   </p>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -453,10 +403,10 @@ const ProductDetails = () => {
                     alt="Renewable Policies"
                     className="w-12 h-12 object-contain"
                   />
-                  <p className="mt-2">
-                    <strong>Renewable Policies:</strong> Enjoy peace of mind
-                    knowing our policies are easily renewable for your future
-                    needs.
+                  <p className="mt-2 text-lg">
+                    <strong className="text-xl">Renewable Policies:</strong>{" "}
+                    Enjoy peace of mind knowing our policies are easily
+                    renewable for your future needs.
                   </p>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -465,10 +415,10 @@ const ProductDetails = () => {
                     alt="Cancellation Refund"
                     className="w-12 h-12 object-contain"
                   />
-                  <p className="mt-3">
-                    <strong>Cancellation Refund:</strong> Plans change, and we
-                    understand. Enjoy a free-look period with full refunds for
-                    cancellations.
+                  <p className="mt-1 text-lg">
+                    <strong className="text-xl">Cancellation Refund:</strong>{" "}
+                    Plans change, and we understand. Enjoy a free-look period
+                    with full refunds for cancellations.
                   </p>
                 </div>
               </div>

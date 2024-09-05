@@ -3,12 +3,6 @@ import DematFAQ from './life_insurance_faq';
 function DocumentList() {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const categories = [
-    "Vehicle Insurance",
-    "Health Insurance",
-    "Term Life Insurance",
-   
-  ];
 
   return (
     <>

@@ -1,28 +1,46 @@
-import React, { useState, useEffect,useContext } from "react";
-import blogst from "../../../assets/blogging.jpeg"
+import React, { useState, useEffect, useContext } from "react";
+import blogst from "../../../assets/blognew.jpg";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
-
-  
 const SeoContext = React.createContext();
 
 const Seo = () => {
-  const { title, description, url, shareImage, keywords, preventIndexing, shareImageAlt } = useContext(SeoContext);
+  const {
+    title,
+    description,
+    url,
+    shareImage,
+    keywords,
+    preventIndexing,
+    shareImageAlt,
+  } = useContext(SeoContext);
 
   return (
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} key="description" />
       <meta name="keywords" content={keywords} />
-      <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+      <meta
+        name="twitter:card"
+        content="summary_large_image"
+        key="twitter:card"
+      />
       <meta property="og:url" content={url} key="og:url" />
       <meta property="og:title" content={title} key="og:title" />
-      <meta property="og:description" content={description} key="og:description" />
-      <meta property="og:image" content={shareImage} key="og:image"  />
-      <meta property="og:image:alt" content={shareImageAlt} key="og:image:alt" /> {/* Added alt text for image */}
+      <meta
+        property="og:description"
+        content={description}
+        key="og:description"
+      />
+      <meta property="og:image" content={shareImage} key="og:image" />
+      <meta
+        property="og:image:alt"
+        content={shareImageAlt}
+        key="og:image:alt"
+      />{" "}
+      {/* Added alt text for image */}
       <link rel="canonical" href={url} />
-
       {preventIndexing && (
         <>
           <meta name="robots" content="noindex" />
@@ -36,11 +54,11 @@ const Seo = () => {
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [metaData, setMetaData] = useState({
-    metaTitle: 'Insurance Plans',
-    metaDescription: 'Discover our insurance plans and services.',
-    metaKeywords: 'insurance, plans, services',
-    shareImage: '',
-    shareImageAlt: '', // Added alt text field
+    metaTitle: "Insurance Plans",
+    metaDescription: "Discover our insurance plans and services.",
+    metaKeywords: "insurance, plans, services",
+    shareImage: "",
+    shareImageAlt: "", // Added alt text field
     preventIndexing: false,
   });
 
@@ -48,7 +66,7 @@ const Blogs = () => {
     const fetchBlogs = async () => {
       try {
         const response = await fetch(
-          `${ process.env.STRAPI_API}/api/blogs?populate=*`,
+          `${process.env.STRAPI_API}/api/blogs?populate=*`,
           {
             headers: {
               Authorization:
@@ -63,12 +81,22 @@ const Blogs = () => {
           if (result.data.length > 0) {
             const firstItem = result.data[0];
             setMetaData({
-              metaTitle: firstItem.attributes.Seo.metaTitle || metaData.metaTitle,
-              metaDescription: firstItem.attributes.Seo.metaDescription || metaData.metaDescription,
-              metaKeywords: firstItem.attributes.metaKeywords || metaData.keywords,
-              shareImage: `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data?.attributes?.url}` || '',
-              shareImageAlt: firstItem.attributes.metaImages?.data?.attributes?.alternativeText || '', // Set alt text from API
-              preventIndexing: firstItem.attributes.preventindexing || metaData.preventIndexing,
+              metaTitle:
+                firstItem.attributes.Seo.metaTitle || metaData.metaTitle,
+              metaDescription:
+                firstItem.attributes.Seo.metaDescription ||
+                metaData.metaDescription,
+              metaKeywords:
+                firstItem.attributes.metaKeywords || metaData.keywords,
+              shareImage:
+                `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data?.attributes?.url}` ||
+                "",
+              shareImageAlt:
+                firstItem.attributes.metaImages?.data?.attributes
+                  ?.alternativeText || "", // Set alt text from API
+              preventIndexing:
+                firstItem.attributes.preventindexing ||
+                metaData.preventIndexing,
             });
           }
         }
@@ -81,59 +109,66 @@ const Blogs = () => {
 
   return (
     <HelmetProvider>
-    <SeoContext.Provider value={{ 
-      title: metaData.metaTitle,
-      description: metaData.metaDescription,
-      url: window.location.href,
-      shareImage: metaData.shareImage,
-      keywords: metaData.metaKeywords,
-      preventIndexing: metaData.preventIndexing,
-      shareImageAlt: metaData.shareImageAlt // Provide alt text to context
-    }}>
-      <Seo />
-    <div>
-      <div className="relative h-72 bg-gray-300 overflow-hidden">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center  "
-          style={{
-            backgroundImage: `url(${blogst})`,
-            
-          }}
-        ></div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-8 ">
-        {blogs.map((item, index) => (
-          <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm mb-5 mt-5" key={index}>
-            <Link  to={`/blogs/${item.attributes.slug}`}>
-              <img
-                className="rounded-t-lg"
-                src={`${ process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`} // Adjusted image URL handling
-                alt=""
-              />
-            </Link>
-            <div className="p-5 font-subheading">
-              <Link  to={`/blogs/${item.attributes.slug}`}>
-                <h5 className="text-gray-900 font-bold text-  xl tracking-tight mb-2 font-sans">
-                  {item.attributes.title}
-                </h5>
-              </Link>
-              <p className="font-normal text-gray-700 mb-3 font-subheading text-lg">
-                {item.attributes.description}
-              </p>
-              <Link
-                className="text-white bg-green-600 hover:bg-gray-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-3 py-2 text-center inline-flex items-center font-subheading"
-                to={`/blogs/${item.attributes.slug}`}
-              >
-                Read more
-              </Link>
-            </div>
+      <SeoContext.Provider
+        value={{
+          title: metaData.metaTitle,
+          description: metaData.metaDescription,
+          url: window.location.href,
+          shareImage: metaData.shareImage,
+          keywords: metaData.metaKeywords,
+          preventIndexing: metaData.preventIndexing,
+          shareImageAlt: metaData.shareImageAlt, // Provide alt text to context
+        }}
+      >
+        <Seo />
+        <div>
+          <div className="relative h-80 mt-10 bg-gray-300 overflow-hidden">
+            {/* Background image */}
+            <div
+              className="absolute inset-0 bg-center"
+              style={{
+                backgroundImage: `url(${blogst})`,
+                backgroundSize: window.innerWidth < 768 ? '150% 110%' : '100% 125%', // Adjust the size for mobile and desktop
+                backgroundRepeat: "no-repeat", // Prevents the image from repeating
+                backgroundPosition: "center", // Centers the image horizontally and vertically
+              }}
+            ></div>
           </div>
-        ))}
-      </div>
-    </div>
-    </SeoContext.Provider>
+
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-8 ">
+            {blogs.map((item, index) => (
+              <div
+                className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm mb-5 mt-5 hover:bg-green-600 cursor-pointer hover:scale-105 transition duration-300 ease-in-out group "
+                key={index}
+              >
+                <Link to={`/blogs/${item.attributes.slug}`}>
+                  <img
+                    className="rounded-t-lg"
+                    src={`${process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`} // Adjusted image URL handling
+                    alt=""
+                  />
+                </Link>
+                <div className="p-5 font-subheading">
+                  <Link to={`/blogs/${item.attributes.slug}`}>
+                    <h5 className="text-gray-900 font-bold text-xl  mb-2 font-subheading group-hover:text-white">
+                      {item.attributes.title}
+                    </h5>
+                  </Link>
+                  <p className="font-normal text-black mb-3 font-subheading text-lg group-hover:text-white">
+                    {item.attributes.description}
+                  </p>
+                  <Link
+                    className="text-white bg-green-600 hover:bg-gray-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-3 py-2 text-center inline-flex items-center font-subheading group-hover:text-white"
+                    to={`/blogs/${item.attributes.slug}`}
+                  >
+                    Read more
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </SeoContext.Provider>
     </HelmetProvider>
   );
 };

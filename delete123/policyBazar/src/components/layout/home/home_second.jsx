@@ -3,27 +3,47 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Carousel } from "@material-tailwind/react";
 import OurServices from "../our services/services";
 import AboutUs from "../aboutus/about_us";
-import './home.css';
+import "./home.css";
 
 // SeoContext to provide SEO-related data
 const SeoContext = React.createContext();
 
 const Seo = () => {
-  const { title, description, url, shareImage, keywords, preventIndexing, shareImageAlt } = useContext(SeoContext);
+  const {
+    title,
+    description,
+    url,
+    shareImage,
+    keywords,
+    preventIndexing,
+    shareImageAlt,
+  } = useContext(SeoContext);
 
   return (
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} key="description" />
       <meta name="keywords" content={keywords} />
-      <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+      <meta
+        name="twitter:card"
+        content="summary_large_image"
+        key="twitter:card"
+      />
       <meta property="og:url" content={url} key="og:url" />
       <meta property="og:title" content={title} key="og:title" />
-      <meta property="og:description" content={description} key="og:description" />
-      <meta property="og:image" content={shareImage} key="og:image"  />
-      <meta property="og:image:alt" content={shareImageAlt} key="og:image:alt" /> {/* Added alt text for image */}
+      <meta
+        property="og:description"
+        content={description}
+        key="og:description"
+      />
+      <meta property="og:image" content={shareImage} key="og:image" />
+      <meta
+        property="og:image:alt"
+        content={shareImageAlt}
+        key="og:image:alt"
+      />{" "}
+      {/* Added alt text for image */}
       <link rel="canonical" href={url} />
-
       {preventIndexing && (
         <>
           <meta name="robots" content="noindex" />
@@ -37,11 +57,11 @@ const Seo = () => {
 const InsuranceComponent = () => {
   const [dashboard, setDashboard] = useState([]);
   const [metaData, setMetaData] = useState({
-    metaTitle: 'Insurance Plans',
-    metaDescription: 'Discover our insurance plans and services.',
-    metaKeywords: 'insurance, plans, services',
-    shareImage: '',
-    shareImageAlt: '', // Added alt text field
+    metaTitle: "Insurance Plans",
+    metaDescription: "Discover our insurance plans and services.",
+    metaKeywords: "insurance, plans, services",
+    shareImage: "",
+    shareImageAlt: "", // Added alt text field
     preventIndexing: false,
   });
 
@@ -49,6 +69,7 @@ const InsuranceComponent = () => {
     const fetchdashData = async () => {
       try {
         const response = await fetch(
+          // eslint-disable-next-line no-undef
           `${process.env.STRAPI_API}/api/dashboard2s?populate=*`,
           {
             headers: {
@@ -67,12 +88,23 @@ const InsuranceComponent = () => {
           if (result.data.length > 0) {
             const firstItem = result.data[0];
             setMetaData({
-              metaTitle: firstItem.attributes.Seo.metaTitle || metaData.metaTitle,
-              metaDescription: firstItem.attributes.Seo.metaDescription || metaData.metaDescription,
-              metaKeywords: firstItem.attributes.metaKeywords || metaData.keywords,
-              shareImage: `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data[0]?.attributes?.url}` || '',
-              shareImageAlt: firstItem.attributes.metaImages?.data[0]?.attributes?.alternativeText || '', // Set alt text from API
-              preventIndexing: firstItem.attributes.preventindexing || metaData.preventIndexing,
+              metaTitle:
+                firstItem.attributes.Seo.metaTitle || metaData.metaTitle,
+              metaDescription:
+                firstItem.attributes.Seo.metaDescription ||
+                metaData.metaDescription,
+              metaKeywords:
+                firstItem.attributes.metaKeywords || metaData.keywords,
+              shareImage:
+                // eslint-disable-next-line no-undef
+                `${process.env.STRAPI_API}${firstItem.attributes.metaImages?.data[0]?.attributes?.url}` ||
+                "",
+              shareImageAlt:
+                firstItem.attributes.metaImages?.data[0]?.attributes
+                  ?.alternativeText || "", // Set alt text from API
+              preventIndexing:
+                firstItem.attributes.preventindexing ||
+                metaData.preventIndexing,
             });
           }
         }
@@ -85,15 +117,17 @@ const InsuranceComponent = () => {
 
   return (
     <HelmetProvider>
-      <SeoContext.Provider value={{ 
-        title: metaData.metaTitle,
-        description: metaData.metaDescription,
-        url: window.location.href,
-        shareImage: metaData.shareImage,
-        keywords: metaData.metaKeywords,
-        preventIndexing: metaData.preventIndexing,
-        shareImageAlt: metaData.shareImageAlt // Provide alt text to context
-      }}>
+      <SeoContext.Provider
+        value={{
+          title: metaData.metaTitle,
+          description: metaData.metaDescription,
+          url: window.location.href,
+          shareImage: metaData.shareImage,
+          keywords: metaData.metaKeywords,
+          preventIndexing: metaData.preventIndexing,
+          shareImageAlt: metaData.shareImageAlt, // Provide alt text to context
+        }}
+      >
         <Seo />
 
         <div className="relative z-10">
@@ -106,29 +140,52 @@ const InsuranceComponent = () => {
                 <div className="w-full md:w-3/5 mt-10">
                   {item.attributes.image && item.attributes.image.data && (
                     <img
+                      // eslint-disable-next-line no-undef
                       src={`${process.env.STRAPI_API}${item.attributes.image.data.attributes.url}`}
                       alt="Dashboard"
                       className="w-full h-auto max-h-80 object-cover rounded-lg"
                     />
                   )}
                 </div>
-                <div className="p-0 md:p-4 py-0 -mt-4 md:py-16  rounded-lg w-full md:w-2/4 ">
+                <div className="p-0 md:p-4 py-0 -mt-4 md:py-16 rounded-lg w-full md:w-2/4">
                   <Carousel autoplay loop arrows={false}>
                     {item.attributes.imagescraousel &&
                       item.attributes.imagescraousel.data &&
                       item.attributes.imagescraousel.data.map(
-                        (carouselImage, carouselIndex) => (
-                          <div className="relative" key={carouselIndex}>
-                            <img
-                              src={`${process.env.STRAPI_API}${carouselImage.attributes.url}`}
-                              alt={`Insurance ${carouselIndex + 1}`}
-                              className="w-full h-70 object-cover rounded-lg"
-                            />
-                            <button className="absolute bottom-4 left-4 bg-blue-500 text-white px-2 py-1 rounded mt-2">
-                              View plans
-                            </button>
-                          </div>
-                        )
+                        (carouselImage, carouselIndex) => {
+                          // Define the URL for each carousel index
+                          let planUrl = "";
+                          switch (carouselIndex) {
+                            case 0:
+                              planUrl = "/products/travel-medical-insurance";
+                              break;
+                            case 1:
+                              planUrl = "/products/term-life-insurance-plan";
+                              break;
+                            case 2:
+                              planUrl = "/products/medical-insurance";
+                              break;
+                            default:
+                              planUrl = "#"; // Fallback URL or keep it as empty
+                          }
+
+                          return (
+                            <div className="relative" key={carouselIndex}>
+                              <img
+                                // eslint-disable-next-line no-undef
+                                src={`${process.env.STRAPI_API}${carouselImage.attributes.url}`}
+                                alt={`Insurance ${carouselIndex + 1}`}
+                                className="w-full h-70 object-cover rounded-lg"
+                              />
+                              <a
+                                href={planUrl}
+                                className="absolute font-subheading bottom-4 left-4 bg-blue-500 text-white px-2 py-1 rounded mt-2"
+                              >
+                                View plans
+                              </a>
+                            </div>
+                          );
+                        }
                       )}
                   </Carousel>
                 </div>

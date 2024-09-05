@@ -31,7 +31,7 @@ const OurServices = () => {
     if (services.length > 0) {
       mySwiper = new Swiper(".swiper-container", {
         slidesPerView: 1,
-        spaceBetween: 10,
+        spaceBetween: 8,
         loop: true,
         autoplay: {
           delay: 2000, // Duration between slides in milliseconds
@@ -82,7 +82,7 @@ const OurServices = () => {
   return (
     <div className="py-4 px-4 sm:px-8 mt-10 text-lg">
       <div className="flex justify-center items-center">
-        <h1 className="text-center  text-3xl font-display mb-5 font-subheading ">
+        <h1 className="text-center  text-3xl text-gray-600 font-display mb-5 font-subheading ">
           Our Services
         </h1>
       </div>
@@ -99,9 +99,9 @@ const OurServices = () => {
                 }}
               >
                 <div
-                  className={`absolute top-3 left-2 sm:top-7 sm:left-4 p-1 sm:p-2 ${getBadgeColor(
+                  className={`absolute top-1 mt-0 md:-mt-7 left-2 md:left-0 sm:top-7 sm:left-4 p-1 sm:p-1 ${getBadgeColor(
                     index
-                  )} text-white rounded-md`}
+                  )} text-white font-subheading text-base rounded-md`}
                 >
                   {service.attributes.title}
                 </div>

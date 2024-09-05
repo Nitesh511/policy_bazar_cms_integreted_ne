@@ -13,7 +13,7 @@ const AccordionItem = ({ title, content }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {title}
-        <span className="text-2xl">{isOpen ? "−" : "+"}</span>
+        <span className="text-4xl ">{isOpen ? "−" : "+"}</span>
       </button>
       {isOpen && (
         <div className="p-4 bg-white">
@@ -62,7 +62,7 @@ const DematFAQProperty = ({ category }) => {
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4">
+    <div className="w-full max-w-7xl mx-auto ">
       <div className="relative w-full h-60 md:h-96 bg-gray-300 overflow-hidden mb-10">
         {/* Background image */}
         <div

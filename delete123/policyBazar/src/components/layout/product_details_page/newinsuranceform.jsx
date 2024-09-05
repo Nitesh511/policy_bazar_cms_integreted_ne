@@ -143,14 +143,14 @@ const InsuranceFormNew = ({
         <div className="flex flex-col sm:flex-row  items-center">
           <button
             type="submit"
-            className="bg-green-600 text-white font-bold font-subheading py-2 px-4 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-green-600  ml-32"
+            className="bg-green-600 text-white font-bold font-subheading py-2 px-4 rounded-lg shadow hover:bg-gray-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-600  w-full"
           >
             Submit
           </button>
           {handleCloseForm && (
             <button
               type="button"
-              className="text-gray-700 font-medium py-2 px-4 rounded-lg hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="text-gray-700 font-medium py-2 px-4 rounded-lg hover:text-gray-900  focus:outline-none focus:ring-2 focus:ring-gray-500"
               onClick={handleCloseForm}
             >
               Close

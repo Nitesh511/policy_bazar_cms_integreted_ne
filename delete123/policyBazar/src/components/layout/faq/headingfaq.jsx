@@ -11,11 +11,6 @@ const categories = [
   { name: "Endowment Plan", path: "/faqendoment" },
   { name: "Travel Medical Insurance", path: "/faqtravels" },
   { name: "Trekker's Insurance", path: "/faqtrekkers" },
-
-
-
-  
- 
 ];
 
 const HeadingFaq = ({ onSelectCategory }) => {
@@ -28,7 +23,7 @@ const HeadingFaq = ({ onSelectCategory }) => {
             <Link to={category.path}>
               <button
                 onClick={() => onSelectCategory(category.name)}
-                className="w-full text-left p-2 bg-green-500 text-white rounded hover:bg-green-600"
+                className="w-full text-left p-2 bg-green-500 text-white rounded hover:bg-green-600 text-lg font-subheading"
               >
                 {category.name}
               </button>

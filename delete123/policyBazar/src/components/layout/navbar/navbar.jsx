@@ -60,11 +60,11 @@ function Navbar() {
             }`}
             id="navbar-sticky"
           >
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 text-lg">
+            <ul className="flex flex-col p-4 md:p-0 mt-4 font-normal  border md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 text-lg">
               <li>
                 <Link
                   to="/"
-                  className={`block py-2 px-3 rounded md:p-0 text-xl  font-subheading ${
+                  className={`block py-2 px-3 rounded md:p-0 text-lg  font-subheading ${
                     isActive("/") ? "text-green-700 " : "text-black"
                   }`}
                   aria-current={isActive("/") ? "page" : undefined}
@@ -76,7 +76,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/products"
-                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-xl ${
+                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-lg ${
                     isActive("/products") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
@@ -87,7 +87,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/ourstory"
-                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-xl ${
+                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-lg ${
                     isActive("/ourstory") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
@@ -98,7 +98,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/blogs"
-                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-xl ${
+                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-lg ${
                     isActive("/blogs") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
@@ -109,7 +109,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/contactus"
-                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-xl ${
+                  className={`block py-2 px-3 rounded md:p-0 font-subheading text-lg ${
                     isActive("/contactus") ? "text-green-700 " : "text-black"
                   }`}
                   onClick={closeMenu}
@@ -132,11 +132,11 @@ function Navbar() {
           </div>
 
           <div className="hidden md:flex md:order-2">
-            <LuLogIn className="mt-3 w-full h-full" />
+        
 
             <Link to={"/commingsoon"}
             
-              className="w-full text-black  font-sans hover:text-red-900   font-medium rounded-lg text-lg px-1 py-2 text-center "
+              className="w-full text-black font-subheading hover:text-green-600   font-medium rounded-lg text-lg px-1 py-2 text-center "
             >
               Login
             </Link>

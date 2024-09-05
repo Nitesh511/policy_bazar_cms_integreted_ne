@@ -13,7 +13,7 @@ const AccordionItem = ({ title, content }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {title}
-        <span className="text-2xl">{isOpen ? "−" : "+"}</span>
+        <span className="text-4xl ">{isOpen ? "−" : "+"}</span>
       </button>
       {isOpen && (
         <div className="p-4 bg-white">

@@ -40,7 +40,7 @@ const AboutSection = () => {
               <div className="lg:px-8">
                 {aboutsection.map((section, index) => (
                   <React.Fragment key={index}>
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 text-gray-800 font-ubheading">
+                    <h2 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-3 text-gray-800 font-subheading">
                       {section.attributes.title1 && (
                         <span
                           dangerouslySetInnerHTML={{
@@ -52,7 +52,7 @@ const AboutSection = () => {
                         />
                       )}
                     </h2>
-                    <p className="text-base sm:text-lg lg:text-xl text-gray-700 font-subheading">
+                    <p className="text-base sm:text-lg lg:text-lg text-black font-subheading">
                       {section.attributes.description1}
                     </p>
                   </React.Fragment>
@@ -65,16 +65,16 @@ const AboutSection = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {aboutsection.map((section, index) => (
                   <React.Fragment key={index}>
-                    <div className="bg-white shadow-md rounded-lg p-5 hover:bg-gradient-to-r from-blue-400 to-green-500 hover:scale-105 transition duration-300 ease-in-out group">
+                    <div className="bg-white shadow-md rounded-lg p-5 hover:bg-gradient-to-r from-blue-400 cursor-pointer to-green-500 hover:scale-105 transition duration-300 ease-in-out group">
                       <img
                         src={`${process.env.STRAPI_API}${section.attributes.image.data.attributes.url}`}
                         alt="product"
                         className="mx-auto mb-3 w-16 h-16 object-contain"
                       />
-                      <h6 className="text-base sm:text-lg lg:text-xl font-semibold font-subheading text-gray-800 mb-2 group-hover:text-white">
+                      <h6 className="text-base sm:text-lg lg:text-xl font-semibold font-subheading text-black mb-2 group-hover:text-white">
                         {section.attributes.title2}
                       </h6>
-                      <p className="text-sm sm:text-base lg:text-lg text-gray-700 group-hover:text-white font-subheading">
+                      <p className="text-sm sm:text-base lg:text-lg text-black group-hover:text-white font-subheading">
                         {section.attributes.description2}
                       </p>
                     </div>
@@ -88,10 +88,10 @@ const AboutSection = () => {
               <div className="px-4">
                 {aboutsection.map((section, index) => (
                   <React.Fragment key={index}>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 font-subheading">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-black mb-3 font-subheading">
                       {section.attributes.title1}
                     </h2>
-                    <p className="text-base sm:text-lg text-gray-700 font-subheading">
+                    <p className="text-base sm:text-lg text-black font-subheading">
                       {section.attributes.description1}
                     </p>
                   </React.Fragment>

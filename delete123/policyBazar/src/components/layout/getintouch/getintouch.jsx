@@ -25,7 +25,7 @@ const ContactSection = () => {
     <section className="bg-gray-100 py-12">
       <div className="container mx-auto px-4 md:px-0">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-3xl font-bold font-subheading text-center mb-8">
+          <h2 className="text-2xl md:text-2xl font-bold font-subheading text-center mb-8">
             Get in Touch with Us
           </h2>
 
@@ -37,8 +37,8 @@ const ContactSection = () => {
               rel="noopener noreferrer"
               className="flex items-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-300"
             >
-              <FaFacebook size={24} className="mr-2 font-subheading text-xl  " />
-              <span className="hidden md:inline font-subheading text-xl ">Contact us on Facebook</span>
+              <FaFacebook size={22} className="mr-2 font-subheading text-lg  " />
+              <span className="hidden md:inline font-subheading text-lg ">Contact us on Facebook</span>
             </a>
           </div>
 
@@ -49,7 +49,7 @@ const ContactSection = () => {
               className="flex items-center bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg transition duration-300"
             >
               <IoLogoWhatsapp size={24} className="mr-2" />
-              <span className="hidden md:inline font-subheading text-xl ">Message on WhatsApp</span>
+              <span className="hidden md:inline font-subheading text-lg ">Message on WhatsApp</span>
             </button>
             <Dialog
               open={openWhatsappDialog}
@@ -86,7 +86,7 @@ const ContactSection = () => {
           </div>
 
           {/* Additional contact text */}
-          <p className="text-center text-gray-700 font-subheading text-xl ">
+          <p className="text-center text-black font-subheading text-lg ">
             Connect with us on social media or give us a call. We're here to
             help!
           </p>

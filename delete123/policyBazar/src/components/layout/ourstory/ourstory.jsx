@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import background from "../../../assets/Background.png";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import modernjpe from "../../../assets/modern.jpeg";
+import modernjpe from "../../../assets/modern.jpg";
 
 const SeoContext = React.createContext();
 
@@ -147,7 +147,7 @@ const Story = () => {
           ) : (
             stories.map((item, index) => (
               <div key={index}>
-                <div className="container mx-auto text-center mt-20 lg:mt-40 cursor-pointer ">
+                <div className="container mx-auto text-center mt-20 lg:mt-20 cursor-pointer ">
                   <p className="main-heading mb-3 text-3xl lg:text-5xl font-subheading">
                     {item.attributes.storyheading && (
                       <span
@@ -176,10 +176,10 @@ const Story = () => {
                         : background
                     }
                     alt="our story"
-                    className="w-full h-1/3 object-cover"
+                    className="w-full h-[200px] md:h-[600px] lg:h-[500px]  object-cover"
                   />
                 </div>
-                <div className="container mx-auto relative -mt-24 md:-mt-[490px]  px-4 lg:px-8  ">
+                <div className="container mx-auto relative mt-2 md:mt-[20px]  px-4 lg:px-8  ">
                   <div className="text-center">
                     <p className="main-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-subheading ">
                       {item.attributes.storyheading2 && (
@@ -242,11 +242,11 @@ const Story = () => {
                       <div className="px-6 py-4">
                         <div className="font-bold text-2xl lg:text-3xl mb-2 text-center group-hover:text-white font-subheading ">
                           {item.attributes.visiontext}
-                        </div>
+                        </div> 
                         <div className="font-bold text-lg lg:text-lg mb-2  group-hover:text-white text-center group-hover:text-whitefont-subheading ">
                           {item.attributes.vissiontext2}
                         </div>
-                        <p className="text-gray-700 text-base lg:text-lg group-hover:text-white font-subheading ">
+                        <p className="text-black text-base lg:text-lg group-hover:text-white font-subheading ">
                           {item.attributes.vissiondescription}
                         </p>
                       </div>
@@ -260,7 +260,7 @@ const Story = () => {
                         <div className="font-bold text-2xl lg:text-lg mb-2 text-center group-hover:text-white font-subheading ">
                           {item.attributes.missiontext2}
                         </div>
-                        <p className="text-gray-700 text-base lg:text-lg group-hover:text-white font-subheading ">
+                        <p className="text-black text-base lg:text-lg group-hover:text-white font-subheading ">
                           {item.attributes.missiondescription}
                         </p>
                       </div>
@@ -270,7 +270,7 @@ const Story = () => {
                   </div>
 
                   {/* Right Side - Image */}
-                  <div className="w-full lg:w-1/2  ">
+                  <div className="w-full lg:w-1/2 mt-10  ">
                     <img
                       src={modernjpe}
                       alt="Mission and Vision"

@@ -13,7 +13,7 @@ const AccordionItem = ({ title, content }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {title}
-        <span className="text-2xl">{isOpen ? "−" : "+"}</span>
+        <span className="text-4xl ">{isOpen ? "−" : "+"}</span>
       </button>
       {isOpen && (
         <div className="p-4 bg-white">
@@ -82,7 +82,7 @@ const DematFAQMTerm = ({ category }) => {
         />
 
         <div className="w-full md:w-3/4 mt-10">
-          <div className="w-full max-w-2xl mx-auto px-4">
+          <div className="w-full max-w-2xl mx-auto ">
             {faq.map((item, index) => {
               const faqVehicle = item.attributes.faq_vechile; // Use correct key
 

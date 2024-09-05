@@ -13,7 +13,7 @@ const AccordionItem = ({ title, content }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {title}
-        <span className="text-2xl">{isOpen ? "−" : "+"}</span>
+        <span className="text-4xl transition ease-in-out  ">{isOpen ? "−" : "+"}</span>
       </button>
       {isOpen && (
         <div className="p-4 bg-white">
@@ -62,7 +62,7 @@ const DematFAQHealth = ({ category }) => {
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4">
+    <div className="w-full max-w-7xl mx-auto">
       <div className="relative w-full h-60 md:h-96 bg-gray-300 overflow-hidden mb-10">
         {/* Background image */}
         <div
@@ -75,13 +75,13 @@ const DematFAQHealth = ({ category }) => {
         ></div>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-4 mb-20">
+      <div className="flex flex-col md:flex-row gap-4 mb-20 ">
         <HeadingFaq
           categories={categories}
           onSelectCategory={setSelectedCategory}
         />
 
-        <div className="w-full md:w-3/4 mt-10">
+        <div className="w-full md:w-3/4 mt-10 ">
           <div className="w-full max-w-2xl mx-auto px-4">
             {faq.map((item, index) => {
               const faqVehicle = item.attributes.faq_vechile; // Use correct key

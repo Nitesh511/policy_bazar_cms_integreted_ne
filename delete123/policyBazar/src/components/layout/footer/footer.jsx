@@ -27,7 +27,7 @@ const Footer = () => {
   return (
     <div class="bg-zinc-50 text-center text-surface/75 bg-gradient-to-r from-green-200 to-green-500 dark:text-white/75 lg:text-left">
       <div class="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
-        <div class="me-12 hidden lg:block font-subheading text-xl">
+        <div class="me-12 hidden lg:block font-subheading text-2xl">
           <span>Get connected with us on social networks:</span>
         </div>
         <div class="flex justify-center">
@@ -99,7 +99,7 @@ const Footer = () => {
               <p key={index} className="mb-1 font-subheading">
                 <Link
                   to={`/products/${item.attributes.slug}`}
-                  className="inline-block text-black font-normal rounded-lg px-4 py-2 text-base"
+                  className="inline-block text-black font-normal rounded-lg px-4 py-2 text-lg"
                 >
                   {item.attributes.title}
                 </Link>
@@ -111,7 +111,7 @@ const Footer = () => {
             <h6 class="mb-4 flex font-subheading justify-center font-semibold uppercase md:justify-start">
               Useful links
             </h6>
-            <p class="mb-4">
+            <p class="mb-4 text-lg">
               <Link to={"/faq"}>FAQ</Link>
             </p>  
             {/* <p class="mb-4">
@@ -129,7 +129,7 @@ const Footer = () => {
             <h6 class="mb-4 flex justify-center font-semibold uppercase md:justify-start font-subheading">
               Contact
             </h6>
-            <p class="mb-4 flex items-center justify-center md:justify-start font-subheading">
+            <p class="mb-4 flex items-center justify-center md:justify-start font-subheading text-lg">
               <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@ const Footer = () => {
               </span>
               Banshidhar Marg, Chandol
             </p>
-            <p class="mb-4 flex items-center justify-center md:justify-start">
+            <p class="mb-4 flex items-center justify-center md:justify-start text-lg">
               <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@ const Footer = () => {
                 info@policybazaarnepal.com
               </a>
             </p>
-            <p class="mb-4 flex items-center justify-center md:justify-start">
+            <p class="mb-4 flex items-center justify-center md:justify-start text-lg">
               <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -183,9 +183,9 @@ const Footer = () => {
         </div>
       </div>
 
-      <div class="bg-black/5 p-6 text-center font-subheading text-xl">
-        <span>© 2023 Copyright:</span>
-        <a class="font-semibold" href="https://tw-elements.com/">
+      <div class="bg-black/5 p-6  font-subheading text-lg">
+        <span> Copyright© 2023, </span>
+        <a class="font-subheading" href="https://tw-elements.com/">
           policybazaarnepal
         </a>
       </div>
